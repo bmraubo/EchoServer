@@ -7,4 +7,10 @@ public class TestDummy {
     void testDummy() {
         Assertions.assertEquals(true,true);
     }
+
+    @Test
+    void testDummy2() {
+        // test should fail
+        Assertions.assertEquals(true, false);
+    }
 }
