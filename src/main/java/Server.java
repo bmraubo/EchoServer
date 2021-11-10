@@ -29,8 +29,6 @@ public class Server {
                 System.out.println(data);
                 if (data.startsWith("Content-Length:")) {
                     contentLength = Integer.valueOf(data.substring(data.indexOf(' ') + 1, data.length()));
-                }
-                if (contentLength != 0) {
                     input.readLine();
                     char[] body = new char[contentLength];
                     input.read(body, 0, contentLength);
