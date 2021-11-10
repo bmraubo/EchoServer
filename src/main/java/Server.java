@@ -20,10 +20,15 @@ public class Server {
             BufferedReader input = new BufferedReader(inputStream);
             PrintWriter output = new PrintWriter(socket.getOutputStream(),true);
             //wait for data
-
-            //do something with the data
-
+            String data;
+            while ((data = input.readLine()) != null) {
+                // do something with the data
+                output.println(data);
+            }
             //close IO streams then socket
+            output.close();
+            input.close();
+            socket.close();
         }
     }
 
