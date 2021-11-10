@@ -29,16 +29,13 @@ public class Server {
                 System.out.println(data);
                 if (data.startsWith("Content-Length:")) {
                     contentLength = Integer.valueOf(data.substring(data.indexOf(' ') + 1, data.length()));
-                    //contentLength = contentLength + 2; //hardcoded - but there is an escape character somewhere
                 }
                 if (contentLength != 0) {
-                    System.out.println("Data Length: "+data.length());
-                    char[] body = new char[data.length()]; //using contentLength requires hardcoded +2 modifier
-                    input.read(body, 0, data.length()); //using contentLength requires hardcoded +2 modifier
-                    String requestBody = new String(body).trim();
-                    //System.out.println("body: "+body);
+                    input.readLine();
+                    char[] body = new char[contentLength];
+                    input.read(body, 0, contentLength);
+                    String requestBody = new String(body);
                     System.out.println("Request Body: "+requestBody);
-                    System.out.println("Request Body Length: "+requestBody.length());
                 }
 
                 //output.println(data);
