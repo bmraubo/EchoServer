@@ -37,7 +37,8 @@ public class Server {
                     System.out.println("Request Body: "+requestBody);
                 }
                 if (data.length() == 0) {
-                    output.println("Hello There");
+                    String responseStatus = "HTTP/1.1 200 OK \r\n";
+                    output.println(responseStatus);
                 }
             }
             // Send Response - response will just be 200 OK
@@ -47,7 +48,7 @@ public class Server {
             General Header - Optional
             Response Header - Optional
             Entity Header - Optional
-            CRLF (Carriage Return and Line Feed - /r/n)
+            CRLF (Carriage Return and Line Feed - \r\n)
             Message Body - this will bounce back the Request Body
              */
             //close IO streams then socket
