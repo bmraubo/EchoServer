@@ -28,7 +28,6 @@ public class Server {
                 // do something with the data
                 int contentLength = 0;
                 System.out.println(data);
-                System.out.println(data.length());
                 if (data.startsWith("Content-Length:")) {
                     contentLength = Integer.valueOf(data.substring(data.indexOf(' ') + 1, data.length()));
                     input.readLine();
@@ -37,7 +36,6 @@ public class Server {
                     String requestBody = new String(body);
                     System.out.println("Request Body: " + requestBody);
                 }
-                System.out.println(data.length());
                 if (data.length() == 0) {
                     String crlf = "\r\n";
                     String responseStatus = "HTTP/1.1 200 OK " + crlf;
