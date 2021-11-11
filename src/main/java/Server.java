@@ -25,30 +25,11 @@ public class Server {
             //wait for data
             String data = "";
             while ((input.ready())) {
-                // do something with the data
-                int contentLength = 0;
-                data = data + input.readLine();
-                System.out.println(data);
-                if (data.startsWith("Content-Length:")) {
-                    contentLength = Integer.valueOf(data.substring(data.indexOf(' ') + 1, data.length()));
-                    input.readLine();
-                    char[] body = new char[contentLength];
-                    input.read(body, 0, contentLength);
-                    String requestBody = new String(body);
-                    System.out.println("Request Body: " + requestBody);
-                }
-                if (data.length() == 0) {
-                    String crlf = "\r\n";
-                    String responseStatus = "HTTP/1.1 200 OK " + crlf;
-                    String responseBody = responseMessage;
-                    int responseContentLength = responseBody.length();
-                    String responseContentHeader = "Content-Length:" + String.format("%d", responseContentLength) + crlf;
-                    String responseConnectionStatus = "close";
-                    String responseConnectionHeader = "Connection:" + responseConnectionStatus;
-                    output.println(responseStatus + responseContentHeader + responseConnectionHeader + crlf + responseBody);
-
-                }
+                data = data + Character.toString(input.read());
             }
+            System.out.println(data);
+            Request request = new Request(data);
+            sendTestResponse(request, output);
             // Send Response - response will just be 200 OK
             /* HTTP Response Standard:
             Status Line
@@ -59,9 +40,22 @@ public class Server {
             CRLF (Carriage Return and Line Feed - \r\n)
             Message Body - this will bounce back the Request Body
              */
+            //}
             //close IO streams then socket
             closeConnection(input, output, socket);
         }
+    }
+
+    public static void sendTestResponse(Request request, PrintWriter output) {
+        String crlf = "\r\n";
+        String responseStatus = "HTTP/1.1 200 OK " + crlf;
+        String responseBody = request.body;
+        int responseContentLength = responseBody.length();
+        String responseContentHeader = "Content-Length:" + String.format("%d", responseContentLength) + crlf;
+        String responseConnectionStatus = "close";
+        String responseConnectionHeader = "Connection:" + responseConnectionStatus;
+        output.println(responseStatus + responseContentHeader + responseConnectionHeader + crlf + responseBody);
+        System.out.println("Response has been sent");
     }
 
     public static void closeConnection(BufferedReader input, PrintWriter output, Socket socket) throws Exception{
