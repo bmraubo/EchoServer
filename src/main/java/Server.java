@@ -8,6 +8,7 @@ import java.net.Socket;
 public class Server {
 
     public static void main(String[] args) throws Exception{
+        String responseMessage;
         int port = 5000;
         ServerSocket serverSocket = new ServerSocket(port);
         System.out.println("server started");
@@ -35,9 +36,20 @@ public class Server {
                     String requestBody = new String(body);
                     System.out.println("Request Body: "+requestBody);
                 }
-
-                //output.println(data);
+                if (data.length() == 0) {
+                    output.println("Hello There");
+                }
             }
+            // Send Response - response will just be 200 OK
+            /* HTTP Response Standard:
+            Status Line
+                Consists of: {Protocol Version} SP {Status Code} SP {Reason Phrase} SP CRLF
+            General Header - Optional
+            Response Header - Optional
+            Entity Header - Optional
+            CRLF (Carriage Return and Line Feed - /r/n)
+            Message Body - this will bounce back the Request Body
+             */
             //close IO streams then socket
             output.close();
             input.close();
