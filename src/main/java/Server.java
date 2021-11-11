@@ -23,10 +23,11 @@ public class Server {
             BufferedReader input = new BufferedReader(inputStream);
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
             //wait for data
-            String data;
-            while ((data = input.readLine()) != null) {
+            String data = "";
+            while ((input.ready())) {
                 // do something with the data
                 int contentLength = 0;
+                data = data + input.readLine();
                 System.out.println(data);
                 if (data.startsWith("Content-Length:")) {
                     contentLength = Integer.valueOf(data.substring(data.indexOf(' ') + 1, data.length()));
