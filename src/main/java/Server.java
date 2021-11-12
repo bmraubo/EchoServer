@@ -30,7 +30,8 @@ public class Server {
             System.out.println(data);
             Request request = new Request(data);
             sendTestResponse(request, output);
-            // Send Response - response will just be 200 OK
+            //close IO streams then socket
+            closeConnection(input, output, socket);
             /* HTTP Response Standard:
             Status Line
                 Consists of: {Protocol Version} SP (space) {Status Code} SP {Reason Phrase} SP CRLF
@@ -40,22 +41,20 @@ public class Server {
             CRLF (Carriage Return and Line Feed - \r\n)
             Message Body - this will bounce back the Request Body
              */
-            //}
-            //close IO streams then socket
-            closeConnection(input, output, socket);
         }
     }
 
     public static void sendTestResponse(Request request, PrintWriter output) {
         String crlf = "\r\n";
-        String responseStatus = "HTTP/1.1 200 OK " + crlf;
+        String responseStatus = "HTTP/1.1 200 OK" + crlf;
         String responseBody = request.body;
         int responseContentLength = responseBody.length();
         String responseContentHeader = "Content-Length:" + String.format("%d", responseContentLength) + crlf;
         String responseConnectionStatus = "close";
-        String responseConnectionHeader = "Connection:" + responseConnectionStatus;
-        output.println(responseStatus + responseContentHeader + responseConnectionHeader + crlf + responseBody);
-        System.out.println("Response has been sent");
+        String responseConnectionHeader = "Connection:" + responseConnectionStatus + crlf;
+        output.print(responseStatus + responseContentHeader + responseConnectionHeader + crlf + responseBody);
+        System.out.println("Response has been sent:");
+        System.out.println(responseStatus + responseContentHeader + responseConnectionHeader + crlf + responseBody);
     }
 
     public static void closeConnection(BufferedReader input, PrintWriter output, Socket socket) throws Exception{
