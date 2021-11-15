@@ -12,11 +12,9 @@ public class Server {
         String requestData = socketWrapper.readRequestData();
         Request request = new Request(requestData);
         Response response = routeConnection(request);
-        // What do
         String responseString = response.generateResponseString();
-        // Generate Response String
         socketWrapper.sendResponseData(responseString);
-        // Send Response
+        socketWrapper.closeSocket();
     }
 
     private Response routeConnection(Request request) {

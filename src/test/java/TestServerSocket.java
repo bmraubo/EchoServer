@@ -45,7 +45,7 @@ public class TestServerSocket {
     }
 
     @Test
-    void SocketSendData() throws IOException {
+    void SocketSendDataTest() throws IOException {
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
         int port = 5000;
@@ -58,10 +58,25 @@ public class TestServerSocket {
 
         testServer.start(port);
 
-        String responseData = "Hello World\r\n";
-        socketWrapper.sendResponseData(responseData);
-
         Assertions.assertTrue(socketWrapper.dataSent);
+        Assertions.assertEquals("HTTP/1.1 200 OK\r\n", socketWrapper.sentResponse);
 
+    }
+
+    @Test
+    void SocketCloseTest() throws IOException {
+        String testRequest = "GET /simple_get HTTP/1.1\r\n";
+
+        int port = 5000;
+
+        BufferedReader input = new BufferedReader(new StringReader(testRequest));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        Assertions.assertTrue(socketWrapper.socketClosed);
     }
 }
