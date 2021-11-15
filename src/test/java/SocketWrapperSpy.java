@@ -40,7 +40,7 @@ public class SocketWrapperSpy implements SocketWrapper{
     }
 
     @Override
-    public void closeSocket() {
+    public void closeSocket() throws IOException {
         input.close();
         output.close();
         socketClosed = true;
