@@ -10,5 +10,8 @@ public class Server {
     public void start(int port) throws IOException {
         socketWrapper.createSocket(port);
         String requestData = socketWrapper.readRequestData();
+        // What do
+        // Generate Response
+        // Send Response
     }
 }
