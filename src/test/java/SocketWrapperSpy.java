@@ -5,6 +5,7 @@ public class SocketWrapperSpy implements SocketWrapper{
     BufferedReader input;
     PrintWriter output;
     boolean socketCreated;
+    boolean dataSent;
 
     public SocketWrapperSpy(BufferedReader input, PrintWriter output) {
         this.input = input;
@@ -23,7 +24,8 @@ public class SocketWrapperSpy implements SocketWrapper{
 
     @Override
     public void sendResponseData(String responseData) {
-
+        output.print(responseData);
+        dataSent = true;
     }
 
     @Override
