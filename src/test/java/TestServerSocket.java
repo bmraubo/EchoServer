@@ -7,6 +7,9 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 public class TestServerSocket {
+    BufferedReader input;
+    PrintWriter output;
+
 
     @Test
     void testSocketCreation() {
