@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TestRequest {
-    String testRequest = "POST / HTTP/1.1\r\nContent-Length: 11\r\n\r\nHello World";
+    String testRequest = "POST / HTTP/1.1\r\nContent-Length: 11\r\nContent-Type: text/html\r\n\r\nHello World";
 
     @Test
     void RequestLineExtractionTest() {
@@ -16,6 +16,7 @@ public class TestRequest {
     void RequestHeadersExtractionTest() {
         Request testRequest = new Request(this.testRequest);
         Assertions.assertEquals(11, testRequest.contentLength);
+        Assertions.assertEquals("text/html", testRequest.contentType);
     }
 
     @Test

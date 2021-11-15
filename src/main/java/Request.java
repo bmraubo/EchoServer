@@ -7,6 +7,7 @@ public class Request {
     String body;
 
     int contentLength;
+    String contentType;
 
     public Request(String request) {
         splitRequestString(request);
@@ -29,9 +30,16 @@ public class Request {
     private void extractHeaderInformation() {
         for (String x : requestArray) {
             if (x.startsWith("Content-Length")) {
-                this.contentLength = Integer.parseInt(x.substring(x.indexOf(" ") + 1, x.length()));
+                this.contentLength = Integer.parseInt(extractHeaderValue(x));
+            }
+            if (x.startsWith(("Content-Type"))) {
+                this.contentType = extractHeaderValue(x);
             }
         }
+    }
+
+    private String extractHeaderValue(String x) {
+        return x.substring(x.indexOf(" ") + 1, x.length());
     }
 
     private void extractRequestBody() {
