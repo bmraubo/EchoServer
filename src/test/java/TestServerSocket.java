@@ -12,7 +12,7 @@ public class TestServerSocket {
 
 
     @Test
-    void testSocketCreation() {
+    void socketCreationTest() {
 
         int port = 5000;
 
@@ -25,5 +25,20 @@ public class TestServerSocket {
         testServer.start(port);
 
         Assertions.assertTrue(socketWrapper.wasCreated());
+    }
+
+    @Test
+    void readRequestDataTest() {
+        int port = 5000;
+
+        BufferedReader input = new BufferedReader(new StringReader("Hello World\r\n"));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        Assertions.assertEquals("Hello World", socketWrapper.readRequestData());
     }
 }
