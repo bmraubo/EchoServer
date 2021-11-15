@@ -27,4 +27,22 @@ public class TestServerSocket {
         Assertions.assertTrue(socketWrapper.wasCreated());
     }
 
+    @Test
+    void SocketSendData() {
+        int port = 5000;
+
+        BufferedReader input = new BufferedReader(new StringReader("Hello World\r\n"));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String responseData = "Hello World\r\n";
+        socketWrapper.sendResponseData(responseData);
+
+        Assertions.assertTrue(socketWrapper.dataSent);
+
+    }
 }
