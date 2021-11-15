@@ -25,14 +25,19 @@ public class ServerSocketWrapper implements SocketWrapper{
     }
 
     @Override
-    public String readRequestData() {
-        return null;
+    public String readRequestData() throws IOException {
+        String data = "";
+        int value;
+        while ((value = input.read()) != -1) {
+            data = data + Character.toString(value);
+        }
+        return data;
     }
 
 
     @Override
     public void sendResponseData(String responseData) {
-
+        output.print(responseData);
     }
 
     @Override
