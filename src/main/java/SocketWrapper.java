@@ -1,8 +1,8 @@
 public interface SocketWrapper {
 
-    // create socket
-    // read incoming data
-    // send data
-    // close socket
+    void createSocket(int port);
+    String readRequestData();
+    void sendResponseData(String responseData);
+    void closeSocket();
 
 }
