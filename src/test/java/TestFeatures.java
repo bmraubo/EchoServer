@@ -1,15 +1,12 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 
 public class TestFeatures {
 
     @Test
-    void SimpleGetTest() {
+    void SimpleGetTest() throws IOException {
         int port = 5000;
 
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
