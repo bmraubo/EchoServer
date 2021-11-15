@@ -16,7 +16,7 @@ public class TestServerSocket {
         BufferedReader input = new BufferedReader(new StringReader("Hello World\n"));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        MockSocketWrapper socketWrapper = new MockSocketWrapper(input, output);
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
         Server testServer = new Server(socketWrapper);
 
         testServer.start(port);
