@@ -12,8 +12,12 @@ public class Request {
     public Request(String request) {
         splitRequestString(request);
         extractRequestLineInformation();
-        extractHeaderInformation();
-        extractRequestBody();
+        if (requestArray.length >= 2) {
+            extractHeaderInformation();
+        }
+        if (requestArray.length >= 3) { //this will have to be changed for multiple headers
+            extractRequestBody();
+        }
     }
 
     private void splitRequestString(String request) {

@@ -18,7 +18,11 @@ public class Response {
     private void determineReasonPhrase(int statusCode) {
         switch (statusCode) {
             case (200):
-                 this.reasonPhrase = "OK";
+                this.reasonPhrase = "OK";
+                break;
+            case (404):
+                this.reasonPhrase = "Not Found";
+                break;
         }
     }
 }

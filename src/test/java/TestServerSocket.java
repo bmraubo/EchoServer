@@ -11,9 +11,11 @@ public class TestServerSocket {
     @Test
     void socketCreationTest() throws IOException {
 
+        String testRequest = "GET /simple_get HTTP/1.1\r\n";
+
         int port = 5000;
 
-        BufferedReader input = new BufferedReader(new StringReader("Hello World\n"));
+        BufferedReader input = new BufferedReader(new StringReader(testRequest));
         PrintWriter output = new PrintWriter(new StringWriter());
 
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
@@ -44,9 +46,11 @@ public class TestServerSocket {
 
     @Test
     void SocketSendData() throws IOException {
+        String testRequest = "GET /simple_get HTTP/1.1\r\n";
+
         int port = 5000;
 
-        BufferedReader input = new BufferedReader(new StringReader("Hello World\r\n"));
+        BufferedReader input = new BufferedReader(new StringReader(testRequest));
         PrintWriter output = new PrintWriter(new StringWriter());
 
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
