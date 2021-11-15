@@ -7,6 +7,7 @@ import java.net.Socket;
 
 public class ServerSocketWrapper implements SocketWrapper{
     ServerSocket serverSocket;
+    Socket socket;
     BufferedReader input;
     PrintWriter output;
 
@@ -37,7 +38,9 @@ public class ServerSocketWrapper implements SocketWrapper{
     }
 
     @Override
-    public void closeSocket() {
-
+    public void closeSocket() throws IOException {
+        input.close();
+        output.close();
+        socket.close();
     }
 }

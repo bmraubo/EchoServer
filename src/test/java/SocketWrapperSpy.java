@@ -7,6 +7,7 @@ public class SocketWrapperSpy implements SocketWrapper{
     PrintWriter output;
     boolean socketCreated;
     boolean dataSent;
+    boolean socketClosed;
     String dataReceived;
     String sentResponse;
 
@@ -40,7 +41,9 @@ public class SocketWrapperSpy implements SocketWrapper{
 
     @Override
     public void closeSocket() {
-
+        input.close();
+        output.close();
+        socketClosed = true;
     }
 
     public boolean wasCreated() {
