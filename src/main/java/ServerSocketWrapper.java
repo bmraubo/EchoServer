@@ -11,16 +11,12 @@ public class ServerSocketWrapper implements SocketWrapper{
     PrintWriter output;
 
     @Override
-    public void createSocket(int port) {
-        try {
-            serverSocket = new ServerSocket(port);
-            Socket socket = serverSocket.accept();
-            InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
-            input = new BufferedReader(inputStream);
-            output = new PrintWriter(socket.getOutputStream(), true);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+    public void createSocket(int port) throws IOException {
+        serverSocket = new ServerSocket(port);
+        Socket socket = serverSocket.accept();
+        InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
+        input = new BufferedReader(inputStream);
+        output = new PrintWriter(socket.getOutputStream(), true);
 
     }
 
