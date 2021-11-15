@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Server {
     SocketWrapper socketWrapper;
 
@@ -5,7 +7,8 @@ public class Server {
         this.socketWrapper = socketWrapper;
     }
 
-    public void start(int port) {
+    public void start(int port) throws IOException {
         socketWrapper.createSocket(port);
+        String requestData = socketWrapper.readRequestData();
     }
 }
