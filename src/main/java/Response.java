@@ -4,6 +4,7 @@ public class Response {
     int statusCode;
     String reasonPhrase;
     String contentLength;
+    String body;
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
@@ -33,6 +34,7 @@ public class Response {
     public void addResponseBody(String body) {
         System.out.println("Adding Response Body");
         contentLength = calculateContentLength(body);
+        this.body = body;
     }
 
     private String calculateContentLength(String body) {
