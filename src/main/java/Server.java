@@ -24,7 +24,13 @@ public class Server {
         Response response = new Response();
         switch (request.uri) {
             case ("/simple_get"):
+                System.out.println("Simple Get Identified");
                 response.setStatusCode(200);
+                break;
+            case ("/simple_get_with_body"):
+                System.out.println("Simple Get with Body Identified");
+                response.setStatusCode(200);
+                response.addResponseBody(request.body);
                 break;
             default:
                 response.setStatusCode(404);

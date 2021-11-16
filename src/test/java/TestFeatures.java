@@ -20,6 +20,26 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        Assertions.assertEquals("HTTP/1.1 200 OK\r\n", socketWrapper.sentResponse);
+        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\n", socketWrapper.sentResponse);
+    }
+
+    @Test
+    void SimpleGetWithBodyTest() throws IOException {
+        int port = 5000;
+
+        String testRequest = "GET /simple_get_with_body HTTP/1.1\r\nContent-Length: 11\r\n\r\nHello World";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 11\r\n\r\nHello World";
+
+        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
 }
