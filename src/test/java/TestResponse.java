@@ -24,6 +24,7 @@ public class TestResponse {
         testResponse.addResponseBody(responseBody);
 
         Assertions.assertEquals("Content-Length: 11", testResponse.contentLength);
+        Assertions.assertEquals("Hello World", testResponse.body);
 
     }
 }
