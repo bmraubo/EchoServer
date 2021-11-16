@@ -27,7 +27,7 @@ public class TestFeatures {
     void SimpleGetWithBodyTest() throws IOException {
         int port = 5000;
 
-        String testRequest = "GET /simple_get_with_body HTTP/1.1\r\nContent-Length: 11\r\n\r\nnHello World\r\n";
+        String testRequest = "GET /simple_get_with_body HTTP/1.1\r\nContent-Length: 11\r\n\r\nHello World";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
@@ -38,7 +38,7 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nContent-Length: 11\r\n\r\nHello World";
+        String expectedResponse = "HTTP/1.1 200 OK\r\nContent-Length: 12\r\n\r\nHello World";
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }

@@ -23,7 +23,7 @@ public class TestResponse {
         testResponse.setStatusCode(statusCode);
         testResponse.addResponseBody(responseBody);
 
-        Assertions.assertEquals("Content-Length: 11", testResponse.contentLength);
+        Assertions.assertEquals("Content-Length: 12", testResponse.contentLength);
         Assertions.assertEquals("Hello World", testResponse.body);
         Assertions.assertTrue(testResponse.sendBody);
 

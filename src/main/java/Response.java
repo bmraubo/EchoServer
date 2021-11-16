@@ -3,6 +3,7 @@ public class Response {
     String protocol = "HTTP/1.1";
     int statusCode;
     String reasonPhrase;
+    boolean sendBody = false;
     String contentLength;
     String body;
 
@@ -15,6 +16,9 @@ public class Response {
         System.out.println("generating response");
         String responseString = "";
         responseString = responseString + this.protocol + " " + this.statusCode + " " + reasonPhrase + crlf;
+        if (sendBody) {
+            responseString = responseString + contentLength + crlf + crlf + body;
+        }
         System.out.println(responseString);
         return responseString;
     }
@@ -35,9 +39,10 @@ public class Response {
         System.out.println("Adding Response Body");
         contentLength = calculateContentLength(body);
         this.body = body;
+        this.sendBody = true;
     }
 
     private String calculateContentLength(String body) {
-        return "Content-Length: " + String.valueOf(body.length());
+        return "Content-Length: " + String.valueOf(body.length()+1);
     }
 }

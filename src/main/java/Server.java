@@ -26,6 +26,10 @@ public class Server {
             case ("/simple_get"):
                 response.setStatusCode(200);
                 break;
+            case ("/simple_get_with_body"):
+                response.setStatusCode(200);
+                response.addResponseBody(request.body);
+                break;
             default:
                 response.setStatusCode(404);
                 break;

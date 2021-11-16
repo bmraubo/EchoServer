@@ -34,7 +34,6 @@ public class ServerSocketWrapper implements SocketWrapper{
         int value;
         while ((input.ready())) {
             data = data + Character.toString(input.read());
-            System.out.println(data);
         }
         System.out.println("Data read");
         System.out.println(data);
