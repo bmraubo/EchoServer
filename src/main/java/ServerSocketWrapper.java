@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerSocketWrapper implements SocketWrapper{
+    boolean keepAlive = true;
     ServerSocket serverSocket;
     Socket socket;
     BufferedReader input;
@@ -45,5 +46,10 @@ public class ServerSocketWrapper implements SocketWrapper{
         input.close();
         output.close();
         socket.close();
+    }
+
+    @Override
+    public boolean keepAlive() {
+        return keepAlive;
     }
 }

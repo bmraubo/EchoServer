@@ -7,5 +7,6 @@ public interface SocketWrapper {
     String readRequestData() throws IOException;
     void sendResponseData(String responseData);
     void closeSocket() throws IOException;
+    boolean keepAlive();
 
 }

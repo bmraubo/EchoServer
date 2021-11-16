@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class SocketWrapperSpy implements SocketWrapper{
+    boolean keepAlive = true;
     BufferedReader input;
     PrintWriter output;
     boolean socketCreated;
@@ -51,6 +52,12 @@ public class SocketWrapperSpy implements SocketWrapper{
         input.close();
         output.close();
         socketClosed = true;
+        keepAlive = false;
+    }
+
+    @Override
+    public boolean keepAlive() {
+        return keepAlive;
     }
 
     public boolean wasCreated() {
