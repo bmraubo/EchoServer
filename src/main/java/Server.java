@@ -32,6 +32,13 @@ public class Server {
                 response.setStatusCode(200);
                 response.addResponseBody(request.body);
                 break;
+            case ("/echo_body"):
+                System.out.println("Simple Post identified");
+                if (request.method == "POST") {
+                    response.setStatusCode(200);
+                    response.addResponseBody(request.body);
+                }
+                break;
             default:
                 response.setStatusCode(404);
                 break;
