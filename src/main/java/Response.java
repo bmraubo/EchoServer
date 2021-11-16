@@ -57,6 +57,6 @@ public class Response {
     }
 
     private String calculateContentLength(String body) {
-        return "Content-Length: " + String.valueOf(body.length()+1);
+        return "Content-Length: " + String.valueOf(body.length());
     }
 }

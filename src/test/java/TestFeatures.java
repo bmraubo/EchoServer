@@ -38,7 +38,7 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nContent-Length: 12\r\n\r\nHello World";
+        String expectedResponse = "HTTP/1.1 200 OK\r\nContent-Length: 11\r\n\r\nHello World";
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }

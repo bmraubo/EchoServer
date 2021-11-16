@@ -44,7 +44,7 @@ public class ServerSocketWrapper implements SocketWrapper{
     @Override
     public void sendResponseData(String responseData) {
         System.out.println("Sending Response...");
-        output.println(responseData);
+        output.print(responseData);
     }
 
     @Override
