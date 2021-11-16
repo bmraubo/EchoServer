@@ -14,13 +14,28 @@ public class Response {
 
     public String generateResponseString() {
         System.out.println("generating response");
-        String responseString = "";
-        responseString = responseString + this.protocol + " " + this.statusCode + " " + reasonPhrase + crlf;
+        String responseString;
+        String responseLine = generateResponseLine();
+        String responseHeaders = generateHeaders();
+        responseString = responseLine + responseHeaders;
         if (sendBody) {
-            responseString = responseString + contentLength + crlf + crlf + body;
+            String responseBody = crlf + body;
+            responseString = responseString + responseBody;
         }
         System.out.println(responseString);
         return responseString;
+    }
+
+    private String generateResponseLine() {
+        return this.protocol + " " + this.statusCode + " " + this.reasonPhrase + crlf;
+    }
+
+    private String generateHeaders() {
+        String headers = "";
+        if (sendBody) {
+            headers = headers + contentLength + crlf;
+        }
+        return headers;
     }
 
     private void determineReasonPhrase(int statusCode) {
@@ -33,7 +48,6 @@ public class Response {
                 break;
         }
     }
-
 
     public void addResponseBody(String body) {
         System.out.println("Adding Response Body");
