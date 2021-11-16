@@ -6,6 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServerSocketWrapper implements SocketWrapper{
+    boolean keepAlive = true;
     ServerSocket serverSocket;
     Socket socket;
     BufferedReader input;
@@ -14,33 +15,49 @@ public class ServerSocketWrapper implements SocketWrapper{
     @Override
     public void createSocket(int port) throws IOException {
         serverSocket = new ServerSocket(port);
-        Socket socket = serverSocket.accept();
-        InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
-        input = new BufferedReader(inputStream);
-        output = new PrintWriter(socket.getOutputStream(), true);
+    }
 
+    @Override
+    public void acceptConnection() throws IOException {
+        this.socket = serverSocket.accept();
+        System.out.println("Connection accepted");
+        InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
+        this.input = new BufferedReader(inputStream);
+        this.output = new PrintWriter(socket.getOutputStream(), true);
+        System.out.println("I/O Streams opened");
     }
 
     @Override
     public String readRequestData() throws IOException {
+        System.out.println("looking at data");
         String data = "";
         int value;
-        while ((value = input.read()) != -1) {
-            data = data + Character.toString(value);
+        while ((input.ready())) {
+            data = data + Character.toString(input.read());
+            System.out.println(data);
         }
+        System.out.println("Data read");
+        System.out.println(data);
         return data;
     }
 
 
     @Override
     public void sendResponseData(String responseData) {
-        output.print(responseData);
+        System.out.println("Sending Response...");
+        output.println(responseData);
     }
 
     @Override
     public void closeSocket() throws IOException {
+        System.out.println("Closing IO Streams and Socket");
         input.close();
         output.close();
         socket.close();
+    }
+
+    @Override
+    public boolean keepAlive() {
+        return keepAlive;
     }
 }

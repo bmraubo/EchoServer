@@ -11,7 +11,8 @@ public class TestFeatures {
 
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
-        BufferedReader input = new BufferedReader(new StringReader(testRequest));
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);

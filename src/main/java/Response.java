@@ -10,8 +10,10 @@ public class Response {
     }
 
     public String generateResponseString() {
+        System.out.println("generating response");
         String responseString = "";
         responseString = responseString + this.protocol + " " + this.statusCode + " " + reasonPhrase + crlf;
+        System.out.println(responseString);
         return responseString;
     }
 

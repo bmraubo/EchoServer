@@ -3,9 +3,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class SocketWrapperSpy implements SocketWrapper{
+    boolean keepAlive = true;
     BufferedReader input;
     PrintWriter output;
     boolean socketCreated;
+    boolean connectionAccepted;
     boolean dataSent;
     boolean socketClosed;
     String dataReceived;
@@ -22,18 +24,28 @@ public class SocketWrapperSpy implements SocketWrapper{
     }
 
     @Override
+    public void acceptConnection() throws IOException {
+        System.out.println("Connection accepted");
+        System.out.println("I/O Streams opened");
+        this.connectionAccepted = true;
+    }
+
+
+    @Override
     public String readRequestData() throws IOException {
         String data = "";
         int value;
-        while ((value = input.read()) != -1) {
-            data = data + Character.toString(value);
+        while (input.ready()) {
+            data = data + Character.toString(input.read());
         }
         dataReceived = data;
+        System.out.println("Data received");
         return data;
     }
 
     @Override
     public void sendResponseData(String responseData) {
+        System.out.println("Sending Response...");
         output.print(responseData);
         sentResponse = responseData;
         dataSent = true;
@@ -41,9 +53,16 @@ public class SocketWrapperSpy implements SocketWrapper{
 
     @Override
     public void closeSocket() throws IOException {
+        System.out.println("Closing IO Streams and Socket");
         input.close();
         output.close();
         socketClosed = true;
+        keepAlive = false;
+    }
+
+    @Override
+    public boolean keepAlive() {
+        return keepAlive;
     }
 
     public boolean wasCreated() {
