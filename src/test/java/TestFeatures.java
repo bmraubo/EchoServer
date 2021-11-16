@@ -42,4 +42,24 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
+
+    @Test
+    void SimplePostTest() throws IOException {
+        int port = 5000;
+
+        String testRequest = "POST /echo_body HTTP/1.1\r\nContent-Length: 11\r\n\r\nHello World";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 11\r\n\r\nHello World";
+
+        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+    }
 }
