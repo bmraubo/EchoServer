@@ -26,17 +26,9 @@ public class Server {
             case ("/simple_get"):
                 return SimpleGet.prepareResponse(request);
             case ("/simple_get_with_body"):
-                System.out.println("Simple Get with Body Identified");
-                response.setStatusCode(200);
-                response.addResponseBody(request.body);
-                break;
+                return SimpleGetWithBody.prepareResponse(request);
             case ("/echo_body"):
-                System.out.println("Simple Post identified");
-                if (request.method == "POST") {
-                    response.setStatusCode(200);
-                    response.addResponseBody(request.body);
-                }
-                break;
+                return SimplePost.prepareResponse(request);
             default:
                 response.setStatusCode(404);
                 break;
