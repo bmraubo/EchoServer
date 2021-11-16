@@ -1,10 +1,17 @@
 public class Response {
     String crlf = "\r\n";
+    // Response Line
     String protocol = "HTTP/1.1";
     int statusCode;
     String reasonPhrase;
-    boolean sendBody = false;
+
+    //Headers
     String contentLength;
+    boolean closeConnection = true;
+    String closeConnectionHeader = "Connection: close";
+
+    // Body
+    boolean sendBody = false;
     String body;
 
     public void setStatusCode(int statusCode) {
@@ -32,6 +39,7 @@ public class Response {
 
     private String generateHeaders() {
         String headers = "";
+        headers = headers + closeConnectionHeader + crlf;
         if (sendBody) {
             headers = headers + contentLength + crlf;
         }
