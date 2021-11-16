@@ -3,6 +3,7 @@ public class Response {
     String protocol = "HTTP/1.1";
     int statusCode;
     String reasonPhrase;
+    String contentLength;
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
@@ -26,5 +27,15 @@ public class Response {
                 this.reasonPhrase = "Not Found";
                 break;
         }
+    }
+
+
+    public void addResponseBody(String body) {
+        System.out.println("Adding Response Body");
+        contentLength = calculateContentLength(body);
+    }
+
+    private String calculateContentLength(String body) {
+        return "Content-Length: " + String.valueOf(body.length());
     }
 }
