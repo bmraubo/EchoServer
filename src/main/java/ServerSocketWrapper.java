@@ -19,22 +19,24 @@ public class ServerSocketWrapper implements SocketWrapper{
 
     @Override
     public void acceptConnection() throws IOException {
-        Socket socket = serverSocket.accept();
+        this.socket = serverSocket.accept();
         System.out.println("Connection accepted");
         InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
-        input = new BufferedReader(inputStream);
-        output = new PrintWriter(socket.getOutputStream(), true);
+        this.input = new BufferedReader(inputStream);
+        this.output = new PrintWriter(socket.getOutputStream(), true);
         System.out.println("I/O Streams opened");
     }
 
     @Override
     public String readRequestData() throws IOException {
+        System.out.println("looking at data");
         String data = "";
         int value;
-        while ((value = input.read()) != -1) {
-            data = data + Character.toString(value);
+        while ((input.ready())) {
+            data = data + Character.toString(input.read());
+            System.out.println(data);
         }
-        System.out.println("Data received");
+        System.out.println("Data read");
         System.out.println(data);
         return data;
     }
@@ -43,7 +45,7 @@ public class ServerSocketWrapper implements SocketWrapper{
     @Override
     public void sendResponseData(String responseData) {
         System.out.println("Sending Response...");
-        output.print(responseData);
+        this.output.print(responseData);
     }
 
     @Override

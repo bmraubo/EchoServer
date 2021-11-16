@@ -35,8 +35,8 @@ public class SocketWrapperSpy implements SocketWrapper{
     public String readRequestData() throws IOException {
         String data = "";
         int value;
-        while ((value = input.read()) != -1) {
-            data = data + Character.toString(value);
+        while (input.ready()) {
+            data = data + Character.toString(input.read());
         }
         dataReceived = data;
         System.out.println("Data received");

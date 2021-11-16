@@ -15,7 +15,8 @@ public class TestServerSocket {
 
         int port = 5000;
 
-        BufferedReader input = new BufferedReader(new StringReader(testRequest));
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
@@ -32,7 +33,8 @@ public class TestServerSocket {
 
         int port = 5000;
 
-        BufferedReader input = new BufferedReader(new StringReader(testRequest));
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
@@ -50,7 +52,8 @@ public class TestServerSocket {
 
         int port = 5000;
 
-        BufferedReader input = new BufferedReader(new StringReader(testRequest));
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
@@ -67,7 +70,8 @@ public class TestServerSocket {
 
         int port = 5000;
 
-        BufferedReader input = new BufferedReader(new StringReader(testRequest));
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
@@ -86,7 +90,8 @@ public class TestServerSocket {
 
         int port = 5000;
 
-        BufferedReader input = new BufferedReader(new StringReader(testRequest));
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
