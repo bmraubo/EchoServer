@@ -14,11 +14,14 @@ public class ServerSocketWrapper implements SocketWrapper{
     @Override
     public void createSocket(int port) throws IOException {
         serverSocket = new ServerSocket(port);
+    }
+
+    @Override
+    public void acceptConnection() throws IOException {
         Socket socket = serverSocket.accept();
         InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
         input = new BufferedReader(inputStream);
         output = new PrintWriter(socket.getOutputStream(), true);
-
     }
 
     @Override

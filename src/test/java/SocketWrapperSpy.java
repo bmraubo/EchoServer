@@ -6,6 +6,7 @@ public class SocketWrapperSpy implements SocketWrapper{
     BufferedReader input;
     PrintWriter output;
     boolean socketCreated;
+    boolean connectionAccepted;
     boolean dataSent;
     boolean socketClosed;
     String dataReceived;
@@ -20,6 +21,12 @@ public class SocketWrapperSpy implements SocketWrapper{
     public void createSocket(int port) {
         this.socketCreated = true;
     }
+
+    @Override
+    public void acceptConnection() throws IOException {
+        this.connectionAccepted = true;
+    }
+
 
     @Override
     public String readRequestData() throws IOException {

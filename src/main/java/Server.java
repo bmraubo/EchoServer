@@ -9,6 +9,7 @@ public class Server {
 
     public void start(int port) throws IOException {
         socketWrapper.createSocket(port);
+        socketWrapper.acceptConnection();
         String requestData = socketWrapper.readRequestData();
         Request request = new Request(requestData);
         Response response = routeConnection(request);

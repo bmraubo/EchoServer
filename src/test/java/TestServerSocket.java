@@ -27,6 +27,23 @@ public class TestServerSocket {
     }
 
     @Test
+    void AcceptConnectionTest() throws IOException {
+        String testRequest = "GET /simple_get HTTP/1.1\r\n";
+
+        int port = 5000;
+
+        BufferedReader input = new BufferedReader(new StringReader(testRequest));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        Assertions.assertTrue(socketWrapper.connectionAccepted);
+    }
+
+    @Test
     void ReadRequestDataTest() throws IOException {
 
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
