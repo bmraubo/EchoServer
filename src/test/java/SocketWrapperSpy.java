@@ -25,6 +25,8 @@ public class SocketWrapperSpy implements SocketWrapper{
 
     @Override
     public void acceptConnection() throws IOException {
+        System.out.println("Connection accepted");
+        System.out.println("I/O Streams opened");
         this.connectionAccepted = true;
     }
 
@@ -37,11 +39,13 @@ public class SocketWrapperSpy implements SocketWrapper{
             data = data + Character.toString(value);
         }
         dataReceived = data;
+        System.out.println("Data received");
         return data;
     }
 
     @Override
     public void sendResponseData(String responseData) {
+        System.out.println("Sending Response...");
         output.print(responseData);
         sentResponse = responseData;
         dataSent = true;
@@ -49,6 +53,7 @@ public class SocketWrapperSpy implements SocketWrapper{
 
     @Override
     public void closeSocket() throws IOException {
+        System.out.println("Closing IO Streams and Socket");
         input.close();
         output.close();
         socketClosed = true;

@@ -6,7 +6,7 @@ public class Request {
     String protocol;
     String body;
 
-    int contentLength;
+    int contentLength = 0;
     String contentType;
 
     public Request(String request) {
@@ -15,7 +15,7 @@ public class Request {
         if (requestArray.length >= 2) {
             extractHeaderInformation();
         }
-        if (requestArray.length >= 3) { //this will have to be changed for multiple headers
+        if (contentLength > 0) { //this will have to be changed for multiple headers
             extractRequestBody();
         }
     }
