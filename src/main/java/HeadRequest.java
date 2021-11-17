@@ -1,14 +1,14 @@
-public class SimpleHead {
+public class HeadRequest {
 
     public static Response prepareResponse(Request request) {
         if (request.method.equals("HEAD")) {
-            return simpleHead(request);
+            return headRequest(request);
         } else {
             return null; // wrong method placeholder
         }
     }
 
-    private static Response simpleHead(Request request) {
+    private static Response headRequest(Request request) {
         Response response = new Response();
         System.out.println("Simple Head Identified");
         response.setStatusCode(200);

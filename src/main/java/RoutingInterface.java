@@ -9,7 +9,7 @@ public interface RoutingInterface {
             case ("/echo_body"):
                 return EchoBody.prepareResponse(request);
             case ("/head_request"):
-                return SimpleHead.prepareResponse(request);
+                return HeadRequest.prepareResponse(request);
         }
         return ResourceNotFound.prepareResponse(request);
     }
