@@ -28,7 +28,7 @@ public class Server {
             case ("/simple_get_with_body"):
                 return SimpleGetWithBody.prepareResponse(request);
             case ("/echo_body"):
-                return SimplePost.prepareResponse(request);
+                return EchoBody.prepareResponse(request);
             default:
                 response.setStatusCode(404);
                 break;
