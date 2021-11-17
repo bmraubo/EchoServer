@@ -9,6 +9,7 @@ public class Response {
     String contentLength;
     boolean closeConnection = true;
     String closeConnectionHeader = "Connection: close";
+    String allowedMethods;
 
     // Body
     boolean sendBody = false;
@@ -40,6 +41,9 @@ public class Response {
     private String generateHeaders() {
         String headers = "";
         headers = headers + closeConnectionHeader + crlf;
+        if (allowedMethods != null) {
+            headers = headers + allowedMethods + crlf;
+        }
         if (sendBody) {
             headers = headers + contentLength + crlf;
         }
@@ -68,5 +72,14 @@ public class Response {
 
     private String calculateContentLength(String body) {
         return "Content-Length: " + String.valueOf(body.length());
+    }
+
+    public void setAllowHeader(String[] allowedMethods) {
+        System.out.println("Setting Allow Header");
+        String methods = "Allow: ";
+        for (String x : allowedMethods) {
+            methods = methods + x + ", ";
+        }
+        this.allowedMethods = methods.substring(0, methods.length()-2);
     }
 }
