@@ -1,4 +1,5 @@
 public class EchoBody {
+    String[] allowedMethods = {"POST"};
 
     public static Response prepareResponse(Request request) {
         if (request.method.equals("POST")) {
