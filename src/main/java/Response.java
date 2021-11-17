@@ -59,9 +59,11 @@ public class Response {
 
     public void addResponseBody(String body) {
         System.out.println("Adding Response Body");
-        contentLength = calculateContentLength(body);
-        this.body = body;
-        this.sendBody = true;
+        if (body != null) {
+            contentLength = calculateContentLength(body);
+            this.body = body;
+            this.sendBody = true;
+        }
     }
 
     private String calculateContentLength(String body) {
