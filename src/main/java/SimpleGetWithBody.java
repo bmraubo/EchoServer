@@ -1,11 +1,11 @@
 public class SimpleGetWithBody {
-    String[] allowedMethods = {"GET", "OPTIONS"};
+    static String[] allowedMethods = {"GET", "OPTIONS"};
 
     public static Response prepareResponse(Request request) {
         if (request.method.equals("GET")) {
             return simpleGetWithBody(request);
         } else {
-            return null; // method not allowed placeholder
+            return MethodNotAllowed.prepareResponse(allowedMethods);
         }
     }
 
