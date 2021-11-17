@@ -9,10 +9,7 @@ public interface RoutingInterface {
                 return SimpleGetWithBody.prepareResponse(request);
             case ("/echo_body"):
                 return EchoBody.prepareResponse(request);
-            default:
-                response.setStatusCode(404);
-                break;
         }
-        return response;
+        return ResourceNotFound.prepareResponse(request);
     }
 }
