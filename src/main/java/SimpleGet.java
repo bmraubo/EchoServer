@@ -1,5 +1,5 @@
 public class SimpleGet {
-    String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
+    static String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
 
     public static Response prepareResponse(Request request) {
         if (request.method.equals("GET")) {

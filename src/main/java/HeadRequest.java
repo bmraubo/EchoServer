@@ -1,5 +1,5 @@
 public class HeadRequest {
-    String[] allowedMethods = {"HEAD", "OPTIONS"};
+    static String[] allowedMethods = {"HEAD", "OPTIONS"};
 
     public static Response prepareResponse(Request request) {
         if (request.method.equals("HEAD")) {
