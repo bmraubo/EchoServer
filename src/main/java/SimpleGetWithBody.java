@@ -1,5 +1,5 @@
 public class SimpleGetWithBody {
-    String[] allowedMethods = {"GET"};
+    String[] allowedMethods = {"GET", "OPTIONS"};
 
     public static Response prepareResponse(Request request) {
         if (request.method.equals("GET")) {
