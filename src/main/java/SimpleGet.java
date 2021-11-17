@@ -1,4 +1,5 @@
 public class SimpleGet {
+    static String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
 
     public static Response prepareResponse(Request request) {
         if (request.method.equals("GET")) {
@@ -6,7 +7,7 @@ public class SimpleGet {
         } else if (request.method.equals("HEAD")) {
             return simpleHead(request);
         } else {
-            return null; // wrong method placeholder
+            return MethodNotAllowed.prepareResponse(allowedMethods);
         }
     }
 
