@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -14,7 +15,7 @@ public class ServerSocketWrapper implements SocketWrapper{
 
     @Override
     public void createSocket(int port) throws IOException {
-        serverSocket = new ServerSocket(port);
+        serverSocket = new ServerSocket(port, 1, InetAddress.getByName("0.0.0.0"));
     }
 
     @Override
