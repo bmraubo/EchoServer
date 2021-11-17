@@ -1,10 +1,11 @@
 public class EchoBody {
 
     public static Response prepareResponse(Request request) {
-        if (request.method == "POST") {
+        if (request.method.equals("POST")) {
             return simplePostRequest(request);
+        } else {
+            return null; // method not allowed
         }
-        return null;
     }
 
     private static Response simplePostRequest(Request request) {
