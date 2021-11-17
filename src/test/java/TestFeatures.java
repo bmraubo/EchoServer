@@ -82,10 +82,10 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleHeadToSimpleHeadTest() throws IOException{
+    void SimpleHeadToHeadRequestTest() throws IOException{
         int port = 5000;
 
-        String testRequest = "HEAD /simple_head HTTP/1.1\r\n";
+        String testRequest = "HEAD /head_request HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
