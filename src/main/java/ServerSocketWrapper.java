@@ -40,7 +40,6 @@ public class ServerSocketWrapper implements SocketWrapper{
         return data;
     }
 
-
     @Override
     public void sendResponseData(String responseData) {
         System.out.println("Sending Response...");
