@@ -8,7 +8,7 @@ public interface RoutingInterface {
                 return SimpleGetWithBody.prepareResponse(request);
             case ("/echo_body"):
                 return EchoBody.prepareResponse(request);
-            case ("/simple_head"):
+            case ("/head_request"):
                 return SimpleHead.prepareResponse(request);
         }
         return ResourceNotFound.prepareResponse(request);
