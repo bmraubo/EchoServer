@@ -7,7 +7,7 @@ public class SimpleGet {
         } else if (request.method.equals("HEAD")) {
             return simpleHead(request);
         } else {
-            return null; // wrong method placeholder
+            return MethodNotAllowed.prepareResponse(allowedMethods);
         }
     }
 

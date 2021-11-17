@@ -5,7 +5,7 @@ public class EchoBody {
         if (request.method.equals("POST")) {
             return simplePostRequest(request);
         } else {
-            return null; // method not allowed
+            return MethodNotAllowed.prepareResponse(allowedMethods);
         }
     }
 

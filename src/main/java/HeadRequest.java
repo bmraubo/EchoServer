@@ -5,7 +5,7 @@ public class HeadRequest {
         if (request.method.equals("HEAD")) {
             return headRequest(request);
         } else {
-            return null; // wrong method placeholder
+            return MethodNotAllowed.prepareResponse(allowedMethods);
         }
     }
 

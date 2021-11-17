@@ -58,6 +58,8 @@ public class Response {
             case (404):
                 this.reasonPhrase = "Not Found";
                 break;
+            case (405):
+                this.reasonPhrase = "Method Not Allowed";
         }
     }
 
