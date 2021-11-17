@@ -114,6 +114,6 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\n", socketWrapper.sentResponse);
+        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\nAllow: HEAD, OPTIONS\r\n", socketWrapper.sentResponse);
     }
 }
