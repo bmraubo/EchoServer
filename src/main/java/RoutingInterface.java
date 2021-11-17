@@ -1,7 +1,6 @@
 public interface RoutingInterface {
 
     static Response routeConnection(Request request) {
-        Response response = new Response();
         switch (request.uri) {
             case ("/simple_get"):
                 return SimpleGet.prepareResponse(request);
