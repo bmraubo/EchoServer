@@ -15,6 +15,7 @@ public class SimpleGet {
         Response response = new Response();
         System.out.println("Simple Get Identified");
         response.setStatusCode(200);
+        response.addResponseBody("");
         return response;
     }
 
@@ -22,6 +23,7 @@ public class SimpleGet {
         Response response = new Response();
         System.out.println("Simple Head Identified");
         response.setStatusCode(200);
+        response.addResponseBody("");
         return response;
     }
 }

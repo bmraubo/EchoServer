@@ -13,7 +13,7 @@ public class SimpleGetWithBody {
         Response response = new Response();
         System.out.println("Simple Get with Body Identified");
         response.setStatusCode(200);
-        response.addResponseBody(request.body);
+        response.addResponseBody("Hello world");
         return response;
     }
 }
