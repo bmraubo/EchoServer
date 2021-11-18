@@ -53,15 +53,15 @@ public class TestResponse {
     }
 
     @Test
-    void setContentLocationTest() {
-        String contentLocation = "http://content.location";
+    void setLocationTest() {
+        String location = "http://content.location";
 
         Response testResponse = new Response();
-        testResponse.setContentLocationHeader(contentLocation);
+        testResponse.setLocationHeader(location);
 
-        String expectedContentLocationHeader = "Content-Location: http://content.location";
+        String expectedLocationHeader = "Content-Location: http://content.location";
 
-        Assertions.assertEquals(expectedContentLocationHeader, testResponse.contentLocationHeader);
+        Assertions.assertEquals(expectedLocationHeader, testResponse.locationHeader);
     }
 
     @Test
