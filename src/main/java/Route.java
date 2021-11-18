@@ -6,7 +6,7 @@ public class Route {
                 SimpleGet simpleGet = new SimpleGet(request.method);
                 return simpleGet.prepareResponse();
             case ("/simple_get_with_body"):
-                SimpleGetWithBody simpleGetWithBody = new SimpleGetWithBody(request.method, request.body);
+                SimpleGetWithBody simpleGetWithBody = new SimpleGetWithBody(request.method);
                 return simpleGetWithBody.prepareResponse();
             case ("/echo_body"):
                 EchoBody echoBody = new EchoBody(request.method, request.body);

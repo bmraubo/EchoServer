@@ -1,11 +1,9 @@
 public class SimpleGetWithBody implements RoutingInterface{
     String[] allowedMethods = {"GET", "OPTIONS"};
     String method;
-    String body;
 
-    public SimpleGetWithBody (String method, String body){
+    public SimpleGetWithBody (String method){
         this.method = method;
-        this.body = body;
     }
 
     @Override
