@@ -56,11 +56,15 @@ public class Response {
             case (200):
                 this.reasonPhrase = "OK";
                 break;
+            case (301):
+                this.reasonPhrase = "Moved Permanently";
+                break;
             case (404):
                 this.reasonPhrase = "Not Found";
                 break;
             case (405):
                 this.reasonPhrase = "Method Not Allowed";
+                break;
         }
     }
 
