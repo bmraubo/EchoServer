@@ -1,17 +1,25 @@
-public class SimpleGet {
-    static String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
+public class SimpleGet implements RoutingInterface{
+    String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
+    String method;
+    String body;
 
-    public static Response prepareResponse(Request request) {
-        if (request.method.equals("GET")) {
-            return simpleGet(request);
-        } else if (request.method.equals("HEAD")) {
-            return simpleHead(request);
+    public SimpleGet(String method, String body) {
+        this.method = method;
+        this.body = body;
+    }
+
+    @Override
+    public Response prepareResponse() {
+        if (method.equals("GET")) {
+            return simpleGet();
+        } else if (method.equals("HEAD")) {
+            return simpleHead();
         } else {
             return MethodNotAllowed.prepareResponse(allowedMethods);
         }
     }
 
-    private static Response simpleGet(Request request) {
+    private static Response simpleGet() {
         Response response = new Response();
         System.out.println("Simple Get Identified");
         response.setStatusCode(200);
@@ -19,7 +27,7 @@ public class SimpleGet {
         return response;
     }
 
-    private static Response simpleHead(Request request) {
+    private static Response simpleHead() {
         Response response = new Response();
         System.out.println("Simple Head Identified");
         response.setStatusCode(200);
