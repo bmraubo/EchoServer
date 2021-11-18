@@ -13,6 +13,7 @@ public class HeadRequest {
         Response response = new Response();
         System.out.println("Simple Head Identified");
         response.setStatusCode(200);
+        response.addResponseBody("");
         return response;
     }
 }
