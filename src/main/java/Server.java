@@ -13,7 +13,7 @@ public class Server {
             socketWrapper.acceptConnection();
             String requestData = socketWrapper.readRequestData();
             Request request = new Request(requestData);
-            Response response = RoutingInterface.routeConnection(request);
+            Response response = Route.routeConnection(request);
             String responseString = response.generateResponseString();
             socketWrapper.sendResponseData(responseString);
             socketWrapper.closeSocket();

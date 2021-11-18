@@ -1,15 +1,20 @@
-public class HeadRequest {
-    static String[] allowedMethods = {"HEAD", "OPTIONS"};
+public class HeadRequest implements RoutingInterface{
+    String[] allowedMethods = {"HEAD", "OPTIONS"};
+    String method;
 
-    public static Response prepareResponse(Request request) {
-        if (request.method.equals("HEAD")) {
-            return headRequest(request);
+    public HeadRequest(String method) {
+        this.method = method;
+    }
+    @Override
+    public Response prepareResponse() {
+        if (method.equals("HEAD")) {
+            return headRequest();
         } else {
             return MethodNotAllowed.prepareResponse(allowedMethods);
         }
     }
 
-    private static Response headRequest(Request request) {
+    private Response headRequest() {
         Response response = new Response();
         System.out.println("Simple Head Identified");
         response.setStatusCode(200);

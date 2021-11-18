@@ -1,7 +1,7 @@
 public class MethodOptions2 {
-    static String[] allowedMethods = {"GET", "HEAD", "OPTIONS", "PUT", "POST"};
+    String[] allowedMethods = {"GET", "HEAD", "OPTIONS", "PUT", "POST"};
 
-    public static Response prepareResponse(Request request) {
+    public Response prepareResponse() {
         Response response = new Response();
         System.out.println("Simple Options to Method Options Identified");
         response.setStatusCode(200);
