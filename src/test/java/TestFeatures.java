@@ -156,4 +156,24 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
+
+    @Test
+    void SimpleRedirectTest() throws IOException {
+        int port = 5000;
+
+        String testRequest = "GET /redirect HTTP/1.1\r\n";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String expectedResponse = "HTTP/1.1 301 Moved Permanently\r\nConnection: close\r\nLocation: http://127.0.0.1:5000/simple_get\r\nContent-Length: 0\r\n\r\n";
+
+        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+    }
 }

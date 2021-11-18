@@ -20,6 +20,9 @@ public class Route {
             case ("/method_options2"):
                 MethodOptions2 methodOptions2 = new MethodOptions2();
                 return methodOptions2.prepareResponse();
+            case ("/redirect"):
+                Redirect redirect = new Redirect(request.method);
+                return redirect.prepareResponse();
         }
         return ResourceNotFound.prepareResponse(request);
     }

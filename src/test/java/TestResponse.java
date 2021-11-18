@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 public class TestResponse {
 
     @Test
-    void setStatusCodeTest() {
+    void set200StatusCodeTest() {
         int statusCode = 200;
 
         Response testResponse = new Response();
@@ -12,6 +12,17 @@ public class TestResponse {
 
         Assertions.assertEquals(200, testResponse.statusCode);
         Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\n", testResponse.generateResponseString());
+    }
+
+    @Test
+    void set301StatusCodeTest() {
+        int statusCode = 301;
+
+        Response testResponse = new Response();
+        testResponse.setStatusCode(statusCode);
+
+        Assertions.assertEquals(301, testResponse.statusCode);
+        Assertions.assertEquals("Moved Permanently", testResponse.reasonPhrase);
     }
 
     @Test
@@ -39,6 +50,18 @@ public class TestResponse {
         String expectedHeader = "Allow: GET, HEAD, OPTIONS";
 
         Assertions.assertEquals(expectedHeader, testResponse.allowedMethods);
+    }
+
+    @Test
+    void setLocationTest() {
+        String location = "http://content.location";
+
+        Response testResponse = new Response();
+        testResponse.setLocationHeader(location);
+
+        String expectedLocationHeader = "Location: http://content.location";
+
+        Assertions.assertEquals(expectedLocationHeader, testResponse.locationHeader);
     }
 
     @Test

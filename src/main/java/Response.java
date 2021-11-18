@@ -10,6 +10,7 @@ public class Response {
     boolean closeConnection = true;
     String closeConnectionHeader = "Connection: close";
     String allowedMethods;
+    String locationHeader;
 
     // Body
     boolean sendBody = false;
@@ -44,6 +45,9 @@ public class Response {
         if (allowedMethods != null) {
             headers = headers + allowedMethods + crlf;
         }
+        if (locationHeader != null) {
+            headers = headers + locationHeader + crlf;
+        }
         if (sendBody) {
             headers = headers + contentLength + crlf;
         }
@@ -55,11 +59,15 @@ public class Response {
             case (200):
                 this.reasonPhrase = "OK";
                 break;
+            case (301):
+                this.reasonPhrase = "Moved Permanently";
+                break;
             case (404):
                 this.reasonPhrase = "Not Found";
                 break;
             case (405):
                 this.reasonPhrase = "Method Not Allowed";
+                break;
         }
     }
 
@@ -83,5 +91,9 @@ public class Response {
             methods = methods + x + ", ";
         }
         this.allowedMethods = methods.substring(0, methods.length()-2);
+    }
+
+    public void setLocationHeader(String location) {
+        this.locationHeader = "Location: " + location;
     }
 }
