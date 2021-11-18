@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 public class TestResponse {
 
     @Test
-    void GenerateBasicResponse() {
+    void setStatusCodeTest() {
         int statusCode = 200;
 
         Response testResponse = new Response();
@@ -15,7 +15,7 @@ public class TestResponse {
     }
 
     @Test
-    void GenerateResponseWithBody() {
+    void addResponseBodyTest() {
         int statusCode = 200;
         String responseBody = "Hello World";
 
@@ -27,5 +27,30 @@ public class TestResponse {
         Assertions.assertEquals("Hello World", testResponse.body);
         Assertions.assertTrue(testResponse.sendBody);
 
+    }
+
+    @Test
+    void setAllowHeaderTest() {
+        String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
+
+        Response testResponse = new Response();
+        testResponse.setAllowHeader(allowedMethods);
+
+        String expectedHeader = "Allow: GET, HEAD, OPTIONS";
+
+        Assertions.assertEquals(expectedHeader, testResponse.allowedMethods);
+    }
+
+    @Test
+    void generateResponseLineTest() {
+        Response testResponse = new Response();
+        testResponse.setStatusCode(200);
+        testResponse.addResponseBody("This is a test");
+
+        String testResponseString = testResponse.generateResponseString();
+
+        String expectedResponseString = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 14\r\n\r\nThis is a test";
+
+        Assertions.assertEquals(expectedResponseString, testResponseString);
     }
 }
