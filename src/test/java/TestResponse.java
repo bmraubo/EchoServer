@@ -42,6 +42,18 @@ public class TestResponse {
     }
 
     @Test
+    void setContentLocationTest() {
+        String contentLocation = "http://content.location";
+
+        Response testResponse = new Response();
+        testResponse.setLocationHeader(contentLocation);
+
+        String expectedContentLocationHeader = "Content-Location: http://content.location";
+
+        Assertions.assertEquals(expectedContentLocationHeader, testResponse.contentLocationHeader);
+    }
+
+    @Test
     void generateResponseLineTest() {
         Response testResponse = new Response();
         testResponse.setStatusCode(200);
