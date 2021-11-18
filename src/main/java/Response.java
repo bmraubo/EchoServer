@@ -10,7 +10,7 @@ public class Response {
     boolean closeConnection = true;
     String closeConnectionHeader = "Connection: close";
     String allowedMethods;
-    String contentLocationHeader;
+    String locationHeader;
 
     // Body
     boolean sendBody = false;
@@ -45,8 +45,8 @@ public class Response {
         if (allowedMethods != null) {
             headers = headers + allowedMethods + crlf;
         }
-        if (contentLocationHeader != null) {
-            headers = headers + contentLocationHeader + crlf;
+        if (locationHeader != null) {
+            headers = headers + locationHeader + crlf;
         }
         if (sendBody) {
             headers = headers + contentLength + crlf;
@@ -93,7 +93,7 @@ public class Response {
         this.allowedMethods = methods.substring(0, methods.length()-2);
     }
 
-    public void setContentLocationHeader(String contentLocation) {
-        this.contentLocationHeader = "Content-Location: " + contentLocation;
+    public void setLocationHeader(String location) {
+        this.locationHeader = "Location: " + location;
     }
 }
