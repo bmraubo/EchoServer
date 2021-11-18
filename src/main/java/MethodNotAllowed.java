@@ -5,6 +5,7 @@ public class MethodNotAllowed {
         System.out.println("Method not allowed!");
         response.setStatusCode(405);
         response.setAllowHeader(allowedMethods);
+        response.addResponseBody("");
         return response;
     }
 }
