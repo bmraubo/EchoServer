@@ -19,7 +19,7 @@ public class SimpleGet implements RoutingInterface{
         }
     }
 
-    private static Response simpleGet() {
+    private Response simpleGet() {
         Response response = new Response();
         System.out.println("Simple Get Identified");
         response.setStatusCode(200);
@@ -27,7 +27,7 @@ public class SimpleGet implements RoutingInterface{
         return response;
     }
 
-    private static Response simpleHead() {
+    private Response simpleHead() {
         Response response = new Response();
         System.out.println("Simple Head Identified");
         response.setStatusCode(200);

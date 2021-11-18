@@ -17,7 +17,7 @@ public class SimpleGetWithBody implements RoutingInterface{
         }
     }
 
-    private static Response simpleGetWithBody() {
+    private Response simpleGetWithBody() {
         Response response = new Response();
         System.out.println("Simple Get with Body Identified");
         response.setStatusCode(200);
