@@ -12,7 +12,8 @@ public class Route {
                 EchoBody echoBody = new EchoBody(request.method, request.body);
                 return echoBody.prepareResponse();
             case ("/head_request"):
-                return HeadRequest.prepareResponse(request);
+                HeadRequest headRequest = new HeadRequest(request.method, request.body);
+                return headRequest.prepareResponse();
             case ("/method_options"):
                 return MethodOptions.prepareResponse(request);
             case ("/method_options2"):
