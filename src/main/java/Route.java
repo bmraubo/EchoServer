@@ -15,7 +15,8 @@ public class Route {
                 HeadRequest headRequest = new HeadRequest(request.method, request.body);
                 return headRequest.prepareResponse();
             case ("/method_options"):
-                return MethodOptions.prepareResponse(request);
+                MethodOptions methodOptions = new MethodOptions();
+                return methodOptions.prepareResponse();
             case ("/method_options2"):
                 return MethodOptions2.prepareResponse(request);
         }

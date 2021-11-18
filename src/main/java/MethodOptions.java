@@ -1,7 +1,8 @@
-public class MethodOptions {
-    static String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
+public class MethodOptions implements RoutingInterface{
+    String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
 
-    public static Response prepareResponse(Request request) {
+    @Override
+    public Response prepareResponse() {
         Response response = new Response();
         System.out.println("Simple Options to Method Options Identified");
         response.setStatusCode(200);
