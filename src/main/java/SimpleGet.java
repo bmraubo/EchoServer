@@ -1,11 +1,9 @@
 public class SimpleGet implements RoutingInterface{
     String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
     String method;
-    String body;
 
-    public SimpleGet(String method, String body) {
+    public SimpleGet(String method) {
         this.method = method;
-        this.body = body;
     }
 
     @Override

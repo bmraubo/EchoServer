@@ -3,7 +3,7 @@ public class Route {
     static Response routeConnection(Request request) {
         switch (request.uri) {
             case ("/simple_get"):
-                SimpleGet simpleGet = new SimpleGet(request.method, request.body);
+                SimpleGet simpleGet = new SimpleGet(request.method);
                 return simpleGet.prepareResponse();
             case ("/simple_get_with_body"):
                 SimpleGetWithBody simpleGetWithBody = new SimpleGetWithBody(request.method, request.body);
