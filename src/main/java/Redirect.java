@@ -12,7 +12,7 @@ public class Redirect implements RoutingInterface{
         Response response = new Response();
         System.out.println("Redirecting");
         response.setStatusCode(301);
-        response.setContentLocationHeader(contentLocation);
+        response.setLocationHeader(contentLocation);
         response.addResponseBody("");
         return response;
     }
