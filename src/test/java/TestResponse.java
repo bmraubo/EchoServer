@@ -15,6 +15,17 @@ public class TestResponse {
     }
 
     @Test
+    void set301StatusCodeTest() {
+        int statusCode = 301;
+
+        Response testResponse = new Response();
+        testResponse.setStatusCode(statusCode);
+
+        Assertions.assertEquals(301, testResponse.statusCode);
+        Assertions.assertEquals("Moved Permanently", testResponse.reasonPhrase);
+    }
+
+    @Test
     void addResponseBodyTest() {
         int statusCode = 200;
         String responseBody = "Hello World";
