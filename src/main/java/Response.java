@@ -45,6 +45,9 @@ public class Response {
         if (allowedMethods != null) {
             headers = headers + allowedMethods + crlf;
         }
+        if (contentLocationHeader != null) {
+            headers = headers + contentLocationHeader + crlf;
+        }
         if (sendBody) {
             headers = headers + contentLength + crlf;
         }
