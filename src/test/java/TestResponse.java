@@ -40,4 +40,17 @@ public class TestResponse {
 
         Assertions.assertEquals(expectedHeader, testResponse.allowedMethods);
     }
+
+    @Test
+    void generateResponseLineTest() {
+        Response testResponse = new Response();
+        testResponse.setStatusCode(200);
+        testResponse.addResponseBody("This is a test");
+
+        String testResponseString = testResponse.generateResponseString();
+
+        String expectedResponseString = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 14\r\n\r\nThis is a test";
+
+        Assertions.assertEquals(expectedResponseString, testResponseString);
+    }
 }
