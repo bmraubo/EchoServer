@@ -1,6 +1,6 @@
 public class Redirect implements RoutingInterface{
     String[] allowedMethods = {"GET"};
-    String contentLocation = "http://0.0.0.0:5000/simple_get";
+    String contentLocation = "http://127.0.0.1:5000/simple_get";
     String method;
 
     public Redirect(String method) {
