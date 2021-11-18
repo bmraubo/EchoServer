@@ -18,7 +18,8 @@ public class Route {
                 MethodOptions methodOptions = new MethodOptions();
                 return methodOptions.prepareResponse();
             case ("/method_options2"):
-                return MethodOptions2.prepareResponse(request);
+                MethodOptions2 methodOptions2 = new MethodOptions2();
+                return methodOptions2.prepareResponse();
         }
         return ResourceNotFound.prepareResponse(request);
     }
