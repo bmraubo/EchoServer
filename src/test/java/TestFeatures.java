@@ -172,7 +172,7 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 301 Moved Permanently\r\nConnection: close\r\nContent-Location: http://0.0.0.0/simple_get\r\nContent-Length: 0\r\n\r\n";
+        String expectedResponse = "HTTP/1.1 301 Moved Permanently\r\nConnection: close\r\nContent-Location: http://0.0.0.0:5000/simple_get\r\nContent-Length: 0\r\n\r\n";
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
