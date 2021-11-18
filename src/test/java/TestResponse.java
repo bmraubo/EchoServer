@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 public class TestResponse {
 
     @Test
-    void setStatusCodeTest() {
+    void set200StatusCodeTest() {
         int statusCode = 200;
 
         Response testResponse = new Response();
@@ -46,7 +46,7 @@ public class TestResponse {
         String contentLocation = "http://content.location";
 
         Response testResponse = new Response();
-        testResponse.setLocationHeader(contentLocation);
+        testResponse.setContentLocationHeader(contentLocation);
 
         String expectedContentLocationHeader = "Content-Location: http://content.location";
 
