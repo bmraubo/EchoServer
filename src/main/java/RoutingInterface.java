@@ -10,6 +10,10 @@ public interface RoutingInterface {
                 return EchoBody.prepareResponse(request);
             case ("/head_request"):
                 return HeadRequest.prepareResponse(request);
+            case ("/method_options"):
+                return MethodOptions.prepareResponse(request);
+            case ("/method_options2"):
+                return MethodOptions2.prepareResponse(request);
         }
         return ResourceNotFound.prepareResponse(request);
     }
