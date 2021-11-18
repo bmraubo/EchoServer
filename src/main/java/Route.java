@@ -12,7 +12,7 @@ public class Route {
                 EchoBody echoBody = new EchoBody(request.method, request.body);
                 return echoBody.prepareResponse();
             case ("/head_request"):
-                HeadRequest headRequest = new HeadRequest(request.method, request.body);
+                HeadRequest headRequest = new HeadRequest(request.method);
                 return headRequest.prepareResponse();
             case ("/method_options"):
                 MethodOptions methodOptions = new MethodOptions();

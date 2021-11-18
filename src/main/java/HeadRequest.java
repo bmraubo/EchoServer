@@ -1,11 +1,9 @@
 public class HeadRequest implements RoutingInterface{
     String[] allowedMethods = {"HEAD", "OPTIONS"};
     String method;
-    String body;
 
-    public HeadRequest(String method, String body) {
+    public HeadRequest(String method) {
         this.method = method;
-        this.body = body;
     }
     @Override
     public Response prepareResponse() {
