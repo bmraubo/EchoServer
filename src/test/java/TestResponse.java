@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 public class TestResponse {
 
     @Test
-    void GenerateBasicResponse() {
+    void setStatusCodeTest() {
         int statusCode = 200;
 
         Response testResponse = new Response();
@@ -15,7 +15,7 @@ public class TestResponse {
     }
 
     @Test
-    void GenerateResponseWithBody() {
+    void addResponseBodyTest() {
         int statusCode = 200;
         String responseBody = "Hello World";
 
@@ -28,4 +28,5 @@ public class TestResponse {
         Assertions.assertTrue(testResponse.sendBody);
 
     }
+
 }
