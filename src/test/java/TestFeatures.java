@@ -116,4 +116,44 @@ public class TestFeatures {
 
         Assertions.assertEquals("HTTP/1.1 405 Method Not Allowed\r\nConnection: close\r\nAllow: HEAD, OPTIONS\r\nContent-Length: 0\r\n\r\n", socketWrapper.sentResponse);
     }
+
+    @Test
+    void SimpleOptionsToMethodOptionsTest() throws IOException {
+        int port = 5000;
+
+        String testRequest = "OPTIONS /method_options HTTP/1.1\r\n";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nAllow: GET, HEAD, OPTIONS\r\nContent-Length: 0\r\n\r\n";
+
+        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+    }
+
+    @Test
+    void SimpleOptionsToMethodOptions2Test() throws IOException {
+        int port = 5000;
+
+        String testRequest = "OPTIONS /method_options2 HTTP/1.1\r\n";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nAllow: GET, HEAD, OPTIONS, PUT, POST\r\nContent-Length: 0\r\n\r\n";
+
+        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+    }
 }
