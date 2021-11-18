@@ -176,4 +176,24 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
+
+    @Test
+    void ResourceNotFoundTest() throws IOException {
+        int port = 5000;
+
+        String testRequest = "GET /resource_not_found HTTP/1.1\r\n";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String expectedResponse = "HTTP/1.1 404 Not Found\r\nConnection: close\r\nContent-Length: 0\r\n\r\n";
+
+        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+    }
 }

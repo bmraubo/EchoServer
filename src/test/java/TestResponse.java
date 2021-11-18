@@ -26,6 +26,17 @@ public class TestResponse {
     }
 
     @Test
+    void set404StatusCodeTest() {
+        int statusCode = 404;
+
+        Response testResponse = new Response();
+        testResponse.setStatusCode(statusCode);
+
+        Assertions.assertEquals(404, testResponse.statusCode);
+        Assertions.assertEquals("Not Found", testResponse.reasonPhrase);
+    }
+
+    @Test
     void addResponseBodyTest() {
         int statusCode = 200;
         String responseBody = "Hello World";
