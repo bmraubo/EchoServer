@@ -59,7 +59,7 @@ public class TestResponse {
         Response testResponse = new Response();
         testResponse.setLocationHeader(location);
 
-        String expectedLocationHeader = "Content-Location: http://content.location";
+        String expectedLocationHeader = "Location: http://content.location";
 
         Assertions.assertEquals(expectedLocationHeader, testResponse.locationHeader);
     }
