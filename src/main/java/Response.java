@@ -10,6 +10,7 @@ public class Response {
     boolean closeConnection = true;
     String closeConnectionHeader = "Connection: close";
     String allowedMethods;
+    String contentLocationHeader;
 
     // Body
     boolean sendBody = false;
@@ -83,5 +84,9 @@ public class Response {
             methods = methods + x + ", ";
         }
         this.allowedMethods = methods.substring(0, methods.length()-2);
+    }
+
+    public void setContentLocationHeader(String contentLocation) {
+        this.contentLocationHeader = "Content-Location: " + contentLocation;
     }
 }
