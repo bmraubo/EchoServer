@@ -1,19 +1,26 @@
-public class EchoBody {
-    static String[] allowedMethods = {"POST", "OPTIONS"};
+public class EchoBody implements RoutingInterface{
+    String[] allowedMethods = {"POST", "OPTIONS"};
+    String method;
+    String body;
 
-    public static Response prepareResponse(Request request) {
-        if (request.method.equals("POST")) {
-            return simplePostRequest(request);
+    public EchoBody(String method, String body) {
+        this.method = method;
+        this.body = body;
+    }
+
+    public Response prepareResponse() {
+        if (method.equals("POST")) {
+            return simplePostRequest();
         } else {
             return MethodNotAllowed.prepareResponse(allowedMethods);
         }
     }
 
-    private static Response simplePostRequest(Request request) {
+    private Response simplePostRequest() {
         System.out.println("Simple Post identified");
         Response response = new Response();
         response.setStatusCode(200);
-        response.addResponseBody(request.body);
+        response.addResponseBody(body);
         return response;
     }
 }
