@@ -29,4 +29,15 @@ public class TestResponse {
 
     }
 
+    @Test
+    void setAllowHeaderTest() {
+        String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
+
+        Response testResponse = new Response();
+        testResponse.setAllowHeader(allowedMethods);
+
+        String expectedHeader = "Allow: GET, HEAD, OPTIONS";
+
+        Assertions.assertEquals(expectedHeader, testResponse.allowedMethods);
+    }
 }
