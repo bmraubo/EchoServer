@@ -68,6 +68,9 @@ public class Response {
             case (405):
                 this.reasonPhrase = "Method Not Allowed";
                 break;
+            case (500):
+                this.reasonPhrase = "Internal Server Error";
+                break;
         }
     }
 
