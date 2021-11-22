@@ -12,6 +12,7 @@ public class SocketWrapperSpy implements SocketWrapper{
     boolean socketClosed;
     String dataReceived;
     String sentResponse;
+    boolean nullInputReceived;
 
     public SocketWrapperSpy(BufferedReader input, PrintWriter output) {
         this.input = input;
