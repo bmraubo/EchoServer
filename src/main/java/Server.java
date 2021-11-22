@@ -13,6 +13,9 @@ public class Server {
             socketWrapper.acceptConnection();
             String requestData = socketWrapper.readRequestData();
             if (requestData.equals("")) {
+                Response response = Route.serverError();
+                String responseString = response.generateResponseString();
+                socketWrapper.sendResponseData(responseString);
                 socketWrapper.closeSocket();
             } else {
                 Request request = new Request(requestData);
