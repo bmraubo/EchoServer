@@ -39,13 +39,13 @@ public class SocketWrapperSpy implements SocketWrapper{
         while (input.ready()) {
             data = data + Character.toString(input.read());
         }
-        if (data == null) {
+        if (data.equals("")) {
             nullInputReceived = true;
             System.out.println("Null input received, closing connection...");
             return data;
         }
         dataReceived = data;
-        System.out.println("Data received");
+        System.out.println("Data received: "+ data);
         return data;
     }
 
