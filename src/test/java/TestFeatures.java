@@ -6,7 +6,7 @@ import java.io.*;
 public class TestFeatures {
 
     @Test
-    void SimpleGetTest() throws IOException {
+    void SimpleGetTest() throws IOException, InterruptedException {
         int port = 5000;
 
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
@@ -24,7 +24,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleGetWithBodyTest() throws IOException {
+    void SimpleGetWithBodyTest() throws IOException, InterruptedException {
         int port = 5000;
 
         String testRequest = "GET /simple_get_with_body HTTP/1.1\r\nContent-Length: 11\r\n\r\nHello World";
@@ -44,7 +44,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimplePostTest() throws IOException {
+    void SimplePostTest() throws IOException, InterruptedException {
         int port = 5000;
 
         String testRequest = "POST /echo_body HTTP/1.1\r\nContent-Length: 11\r\n\r\nHello World";
@@ -64,7 +64,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleHeadToSimpleGetTest() throws IOException{
+    void SimpleHeadToSimpleGetTest() throws IOException, InterruptedException {
         int port = 5000;
 
         String testRequest = "HEAD /simple_get HTTP/1.1\r\n";
@@ -82,7 +82,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleHeadToHeadRequestTest() throws IOException{
+    void SimpleHeadToHeadRequestTest() throws IOException, InterruptedException{
         int port = 5000;
 
         String testRequest = "HEAD /head_request HTTP/1.1\r\n";
@@ -100,7 +100,7 @@ public class TestFeatures {
     }
 
     @Test
-    void MethodNotAllowedTest() throws IOException {
+    void MethodNotAllowedTest() throws IOException, InterruptedException {
         int port = 5000;
 
         String testRequest = "GET /head_request HTTP/1.1\r\n";
@@ -118,7 +118,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleOptionsToMethodOptionsTest() throws IOException {
+    void SimpleOptionsToMethodOptionsTest() throws IOException, InterruptedException {
         int port = 5000;
 
         String testRequest = "OPTIONS /method_options HTTP/1.1\r\n";
@@ -138,7 +138,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleOptionsToMethodOptions2Test() throws IOException {
+    void SimpleOptionsToMethodOptions2Test() throws IOException, InterruptedException {
         int port = 5000;
 
         String testRequest = "OPTIONS /method_options2 HTTP/1.1\r\n";
@@ -158,7 +158,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleRedirectTest() throws IOException {
+    void SimpleRedirectTest() throws IOException, InterruptedException {
         int port = 5000;
 
         String testRequest = "GET /redirect HTTP/1.1\r\n";
@@ -178,7 +178,7 @@ public class TestFeatures {
     }
 
     @Test
-    void ResourceNotFoundTest() throws IOException {
+    void ResourceNotFoundTest() throws IOException, InterruptedException {
         int port = 5000;
 
         String testRequest = "GET /resource_not_found HTTP/1.1\r\n";
@@ -198,7 +198,7 @@ public class TestFeatures {
     }
 
     @Test
-    void EmptyRequestTest() throws IOException {
+    void EmptyRequestTest() throws IOException, InterruptedException {
         int port = 5000;
 
         byte[] testRequest = new byte[0];
