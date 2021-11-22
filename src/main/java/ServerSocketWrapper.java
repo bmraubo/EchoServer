@@ -13,15 +13,21 @@ public class ServerSocketWrapper implements SocketWrapper{
     BufferedReader input;
     PrintWriter output;
 
+
     @Override
     public void createSocket(int port) throws IOException {
         serverSocket = new ServerSocket(port, 1, InetAddress.getByName("0.0.0.0"));
     }
 
     @Override
-    public void acceptConnection() throws IOException {
+    public void acceptConnection() throws IOException, InterruptedException {
+        int timeoutCounter = 0;
         socket = serverSocket.accept();
         System.out.println("Connection accepted");
+        while ((socket.getInputStream().available() == 0) && (timeoutCounter < 100)) {
+            Thread.sleep(5);
+            timeoutCounter = timeoutCounter + 1;
+        }
         InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
         input = new BufferedReader(inputStream);
         output = new PrintWriter(socket.getOutputStream(), true);
@@ -52,6 +58,7 @@ public class ServerSocketWrapper implements SocketWrapper{
     @Override
     public void closeSocket() throws IOException {
         System.out.println("Closing IO Streams and Socket");
+        System.out.println(socket.getInputStream().available());
         input.close();
         output.close();
         socket.close();

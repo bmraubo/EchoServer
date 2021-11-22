@@ -7,7 +7,7 @@ public class Server {
         this.socketWrapper = socketWrapper;
     }
 
-    public void start(int port) throws IOException {
+    public void start(int port) throws IOException, InterruptedException{
         socketWrapper.createSocket(port);
         while (socketWrapper.keepAlive()) {
             socketWrapper.acceptConnection();
