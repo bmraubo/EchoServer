@@ -196,4 +196,24 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
+
+    @Test
+    void EmptyRequestTest() throws IOException {
+        int port = 5000;
+
+        byte[] testRequest = new byte[0];
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest);
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String expectedResponse = "HTTP/1.1 500 Internal Server Error\r\nConnection: close\r\nContent-Length: 40\r\n\r\nRequest read as empty, please try again.";
+
+        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+    }
 }

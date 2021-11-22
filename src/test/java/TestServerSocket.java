@@ -65,6 +65,25 @@ public class TestServerSocket {
     }
 
     @Test
+    void ReadRequestNullDataTest() throws IOException{
+
+        byte[] testRequest = new byte[0];
+
+        int port = 5000;
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest);
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        Assertions.assertTrue(socketWrapper.nullInputReceived);
+    }
+
+    @Test
     void SocketSendDataTest() throws IOException {
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
