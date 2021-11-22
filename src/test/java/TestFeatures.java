@@ -212,7 +212,7 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 505 Internal Server Error\r\nConnection: close\r\nContent-Length: 0\r\n\r\n";
+        String expectedResponse = "HTTP/1.1 500 Internal Server Error\r\nConnection: close\r\nContent-Length: 0\r\n\r\n";
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
