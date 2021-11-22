@@ -9,7 +9,7 @@ public class TestServerSocket {
 
 
     @Test
-    void socketCreationTest() throws IOException {
+    void socketCreationTest() throws IOException, InterruptedException {
 
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
@@ -28,7 +28,7 @@ public class TestServerSocket {
     }
 
     @Test
-    void AcceptConnectionTest() throws IOException {
+    void AcceptConnectionTest() throws IOException, InterruptedException {
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
         int port = 5000;
@@ -46,7 +46,7 @@ public class TestServerSocket {
     }
 
     @Test
-    void ReadRequestDataTest() throws IOException {
+    void ReadRequestDataTest() throws IOException, InterruptedException {
 
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
@@ -65,7 +65,7 @@ public class TestServerSocket {
     }
 
     @Test
-    void ReadRequestNullDataTest() throws IOException{
+    void ReadRequestNullDataTest() throws IOException, InterruptedException {
 
         byte[] testRequest = new byte[0];
 
@@ -84,7 +84,7 @@ public class TestServerSocket {
     }
 
     @Test
-    void SocketSendDataTest() throws IOException {
+    void SocketSendDataTest() throws IOException, InterruptedException {
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
         int port = 5000;
@@ -104,7 +104,7 @@ public class TestServerSocket {
     }
 
     @Test
-    void SocketCloseTest() throws IOException {
+    void SocketCloseTest() throws IOException, InterruptedException {
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
         int port = 5000;
