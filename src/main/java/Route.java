@@ -26,4 +26,9 @@ public class Route {
         }
         return ResourceNotFound.prepareResponse(request);
     }
+
+    static Response serverError() {
+        ServerError error = new ServerError();
+        return error.prepareResponse();
+    }
 }
