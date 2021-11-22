@@ -26,7 +26,7 @@ public class ServerSocketWrapper implements SocketWrapper{
         System.out.println("Connection accepted");
         while ((socket.getInputStream().available() == 0) && (timeoutCounter < 100)) {
             Thread.sleep(5);
-            timeoutCounter = timeoutCounter + 1;
+            timeoutCounter++;
         }
         InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
         input = new BufferedReader(inputStream);
