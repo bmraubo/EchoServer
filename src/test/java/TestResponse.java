@@ -37,6 +37,17 @@ public class TestResponse {
     }
 
     @Test
+    void set500StatusCodeTest() {
+        int statusCode = 500;
+
+        Response testResponse = new Response();
+        testResponse.setStatusCode(statusCode);
+
+        Assertions.assertEquals(500, testResponse.statusCode);
+        Assertions.assertEquals("Internal Server Error", testResponse.reasonPhrase);
+    }
+
+    @Test
     void addResponseBodyTest() {
         int statusCode = 200;
         String responseBody = "Hello World";
