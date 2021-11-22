@@ -13,7 +13,8 @@ public class Server {
             socketWrapper.acceptConnection();
             String requestData = socketWrapper.readRequestData();
             if (requestData.equals("")) {
-                Response response = Route.serverError();
+                String errorReason = "Request read as empty, please try again.";
+                Response response = Route.serverError(errorReason);
                 String responseString = response.generateResponseString();
                 socketWrapper.sendResponseData(responseString);
                 socketWrapper.closeSocket();

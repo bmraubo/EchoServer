@@ -27,8 +27,8 @@ public class Route {
         return ResourceNotFound.prepareResponse(request);
     }
 
-    static Response serverError() {
-        ServerError error = new ServerError();
+    static Response serverError(String errorReason) {
+        ServerError error = new ServerError(errorReason);
         return error.prepareResponse();
     }
 }
