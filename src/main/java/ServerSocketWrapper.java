@@ -58,7 +58,6 @@ public class ServerSocketWrapper implements SocketWrapper{
     @Override
     public void closeSocket() throws IOException {
         System.out.println("Closing IO Streams and Socket");
-        System.out.println(socket.getInputStream().available());
         input.close();
         output.close();
         socket.close();
