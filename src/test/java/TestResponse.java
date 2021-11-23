@@ -107,8 +107,12 @@ public class TestResponse {
         testResponse.setStatusCode(200);
         testResponse.setContentType(contentType);
 
+        String testResponseString = testResponse.generateResponseString();
+
         String expectedContentTypeHeader = "Content-Type: text/plain";
+        String expectedResponseString = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/plain\r\nContent-Length: 0\r\n\r\n";
 
         Assertions.assertEquals(expectedContentTypeHeader, testResponse.contentType);
+        Assertions.assertEquals(expectedResponseString, testResponseString);
     }
 }
