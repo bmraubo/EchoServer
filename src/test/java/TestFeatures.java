@@ -216,4 +216,35 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
+
+    @Test
+    void TextResponseTest() throws IOException, InterruptedException {
+        int port = 5000;
+
+        String testRequest = "GET /text_response HTTP/1.1\r\n";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String responseText = "Aedh Wishes for the Cloths of Heaven\n"+
+                "WB YEATS\n\n" +
+                "Had I the heavens' embroidered cloths,\n" +
+                "Enwrought with golden and silver light,\n"+
+                "The blue and the dim and the dark cloths\n"+
+                "Of night and light and the half light,\n"+
+                "I would spread the cloths under your feet:\n"+
+                "But I, being poor, have only my dreams;\n"+
+                "I have spread my dreams under your feet;\n"+
+                "Tread softly because you tread on my dreams.";
+
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: raw/text\r\nContent-Length: 374\r\n\r\n"+responseText;
+
+        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+    }
 }
