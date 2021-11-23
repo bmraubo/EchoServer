@@ -1,5 +1,5 @@
 public class TextResponse implements RoutingInterface{
-    String contentType = "text/plain";
+    String contentType = "text/plain;charset=utf-8";
     String responseBody = "Aedh Wishes for the Cloths of Heaven\n"+
             "WB YEATS\n\n" +
             "Had I the heavens' embroidered cloths,\n" +
