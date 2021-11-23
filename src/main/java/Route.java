@@ -23,6 +23,9 @@ public class Route {
             case ("/redirect"):
                 Redirect redirect = new Redirect(request.method);
                 return redirect.prepareResponse();
+            case ("text_respose"):
+                TextResponse textResponse = new TextResponse();
+                return textResponse.prepareResponse();
         }
         return ResourceNotFound.prepareResponse(request);
     }
