@@ -23,7 +23,7 @@ public class Route {
             case ("/redirect"):
                 Redirect redirect = new Redirect(request.method);
                 return redirect.prepareResponse();
-            case ("text_respose"):
+            case ("text_response"):
                 TextResponse textResponse = new TextResponse();
                 return textResponse.prepareResponse();
         }
