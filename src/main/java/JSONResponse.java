@@ -15,7 +15,8 @@ public class JSONResponse implements RoutingInterface{
 
     private JSONObject generateJSONResponse() {
         JSONObject jsonResponse = new JSONObject();
-        jsonResponse.put("body", "json");
+        jsonResponse.put("key1", "value1");
+        jsonResponse.put("key2", "value2");
         return jsonResponse;
     }
 }
