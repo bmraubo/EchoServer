@@ -12,5 +12,6 @@ public class TestXMLResponse {
 
         Assertions.assertEquals(200, testResponseObject.statusCode);
         Assertions.assertEquals("Content-Type: application/xml;charset=utf-8", testResponseObject.contentType);
+        Assertions.assertEquals(expectedXMLString, testResponseObject.body);
     }
 }
