@@ -232,18 +232,9 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String responseText = "Aedh Wishes for the Cloths of Heaven\n"+
-                "WB YEATS\n\n" +
-                "Had I the heavens' embroidered cloths,\n" +
-                "Enwrought with golden and silver light,\n"+
-                "The blue and the dim and the dark cloths\n"+
-                "Of night and light and the half light,\n"+
-                "I would spread the cloths under your feet:\n"+
-                "But I, being poor, have only my dreams;\n"+
-                "I have spread my dreams under your feet;\n"+
-                "Tread softly because you tread on my dreams.";
+        String responseText = "text response";
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/plain;charset=utf-8\r\nContent-Length: 374\r\n\r\n"+responseText;
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/plain;charset=utf-8\r\nContent-Length: 13\r\n\r\n"+responseText;
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
