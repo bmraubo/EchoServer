@@ -11,6 +11,7 @@ public class Response {
     String closeConnectionHeader = "Connection: close";
     String allowedMethods;
     String locationHeader;
+    String contentType;
 
     // Body
     boolean sendBody = false;
@@ -47,6 +48,9 @@ public class Response {
         }
         if (locationHeader != null) {
             headers = headers + locationHeader + crlf;
+        }
+        if (contentType != null) {
+            headers = headers + contentType + crlf;
         }
         if (sendBody) {
             headers = headers + contentLength + crlf;
@@ -98,5 +102,9 @@ public class Response {
 
     public void setLocationHeader(String location) {
         this.locationHeader = "Location: " + location;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = "Content-Type: " + contentType;
     }
 }
