@@ -8,7 +8,7 @@ public class TestXMLResponse {
         XMLResponse testResponse = new XMLResponse();
         Response testResponseObject = testResponse.prepareResponse();
 
-        String expectedXMLString = "<body><response>Hello World</response></body>";
+        String expectedXMLString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><body><response>Hello World</response></body>";
 
         Assertions.assertEquals(200, testResponseObject.statusCode);
         Assertions.assertEquals("Content-Type: application/xml;charset=utf-8", testResponseObject.contentType);
