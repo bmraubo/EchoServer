@@ -49,6 +49,9 @@ public class Response {
         if (locationHeader != null) {
             headers = headers + locationHeader + crlf;
         }
+        if (contentType != null) {
+            headers = headers + contentType + crlf;
+        }
         if (sendBody) {
             headers = headers + contentLength + crlf;
         }
