@@ -1,5 +1,5 @@
 public class HTMLResponse implements RoutingInterface{
-    String contentType = "text/html";
+    String contentType = "text/html;charset=utf-8";
     String responseBody = "<!DOCTYPE html><html>html response</html>";
 
     @Override
