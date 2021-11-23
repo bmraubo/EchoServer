@@ -256,7 +256,8 @@ public class TestFeatures {
 
         String responseText = "<!DOCTYPE html><html>html response</html>";
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/html\r\nContent-Length: 41\r\n\r\n"+responseText;
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/html\r\nContent-Length: 41\r\n\r\n" + responseText;
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+    }
 }
