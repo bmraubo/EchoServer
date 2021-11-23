@@ -243,7 +243,7 @@ public class TestFeatures {
                 "I have spread my dreams under your feet;\n"+
                 "Tread softly because you tread on my dreams.";
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/plain\r\nContent-Length: 374\r\n\r\n"+responseText;
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/plain;charset=utf-8\r\nContent-Length: 374\r\n\r\n"+responseText;
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
