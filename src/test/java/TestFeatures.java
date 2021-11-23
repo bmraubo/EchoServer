@@ -301,9 +301,9 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String XMLString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><body><response>Hello World</response></body>";
+        String XMLString = "<note><body>XML Response</body></note>";
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: application/xml;charset=utf-8\r\nContent-Length: 45\r\n\r\n" + XMLString;
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: application/xml;charset=utf-8\r\nContent-Length: 38\r\n\r\n" + XMLString;
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
