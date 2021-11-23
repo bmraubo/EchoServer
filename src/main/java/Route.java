@@ -32,6 +32,9 @@ public class Route {
             case ("/json_response"):
                 JSONResponse jsonResponse = new JSONResponse();
                 return jsonResponse.prepareResponse();
+            case ("/xml_response"):
+                XMLResponse xmlResponse = new XMLResponse();
+                return xmlResponse.prepareResponse();
         }
         return ResourceNotFound.prepareResponse(request);
     }
