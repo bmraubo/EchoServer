@@ -98,4 +98,17 @@ public class TestResponse {
 
         Assertions.assertEquals(expectedResponseString, testResponseString);
     }
+
+    @Test
+    void setContentTypeTest() {
+        String contentType = "text/plain";
+
+        Response testResponse = new Response();
+        testResponse.setStatusCode(200);
+        testResponse.setContentType(contentType);
+
+        String expectedContentTypeHeader = "Content-Type: text/plain";
+
+        Assertions.assertEquals(expectedContentTypeHeader, testResponse.contentType);
+    }
 }
