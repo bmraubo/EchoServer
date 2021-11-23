@@ -29,6 +29,9 @@ public class Route {
             case ("/html_response"):
                 HTMLResponse htmlResponse = new HTMLResponse();
                 return htmlResponse.prepareResponse();
+            case ("/json_response"):
+                JSONResponse jsonResponse = new JSONResponse();
+                return jsonResponse.prepareResponse();
         }
         return ResourceNotFound.prepareResponse(request);
     }
