@@ -106,6 +106,7 @@ public class TestResponse {
         Response testResponse = new Response();
         testResponse.setStatusCode(200);
         testResponse.setContentType(contentType);
+        testResponse.addResponseBody("");
 
         String testResponseString = testResponse.generateResponseString();
 
