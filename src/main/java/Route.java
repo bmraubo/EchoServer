@@ -26,6 +26,9 @@ public class Route {
             case ("/text_response"):
                 TextResponse textResponse = new TextResponse();
                 return textResponse.prepareResponse();
+            case ("/html_response"):
+                HTMLResponse htmlResponse = new HTMLResponse();
+                return htmlResponse.prepareResponse();
         }
         return ResourceNotFound.prepareResponse(request);
     }
