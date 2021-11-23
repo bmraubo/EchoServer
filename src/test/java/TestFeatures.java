@@ -278,9 +278,10 @@ public class TestFeatures {
         testServer.start(port);
 
         JSONObject responseJson = new JSONObject();
-        responseJson.put("body", "json");
+        responseJson.put("key1", "value1");
+        responseJson.put("key2", "value2");
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: application/json;charset=utf-8\r\nContent-Length: 15\r\n\r\n" + responseJson;
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: application/json;charset=utf-8\r\nContent-Length: 33\r\n\r\n" + responseJson;
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
