@@ -94,6 +94,7 @@ public class Response {
     public void addResponseBody(byte[] image) {
         if (image != null) {
             contentLength = calculateContentLength(image);
+            imageBody = image;
             sendBody = true;
         }
     }
