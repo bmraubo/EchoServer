@@ -16,6 +16,7 @@ public class Response {
     // Body
     boolean sendBody = false;
     String body;
+    byte[] imageBody;
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;

@@ -13,6 +13,7 @@ public class SocketWrapperSpy implements SocketWrapper{
     String dataReceived;
     String sentResponse;
     boolean nullInputReceived;
+    boolean imageOutputSelected;
 
     public SocketWrapperSpy(BufferedReader input, PrintWriter output) {
         this.input = input;
@@ -50,7 +51,27 @@ public class SocketWrapperSpy implements SocketWrapper{
     }
 
     @Override
-    public void sendResponseData(Response response) {
+    public void sendResponseData(Response response) throws IOException {
+        if (response.contentType != null && response.contentType.contains("image/")) {
+            sendImageResponseData(response);
+        } else {
+            sendTextResponseData(response);
+        }
+        dataSent = true;
+    }
+
+    @Override
+    public void sendImageResponseData(Response response) throws IOException {
+        imageOutputSelected = true;
+        System.out.println("Sending Response...");
+        output.print(response.generateResponseLine());
+        sentResponse = response.generateResponseLine();
+        output.print(response.generateHeaders());
+        sentResponse = sentResponse + response.generateHeaders();
+    }
+
+    @Override
+    public void sendTextResponseData(Response response) {
         System.out.println("Sending Response...");
         output.print(response.generateResponseLine());
         sentResponse = response.generateResponseLine();
@@ -60,7 +81,6 @@ public class SocketWrapperSpy implements SocketWrapper{
             output.print(response.body);
             sentResponse = sentResponse + response.body;
         }
-        dataSent = true;
     }
 
     @Override
