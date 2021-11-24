@@ -104,7 +104,7 @@ public class TestServerSocket {
     }
 
     @Test
-    void SocketSwitchToImageOutputTest() {
+    void SocketSwitchToImageOutputTest() throws IOException {
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
