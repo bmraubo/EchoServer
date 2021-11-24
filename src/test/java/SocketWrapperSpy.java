@@ -14,6 +14,7 @@ public class SocketWrapperSpy implements SocketWrapper{
     String sentResponse;
     boolean nullInputReceived;
     boolean imageOutputSelected;
+    byte[] responseBodyImage;
 
     public SocketWrapperSpy(BufferedReader input, PrintWriter output) {
         this.input = input;
@@ -68,6 +69,7 @@ public class SocketWrapperSpy implements SocketWrapper{
         sentResponse = response.generateResponseLine();
         output.print(response.generateHeaders());
         sentResponse = sentResponse + response.generateHeaders();
+        responseBodyImage = response.imageBody;
     }
 
     @Override
