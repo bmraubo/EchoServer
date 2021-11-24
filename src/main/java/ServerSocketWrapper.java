@@ -53,15 +53,25 @@ public class ServerSocketWrapper implements SocketWrapper{
     @Override
     public void sendResponseData(Response response) {
         if (response.contentType != null && response.contentType.contains("image/")) {
-            System.out.println("Image Output");
+            sendImageResponseData(response);
         } else {
-            System.out.println("Sending Response...");
-            output.print(response.generateResponseLine());
-            output.print(response.generateHeaders());
-            if (response.sendBody) {
-                output.print(response.body);
-                output.flush();
-            }
+            sendTextResponseData(response);
+        }
+    }
+
+    @Override
+    public void sendImageResponseData(Response response) {
+        System.out.println("Image Output");
+    }
+
+    @Override
+    public void sendTextResponseData(Response response) {
+        System.out.println("Sending Response...");
+        output.print(response.generateResponseLine());
+        output.print(response.generateHeaders());
+        if (response.sendBody) {
+            output.print(response.body);
+            output.flush();
         }
     }
 

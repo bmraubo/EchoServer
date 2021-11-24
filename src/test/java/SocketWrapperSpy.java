@@ -53,19 +53,29 @@ public class SocketWrapperSpy implements SocketWrapper{
     @Override
     public void sendResponseData(Response response) {
         if (response.contentType != null && response.contentType.contains("image/")) {
-            imageOutputSelected = true;
+            sendImageResponseData(response);
         } else {
-            System.out.println("Sending Response...");
-            output.print(response.generateResponseLine());
-            sentResponse = response.generateResponseLine();
-            output.print(response.generateHeaders());
-            sentResponse = sentResponse + response.generateHeaders();
-            if (response.sendBody) {
-                output.print(response.body);
-                sentResponse = sentResponse + response.body;
-            }
+            sendTextResponseData(response);
         }
         dataSent = true;
+    }
+
+    @Override
+    public void sendImageResponseData(Response response) {
+        imageOutputSelected = true;
+    }
+
+    @Override
+    public void sendTextResponseData(Response response) {
+        System.out.println("Sending Response...");
+        output.print(response.generateResponseLine());
+        sentResponse = response.generateResponseLine();
+        output.print(response.generateHeaders());
+        sentResponse = sentResponse + response.generateHeaders();
+        if (response.sendBody) {
+            output.print(response.body);
+            sentResponse = sentResponse + response.body;
+        }
     }
 
     @Override

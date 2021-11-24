@@ -6,6 +6,8 @@ public interface SocketWrapper {
     void acceptConnection() throws IOException, InterruptedException;
     String readRequestData() throws IOException;
     void sendResponseData(Response response);
+    void sendImageResponseData(Response response);
+    void sendTextResponseData(Response response);
     void closeSocket() throws IOException;
     boolean keepAlive();
 
