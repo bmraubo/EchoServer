@@ -33,7 +33,6 @@ public class ServerSocketWrapper implements SocketWrapper{
         InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
         input = new BufferedReader(inputStream);
         output = new PrintWriter(socket.getOutputStream(), true);
-        otherOutput = new PrintWriter(socket.getOutputStream(), true);
         System.out.println("I/O Streams opened");
     }
 
