@@ -59,7 +59,9 @@ public class ServerSocketWrapper implements SocketWrapper{
     public void sendImageResponseData(Response response) throws IOException {
         System.out.println("Sending Response...");
         output.print(response.generateResponseLine());
+        System.out.println("Sending Response...");
         output.print(response.generateHeaders());
+        System.out.println("Sending Response...");
         System.out.println("Sending Image...");
         OutputStream output = socket.getOutputStream();
         output.write(response.imageBody);
@@ -70,9 +72,12 @@ public class ServerSocketWrapper implements SocketWrapper{
     public void sendTextResponseData(Response response) {
         System.out.println("Sending Response...");
         output.print(response.generateResponseLine());
+        System.out.println(response.generateResponseLine());
         output.print(response.generateHeaders());
+        System.out.println(response.generateHeaders());
         if (response.sendBody) {
             output.print(response.body);
+            System.out.println(response.body);
             output.flush();
         }
     }
