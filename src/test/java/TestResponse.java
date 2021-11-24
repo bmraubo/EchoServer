@@ -11,7 +11,7 @@ public class TestResponse {
         testResponse.setStatusCode(statusCode);
 
         Assertions.assertEquals(200, testResponse.statusCode);
-        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\n", testResponse.generateResponseString());
+        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\n", testResponse.generateResponseLine());
     }
 
     @Test
@@ -90,11 +90,10 @@ public class TestResponse {
     void generateResponseLineTest() {
         Response testResponse = new Response();
         testResponse.setStatusCode(200);
-        testResponse.addResponseBody("This is a test");
 
-        String testResponseString = testResponse.generateResponseString();
+        String testResponseString = testResponse.generateResponseLine();
 
-        String expectedResponseString = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 14\r\n\r\nThis is a test";
+        String expectedResponseString = "HTTP/1.1 200 OK\r\n";
 
         Assertions.assertEquals(expectedResponseString, testResponseString);
     }
@@ -108,12 +107,8 @@ public class TestResponse {
         testResponse.setContentType(contentType);
         testResponse.addResponseBody("");
 
-        String testResponseString = testResponse.generateResponseString();
-
         String expectedContentTypeHeader = "Content-Type: text/plain";
-        String expectedResponseString = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/plain\r\nContent-Length: 0\r\n\r\n";
 
         Assertions.assertEquals(expectedContentTypeHeader, testResponse.contentType);
-        Assertions.assertEquals(expectedResponseString, testResponseString);
     }
 }
