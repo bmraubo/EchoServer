@@ -12,7 +12,7 @@ public class ServerSocketWrapper implements SocketWrapper{
     Socket socket;
     BufferedReader input;
     PrintWriter output;
-    PrintWriter otherOutput;
+
 
 
     @Override
