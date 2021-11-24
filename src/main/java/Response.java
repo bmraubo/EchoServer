@@ -22,6 +22,7 @@ public class Response {
         determineReasonPhrase(statusCode);
     }
 
+    /*
     public String generateResponseString() {
         System.out.println("generating response");
         String responseString;
@@ -35,12 +36,13 @@ public class Response {
         System.out.println(responseString);
         return responseString;
     }
+    */
 
-    private String generateResponseLine() {
+    public String generateResponseLine() {
         return this.protocol + " " + this.statusCode + " " + this.reasonPhrase + crlf;
     }
 
-    private String generateHeaders() {
+    public String generateHeaders() {
         String headers = "";
         headers = headers + closeConnectionHeader + crlf;
         if (allowedMethods != null) {
@@ -55,6 +57,7 @@ public class Response {
         if (sendBody) {
             headers = headers + contentLength + crlf;
         }
+        headers = headers + crlf;
         return headers;
     }
 

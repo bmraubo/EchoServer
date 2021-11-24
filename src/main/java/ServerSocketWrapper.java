@@ -12,6 +12,7 @@ public class ServerSocketWrapper implements SocketWrapper{
     Socket socket;
     BufferedReader input;
     PrintWriter output;
+    PrintWriter otherOutput;
 
 
     @Override
@@ -32,6 +33,7 @@ public class ServerSocketWrapper implements SocketWrapper{
         InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
         input = new BufferedReader(inputStream);
         output = new PrintWriter(socket.getOutputStream(), true);
+        otherOutput = new PrintWriter(socket.getOutputStream(), true);
         System.out.println("I/O Streams opened");
     }
 
@@ -49,10 +51,13 @@ public class ServerSocketWrapper implements SocketWrapper{
     }
 
     @Override
-    public void sendResponseData(String responseData) {
+    public void sendResponseData(Response response) {
         System.out.println("Sending Response...");
-        System.out.println(responseData);
-        output.print(responseData);
+        output.print(response.generateResponseLine());
+        output.print(response.generateHeaders());
+        if (response.sendBody) {
+            output.print(response.body);
+        }
         output.flush();
     }
 
