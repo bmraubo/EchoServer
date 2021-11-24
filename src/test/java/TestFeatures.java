@@ -349,6 +349,6 @@ public class TestFeatures {
         File file = new File("src/test/java/kitteh.jpg");
         byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
 
-        Assertions.assertEquals(expectedResponseBody, socketWrapper.responseBodyImage);
+        Assertions.assertEquals(expectedResponseBody.length, socketWrapper.responseBodyImage.length);
     }
 }

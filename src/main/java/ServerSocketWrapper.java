@@ -61,6 +61,7 @@ public class ServerSocketWrapper implements SocketWrapper{
         output.print(response.generateResponseLine());
         System.out.println("Sending Response...");
         output.print(response.generateHeaders());
+        output.flush();
         System.out.println("Sending Response...");
         System.out.println("Sending Image...");
         OutputStream output = socket.getOutputStream();
