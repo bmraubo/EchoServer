@@ -8,7 +8,7 @@ public class TestHealthCheck {
         HealthCheck healthCheck = new HealthCheck();
         Response testResponse = healthCheck.prepareResponse();
 
-        String expectedResponseBody = "<html><body><p>status is passing</p></body></html>";
+        String expectedResponseBody = "<html><body><p><strong>Status:</strong> pass</p></body></html>";
 
         Assertions.assertEquals(expectedResponseBody, testResponse.body);
     }

@@ -323,9 +323,9 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String responseString = "<html><body><p>status is passing</p></body></html>";
+        String responseString = "<html><body><p><strong>Status:</strong> pass</p></body></html>";
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/html;charset=utf-8\r\nContent-Length: 50\r\n\r\n" + responseString;
+        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/html;charset=utf-8\r\nContent-Length: 62\r\n\r\n" + responseString;
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
     }
