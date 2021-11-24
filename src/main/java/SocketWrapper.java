@@ -5,7 +5,7 @@ public interface SocketWrapper {
     void createSocket(int port) throws IOException;
     void acceptConnection() throws IOException, InterruptedException;
     String readRequestData() throws IOException;
-    void sendResponseData(String responseData);
+    void sendResponseData(Response response);
     void closeSocket() throws IOException;
     boolean keepAlive();
 
