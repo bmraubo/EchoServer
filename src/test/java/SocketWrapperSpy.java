@@ -50,10 +50,17 @@ public class SocketWrapperSpy implements SocketWrapper{
     }
 
     @Override
-    public void sendResponseData(String responseData) {
+    public void sendResponseData(Response response) {
         System.out.println("Sending Response...");
-        output.print(responseData);
-        sentResponse = responseData;
+        System.out.println("Sending Response...");
+        output.print(response.generateResponseLine());
+        sentResponse = sentResponse + response.generateResponseLine();
+        output.print(response.generateHeaders());
+        sentResponse = sentResponse + response.generateHeaders();
+        if (response.sendBody) {
+            output.print(response.body);
+            sentResponse = sentResponse + response.body;
+        }
         dataSent = true;
     }
 
