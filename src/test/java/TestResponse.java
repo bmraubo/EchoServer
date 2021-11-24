@@ -11,7 +11,7 @@ public class TestResponse {
         testResponse.setStatusCode(statusCode);
 
         Assertions.assertEquals(200, testResponse.statusCode);
-        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\n", testResponse.generateResponseLine());
+        Assertions.assertEquals("HTTP/1.1 200 OK\r\n", testResponse.generateResponseLine());
     }
 
     @Test
