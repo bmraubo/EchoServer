@@ -91,8 +91,20 @@ public class Response {
         }
     }
 
+    public void addResponseBody(byte[] image) {
+        if (image != null) {
+            contentLength = calculateContentLength(image);
+            imageBody = image;
+            sendBody = true;
+        }
+    }
+
     private String calculateContentLength(String body) {
         return "Content-Length: " + String.valueOf(body.length());
+    }
+
+    private String calculateContentLength(byte[] image) {
+        return "Content-Length: " + String.valueOf(image.length);
     }
 
     public void setAllowHeader(String[] allowedMethods) {

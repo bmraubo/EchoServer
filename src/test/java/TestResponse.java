@@ -63,6 +63,20 @@ public class TestResponse {
     }
 
     @Test
+    void addResponseBodyByteTest() {
+        int statusCode = 200;
+        byte[] responseBody = new byte[3];
+
+        Response testResponse = new Response();
+        testResponse.setStatusCode(statusCode);
+        testResponse.addResponseBody(responseBody);
+
+        Assertions.assertEquals("Content-Length: 3", testResponse.contentLength);
+        Assertions.assertTrue(testResponse.sendBody);
+
+    }
+
+    @Test
     void setAllowHeaderTest() {
         String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
 
