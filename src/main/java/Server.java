@@ -15,14 +15,12 @@ public class Server {
             if (requestData.equals("")) {
                 String errorReason = "Request read as empty, please try again.";
                 Response response = Route.serverError(errorReason);
-                String responseString = response.generateResponseString();
-                socketWrapper.sendResponseData(responseString);
+                socketWrapper.sendResponseData(response);
                 socketWrapper.closeSocket();
             } else {
                 Request request = new Request(requestData);
                 Response response = Route.routeConnection(request);
-                String responseString = response.generateResponseString();
-                socketWrapper.sendResponseData(responseString);
+                socketWrapper.sendResponseData(response);
                 socketWrapper.closeSocket();
             }
         }
