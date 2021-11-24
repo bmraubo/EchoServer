@@ -35,6 +35,9 @@ public class Route {
             case ("/xml_response"):
                 XMLResponse xmlResponse = new XMLResponse();
                 return xmlResponse.prepareResponse();
+            case ("/health-check.html"):
+                HealthCheck healthCheck = new HealthCheck();
+                return healthCheck.prepareResponse();
         }
         return ResourceNotFound.prepareResponse(request);
     }
