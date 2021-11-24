@@ -16,12 +16,14 @@ public class Response {
     // Body
     boolean sendBody = false;
     String body;
+    byte[] imageBody;
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
         determineReasonPhrase(statusCode);
     }
 
+    /*
     public String generateResponseString() {
         System.out.println("generating response");
         String responseString;
@@ -35,12 +37,13 @@ public class Response {
         System.out.println(responseString);
         return responseString;
     }
+    */
 
-    private String generateResponseLine() {
+    public String generateResponseLine() {
         return this.protocol + " " + this.statusCode + " " + this.reasonPhrase + crlf;
     }
 
-    private String generateHeaders() {
+    public String generateHeaders() {
         String headers = "";
         headers = headers + closeConnectionHeader + crlf;
         if (allowedMethods != null) {
@@ -55,6 +58,7 @@ public class Response {
         if (sendBody) {
             headers = headers + contentLength + crlf;
         }
+        headers = headers + crlf;
         return headers;
     }
 
@@ -87,8 +91,20 @@ public class Response {
         }
     }
 
+    public void addResponseBody(byte[] image) {
+        if (image != null) {
+            contentLength = calculateContentLength(image);
+            this.imageBody = image;
+            this.sendBody = true;
+        }
+    }
+
     private String calculateContentLength(String body) {
         return "Content-Length: " + String.valueOf(body.length());
+    }
+
+    private String calculateContentLength(byte[] image) {
+        return "Content-Length: " + String.valueOf(image.length);
     }
 
     public void setAllowHeader(String[] allowedMethods) {

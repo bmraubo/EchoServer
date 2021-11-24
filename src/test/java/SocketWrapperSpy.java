@@ -13,6 +13,8 @@ public class SocketWrapperSpy implements SocketWrapper{
     String dataReceived;
     String sentResponse;
     boolean nullInputReceived;
+    boolean imageOutputSelected;
+    byte[] responseBodyImage;
 
     public SocketWrapperSpy(BufferedReader input, PrintWriter output) {
         this.input = input;
@@ -50,11 +52,37 @@ public class SocketWrapperSpy implements SocketWrapper{
     }
 
     @Override
-    public void sendResponseData(String responseData) {
-        System.out.println("Sending Response...");
-        output.print(responseData);
-        sentResponse = responseData;
+    public void sendResponseData(Response response) throws IOException {
+        if (response.contentType != null && response.contentType.contains("image/")) {
+            sendImageResponseData(response);
+        } else {
+            sendTextResponseData(response);
+        }
         dataSent = true;
+    }
+
+    @Override
+    public void sendImageResponseData(Response response) throws IOException {
+        imageOutputSelected = true;
+        System.out.println("Sending Response...");
+        output.print(response.generateResponseLine());
+        sentResponse = response.generateResponseLine();
+        output.print(response.generateHeaders());
+        sentResponse = sentResponse + response.generateHeaders();
+        responseBodyImage = response.imageBody;
+    }
+
+    @Override
+    public void sendTextResponseData(Response response) {
+        System.out.println("Sending Response...");
+        output.print(response.generateResponseLine());
+        sentResponse = response.generateResponseLine();
+        output.print(response.generateHeaders());
+        sentResponse = sentResponse + response.generateHeaders();
+        if (response.sendBody) {
+            output.print(response.body);
+            sentResponse = sentResponse + response.body;
+        }
     }
 
     @Override

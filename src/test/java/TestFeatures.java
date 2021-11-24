@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+import java.nio.file.Files;
 
 public class TestFeatures {
 
@@ -328,5 +329,26 @@ public class TestFeatures {
         String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/html;charset=utf-8\r\nContent-Length: 62\r\n\r\n" + responseString;
 
         Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+    }
+
+    @Test
+    void ImageSendTest() throws IOException, InterruptedException {
+        int port = 5000;
+
+        String testRequest = "GET /kitteh.jpg HTTP/1.1\r\n";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        File file = new File("src/test/java/kitteh.jpg");
+        byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
+
+        Assertions.assertEquals(expectedResponseBody.length, socketWrapper.responseBodyImage.length);
     }
 }

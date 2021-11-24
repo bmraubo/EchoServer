@@ -38,6 +38,9 @@ public class Route {
             case ("/health-check.html"):
                 HealthCheck healthCheck = new HealthCheck();
                 return healthCheck.prepareResponse();
+            case ("/kitteh.jpg"):
+                Kitteh kitteh = new Kitteh();
+                return kitteh.prepareResponse();
         }
         return ResourceNotFound.prepareResponse(request);
     }
