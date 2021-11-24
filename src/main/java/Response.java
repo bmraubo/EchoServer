@@ -36,11 +36,11 @@ public class Response {
         return responseString;
     }
 
-    private String generateResponseLine() {
+    public String generateResponseLine() {
         return this.protocol + " " + this.statusCode + " " + this.reasonPhrase + crlf;
     }
 
-    private String generateHeaders() {
+    public String generateHeaders() {
         String headers = "";
         headers = headers + closeConnectionHeader + crlf;
         if (allowedMethods != null) {
