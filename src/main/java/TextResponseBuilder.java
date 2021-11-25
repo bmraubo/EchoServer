@@ -1,5 +1,7 @@
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.StringJoiner;
 
 public class TextResponseBuilder implements ResponseBuilder{
@@ -8,7 +10,7 @@ public class TextResponseBuilder implements ResponseBuilder{
     HashMap<Integer, String> statusCodeMap;
     int statusCode;
     String reasonPhrase;
-    HashMap<String, String> headers;
+    LinkedHashMap<String, String> headers;
     byte[] responseBody;
 
     public TextResponseBuilder() {
@@ -56,7 +58,13 @@ public class TextResponseBuilder implements ResponseBuilder{
 
     @Override
     public String getHeaders() {
-        return null;
+        StringJoiner joiner = new StringJoiner(crlf);
+        for (Map.Entry<String, String> entry : headers.entrySet()) {
+            String value = entry.getValue();
+            String header = entry+value;
+            joiner.add(header);
+        }
+        return joiner + crlf;
     }
 
     @Override
@@ -74,7 +82,7 @@ public class TextResponseBuilder implements ResponseBuilder{
     }
 
     private void generateHeaderMap() {
-        headers = new HashMap<String, String>();
+        headers = new LinkedHashMap<String, String>();
     }
 
     private String generateHeaderString(String[] headerValue) {
