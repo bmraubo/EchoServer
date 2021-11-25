@@ -15,10 +15,11 @@ public class HeadRequest implements RoutingInterface{
     }
 
     private Response headRequest() {
-        Response response = new Response();
+        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        Response response = new Response(responseBuilder);
         System.out.println("Simple Head Identified");
-        response.setStatusCode(200);
-        response.addResponseBody("");
+        responseBuilder.setStatusCode(200);
+        responseBuilder.setResponseBody("");
         return response;
     }
 }
