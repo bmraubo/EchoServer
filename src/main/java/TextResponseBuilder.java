@@ -6,7 +6,7 @@ public class TextResponseBuilder implements ResponseBuilder{
     String reasonPhrase;
 
     public TextResponseBuilder() {
-        generateHashMap();
+        generateStatusCodeMap();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TextResponseBuilder implements ResponseBuilder{
         return null;
     }
 
-    private void generateHashMap() {
+    private void generateStatusCodeMap() {
         statusCodeMap = new HashMap<Integer, String>();
         statusCodeMap.put(200, "OK");
         statusCodeMap.put(301, "Moved Permanently");
