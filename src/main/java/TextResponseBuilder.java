@@ -1,7 +1,6 @@
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.StringJoiner;
 
 public class TextResponseBuilder implements ResponseBuilder{
@@ -59,12 +58,12 @@ public class TextResponseBuilder implements ResponseBuilder{
     @Override
     public String getHeaders() {
         StringJoiner joiner = new StringJoiner(crlf);
-        for (Map.Entry<String, String> entry : headers.entrySet()) {
-            String value = entry.getValue();
-            String header = entry+value;
+        for (String key : headers.keySet()) {
+            String value = headers.get(key);
+            String header = key+value;
             joiner.add(header);
         }
-        return joiner + crlf;
+        return joiner + crlf + crlf;
     }
 
     @Override
