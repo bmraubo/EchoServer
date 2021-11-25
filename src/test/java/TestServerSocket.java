@@ -104,24 +104,6 @@ public class TestServerSocket {
     }
 
     @Test
-    void SocketSwitchToImageOutputTest() throws IOException {
-        String testRequest = "GET /simple_get HTTP/1.1\r\n";
-
-        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
-        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
-        PrintWriter output = new PrintWriter(new StringWriter());
-
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-
-        Response testResponse = new Response();
-        testResponse.setContentType("image/jpg");
-
-        socketWrapper.sendResponseData(testResponse);
-
-        Assertions.assertTrue(socketWrapper.imageOutputSelected);
-    }
-
-    @Test
     void SocketCloseTest() throws IOException, InterruptedException {
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
