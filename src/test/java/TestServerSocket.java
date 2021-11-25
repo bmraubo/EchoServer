@@ -99,7 +99,8 @@ public class TestServerSocket {
         testServer.start(port);
 
         Assertions.assertTrue(socketWrapper.dataSent);
-        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 0\r\n\r\n", socketWrapper.sentResponse);
+        Assertions.assertEquals("HTTP/1.1 200 OK\r\n", socketWrapper.sentResponseLine);
+        Assertions.assertEquals("Content-Length: 0\r\n\r\n", socketWrapper.sentResponseHeaders);
 
     }
 
