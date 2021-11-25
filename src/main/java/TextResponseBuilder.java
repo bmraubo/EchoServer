@@ -29,7 +29,7 @@ public class TextResponseBuilder implements ResponseBuilder{
 
     @Override
     public void setHeader(String headerType, String headerValue) {
-
+        headers.put(headerType, headerValue);
     }
 
     @Override
