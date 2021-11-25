@@ -27,9 +27,9 @@ public class TestTextResponseBuilder {
 
     @Test
     void setHeaderTest() {
-        String headerType = "Content-Type: ";
+        String headerType = "Content-Type";
         String headerValue = "application/json;charset=utf-8";
-        String arrayHeaderType = "Allow: ";
+        String arrayHeaderType = "Allow";
         String[] arrayHeaderValue = {"GET", "OPTIONS"};
 
         TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
@@ -68,9 +68,9 @@ public class TestTextResponseBuilder {
 
     @Test
     void generateHeadersTest() {
-        String headerType = "Content-Type: ";
+        String headerType = "Content-Type";
         String headerValue = "application/json;charset=utf-8";
-        String arrayHeaderType = "Allow: ";
+        String arrayHeaderType = "Allow";
         String[] arrayHeaderValue = {"GET", "OPTIONS"};
 
         TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
