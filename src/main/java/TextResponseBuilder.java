@@ -55,7 +55,7 @@ public class TextResponseBuilder implements ResponseBuilder{
 
     @Override
     public String getBody() {
-        return null;
+        return responseBody;
     }
 
     private void generateStatusCodeMap() {
