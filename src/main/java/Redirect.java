@@ -9,11 +9,12 @@ public class Redirect implements RoutingInterface{
 
     @Override
     public Response prepareResponse() {
-        Response response = new Response();
+        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        Response response = new Response(responseBuilder);
         System.out.println("Redirecting");
-        response.setStatusCode(301);
-        response.setLocationHeader(contentLocation);
-        response.addResponseBody("");
+        responseBuilder.setStatusCode(301);
+        responseBuilder.setHeader("Location", contentLocation);
+        responseBuilder.setResponseBody("");
         return response;
     }
 }
