@@ -25,12 +25,16 @@ public class TestTextResponseBuilder {
 
     @Test
     void setHeaderTest() {
-        String headerType = "Content-Type:";
+        String headerType = "Content-Type: ";
         String headerValue = "application/json;charset=utf-8";
+        String arrayHeaderType = "Allow: ";
+        String[] arrayHeaderValue = {"GET", "OPTIONS"};
 
         TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
         testResponseBuilder.setHeader(headerType, headerValue);
+        testResponseBuilder.setHeader(arrayHeaderType,arrayHeaderValue);
 
         Assertions.assertEquals(headerValue, testResponseBuilder.headers.get(headerType));
+        Assertions.assertEquals("GET, OPTIONS", testResponseBuilder.headers.get(arrayHeaderType));
     }
 }
