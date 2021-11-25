@@ -37,4 +37,14 @@ public class TestTextResponseBuilder {
         Assertions.assertEquals(headerValue, testResponseBuilder.headers.get(headerType));
         Assertions.assertEquals("GET, OPTIONS", testResponseBuilder.headers.get(arrayHeaderType));
     }
+
+    @Test
+    void setResponseBodyTest() {
+        String testResponseBody = "Hello World";
+
+        TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
+        testResponseBuilder.setResponseBody(testResponseBody);
+
+        Assertions.assertEquals(testResponseBuilder.responseBody.body, testResponseBody)
+    }
 }
