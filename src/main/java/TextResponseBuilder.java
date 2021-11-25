@@ -26,13 +26,13 @@ public class TextResponseBuilder implements ResponseBuilder{
     @Override
     public void setResponseBody(String body) {
         this.responseBody = body.getBytes(StandardCharsets.UTF_8);
-        setHeader("Content-Length: ", calculateContentLength());
+        setHeader("Content-Length", calculateContentLength());
     }
 
     @Override
     public void setResponseBody(byte[] body) {
         this.responseBody = body;
-        setHeader("Content-Length: ", calculateContentLength());
+        setHeader("Content-Length", calculateContentLength());
     }
 
     @Override
@@ -60,7 +60,8 @@ public class TextResponseBuilder implements ResponseBuilder{
         StringBuilder stringBuilder = new StringBuilder();
         for (String key : headers.keySet()) {
             String value = headers.get(key);
-            String header = key+value;
+            String headerType = key + ": ";
+            String header = headerType+value;
             stringBuilder.append(header);
             stringBuilder.append(crlf);
         }
