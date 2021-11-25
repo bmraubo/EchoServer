@@ -7,5 +7,5 @@ public interface ResponseBuilder {
     void setHeader(String headerType, String[] headerValue);
     String getResponseLine();
     String getHeaders();
-    String getBody();
+    byte[] getBody();
 }

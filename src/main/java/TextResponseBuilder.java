@@ -3,6 +3,8 @@ import java.util.HashMap;
 import java.util.StringJoiner;
 
 public class TextResponseBuilder implements ResponseBuilder{
+    String protocol = "HTTP/1.1";
+    String crlf = "\r\n";
     HashMap<Integer, String> statusCodeMap;
     int statusCode;
     String reasonPhrase;
@@ -45,7 +47,11 @@ public class TextResponseBuilder implements ResponseBuilder{
 
     @Override
     public String getResponseLine() {
-        return null;
+        StringJoiner joiner = new StringJoiner(" ");
+        joiner.add(this.protocol);
+        joiner.add(String.valueOf(this.statusCode));
+        joiner.add(this.reasonPhrase);
+        return joiner + crlf;
     }
 
     @Override
@@ -54,7 +60,7 @@ public class TextResponseBuilder implements ResponseBuilder{
     }
 
     @Override
-    public String getBody() {
+    public byte[] getBody() {
         return responseBody;
     }
 
