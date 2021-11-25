@@ -4,9 +4,11 @@ public class TextResponseBuilder implements ResponseBuilder{
     HashMap<Integer, String> statusCodeMap;
     int statusCode;
     String reasonPhrase;
+    HashMap<String, String> headers;
 
     public TextResponseBuilder() {
         generateStatusCodeMap();
+        generateHeaderMap();
     }
 
     @Override
@@ -57,5 +59,9 @@ public class TextResponseBuilder implements ResponseBuilder{
         statusCodeMap.put(404, "Not Found");
         statusCodeMap.put(405, "Method Not Allowed");
         statusCodeMap.put(500, "Internal Server Error");
+    }
+
+    private void generateHeaderMap() {
+        headers = new HashMap<String, String>();
     }
 }
