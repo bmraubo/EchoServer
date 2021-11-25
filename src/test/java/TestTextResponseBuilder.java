@@ -22,4 +22,15 @@ public class TestTextResponseBuilder {
         Assertions.assertEquals(200, testResponseBuilder.statusCode);
         Assertions.assertEquals("OK", testResponseBuilder.reasonPhrase);
     }
+
+    @Test
+    void setHeaderTest() {
+        String headerType = "Content-Type:";
+        String headerValue = "application/json;charset=utf-8";
+
+        TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
+        testResponseBuilder.setHeader(headerType, headerValue);
+
+        Assertions.assertEquals(headerValue, testResponseBuilder.headers.get(headerType));
+    }
 }
