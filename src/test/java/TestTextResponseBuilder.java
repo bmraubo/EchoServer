@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.nio.charset.StandardCharsets;
+
 public class TestTextResponseBuilder {
 
     @Test
@@ -39,12 +41,12 @@ public class TestTextResponseBuilder {
     }
 
     @Test
-    void setResponseBodyTest() {
+    void setResponseTextBodyTest() {
         String testResponseBody = "Hello World";
 
         TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
         testResponseBuilder.setResponseBody(testResponseBody);
 
-        Assertions.assertEquals(testResponseBuilder.responseBody.body, testResponseBody)
+        Assertions.assertArrayEquals(testResponseBody.getBytes(StandardCharsets.UTF_8), testResponseBuilder.responseBody);
     }
 }
