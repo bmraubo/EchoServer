@@ -1,3 +1,4 @@
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.StringJoiner;
 
@@ -6,6 +7,7 @@ public class TextResponseBuilder implements ResponseBuilder{
     int statusCode;
     String reasonPhrase;
     HashMap<String, String> headers;
+    byte[] responseBody;
 
     public TextResponseBuilder() {
         generateStatusCodeMap();
@@ -20,7 +22,7 @@ public class TextResponseBuilder implements ResponseBuilder{
 
     @Override
     public void setResponseBody(String body) {
-
+        this.responseBody = body.getBytes(StandardCharsets.UTF_8);
     }
 
     @Override
