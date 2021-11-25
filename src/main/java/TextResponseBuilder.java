@@ -57,13 +57,13 @@ public class TextResponseBuilder implements ResponseBuilder{
 
     @Override
     public String getHeaders() {
-        StringJoiner joiner = new StringJoiner(crlf);
+        StringBuilder stringBuilder = new StringBuilder();
         for (String key : headers.keySet()) {
             String value = headers.get(key);
             String header = key+value;
-            joiner.add(header);
+            stringBuilder.append(header + crlf);
         }
-        return joiner + crlf + crlf;
+        return stringBuilder + crlf;
     }
 
     @Override
