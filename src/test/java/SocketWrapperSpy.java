@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 
 public class SocketWrapperSpy implements SocketWrapper{
@@ -12,13 +11,11 @@ public class SocketWrapperSpy implements SocketWrapper{
     boolean dataSent;
     boolean socketClosed;
     String dataReceived;
-    String sentResponse;
     String sentResponseLine;
     String sentResponseHeaders;
     byte[] sentResponseBody;
     boolean nullInputReceived;
-    boolean imageOutputSelected;
-    byte[] responseBodyImage;
+
 
     public SocketWrapperSpy(BufferedReader input, PrintWriter output) {
         this.input = input;
