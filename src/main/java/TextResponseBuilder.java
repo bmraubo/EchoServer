@@ -23,11 +23,13 @@ public class TextResponseBuilder implements ResponseBuilder{
     @Override
     public void setResponseBody(String body) {
         this.responseBody = body.getBytes(StandardCharsets.UTF_8);
+        setHeader("Content-Length: ", calculateContentLength());
     }
 
     @Override
     public void setResponseBody(byte[] body) {
-
+        this.responseBody = body;
+        setHeader("Content-Length: ", calculateContentLength());
     }
 
     @Override
@@ -75,5 +77,9 @@ public class TextResponseBuilder implements ResponseBuilder{
             joiner.add(x);
         }
         return joiner.toString();
+    }
+
+    private String calculateContentLength() {
+        return String.valueOf(responseBody.length);
     }
 }
