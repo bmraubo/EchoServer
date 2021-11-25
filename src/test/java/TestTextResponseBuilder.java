@@ -4,6 +4,13 @@ import org.junit.jupiter.api.Test;
 public class TestTextResponseBuilder {
 
     @Test
+    void createTextResponseBuilder() {
+        TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
+
+        Assertions.assertNotNull(testResponseBuilder.statusCodeMap);
+    }
+
+    @Test
     void set200StatusCodeTest() {
         int statusCode = 200;
 
