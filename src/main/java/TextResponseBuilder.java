@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.StringJoiner;
 
 public class TextResponseBuilder implements ResponseBuilder{
     HashMap<Integer, String> statusCodeMap;
@@ -34,7 +35,8 @@ public class TextResponseBuilder implements ResponseBuilder{
 
     @Override
     public void setHeader(String headerType, String[] headerValue) {
-
+        String joinedHeaderValue = generateHeaderString(headerValue);
+        headers.put(headerType, joinedHeaderValue);
     }
 
     @Override
@@ -63,5 +65,13 @@ public class TextResponseBuilder implements ResponseBuilder{
 
     private void generateHeaderMap() {
         headers = new HashMap<String, String>();
+    }
+
+    private String generateHeaderString(String[] headerValue) {
+        StringJoiner joiner = new StringJoiner(", ");
+        for (String x : headerValue) {
+            joiner.add(x);
+        }
+        return joiner.toString();
     }
 }
