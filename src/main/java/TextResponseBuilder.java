@@ -61,7 +61,8 @@ public class TextResponseBuilder implements ResponseBuilder{
         for (String key : headers.keySet()) {
             String value = headers.get(key);
             String header = key+value;
-            stringBuilder.append(header + crlf);
+            stringBuilder.append(header);
+            stringBuilder.append(crlf);
         }
         return stringBuilder + crlf;
     }
