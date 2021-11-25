@@ -1,10 +1,18 @@
+import java.util.HashMap;
+
 public class TextResponseBuilder implements ResponseBuilder{
+    HashMap<Integer, String> statusCodeMap;
     int statusCode;
     String reasonPhrase;
+
+    public TextResponseBuilder() {
+        generateHashMap();
+    }
 
     @Override
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
+        this.reasonPhrase = statusCodeMap.get(statusCode);
     }
 
     @Override
@@ -40,5 +48,14 @@ public class TextResponseBuilder implements ResponseBuilder{
     @Override
     public String getBody() {
         return null;
+    }
+
+    private void generateHashMap() {
+        statusCodeMap = new HashMap<Integer, String>();
+        statusCodeMap.put(200, "OK");
+        statusCodeMap.put(301, "Moved Permanently");
+        statusCodeMap.put(404, "Not Found");
+        statusCodeMap.put(405, "Method Not Allowed");
+        statusCodeMap.put(500, "Internal Server Error");
     }
 }

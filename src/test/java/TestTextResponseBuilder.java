@@ -8,6 +8,7 @@ public class TestTextResponseBuilder {
         TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
 
         Assertions.assertNotNull(testResponseBuilder.statusCodeMap);
+        Assertions.assertEquals("OK", testResponseBuilder.statusCodeMap.get(200));
     }
 
     @Test
