@@ -18,9 +18,10 @@ public class EchoBody implements RoutingInterface{
 
     private Response simplePostRequest() {
         System.out.println("Simple Post identified");
-        Response response = new Response();
-        response.setStatusCode(200);
-        response.addResponseBody(body);
+        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        Response response = new Response(responseBuilder);
+        responseBuilder.setStatusCode(200);
+        responseBuilder.setResponseBody(body);
         return response;
     }
 }
