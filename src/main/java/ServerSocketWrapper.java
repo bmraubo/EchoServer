@@ -48,39 +48,14 @@ public class ServerSocketWrapper implements SocketWrapper{
 
     @Override
     public void sendResponseData(Response response) throws IOException {
-        if (response.contentType != null && response.contentType.contains("image/")) {
-            sendImageResponseData(response);
-        } else {
-            sendTextResponseData(response);
-        }
-    }
-
-    @Override
-    public void sendImageResponseData(Response response) throws IOException {
+        response.generateResponse();
         System.out.println("Sending Response...");
-        output.print(response.generateResponseLine());
-        System.out.println("Sending Response...");
-        output.print(response.generateHeaders());
+        output.print(response.responseLine);
+        output.print(response.responseHeaders);
         output.flush();
-        System.out.println("Sending Response...");
-        System.out.println("Sending Image...");
         OutputStream output = socket.getOutputStream();
-        output.write(response.imageBody);
+        output.write(response.responseBody);
         output.flush();
-    }
-
-    @Override
-    public void sendTextResponseData(Response response) {
-        System.out.println("Sending Response...");
-        output.print(response.generateResponseLine());
-        System.out.println(response.generateResponseLine());
-        output.print(response.generateHeaders());
-        System.out.println(response.generateHeaders());
-        if (response.sendBody) {
-            output.print(response.body);
-            System.out.println(response.body);
-            output.flush();
-        }
     }
 
     @Override

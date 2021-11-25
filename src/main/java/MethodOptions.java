@@ -3,11 +3,12 @@ public class MethodOptions implements RoutingInterface{
 
     @Override
     public Response prepareResponse() {
-        Response response = new Response();
+        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        Response response = new Response(responseBuilder);
         System.out.println("Simple Options to Method Options Identified");
-        response.setStatusCode(200);
-        response.setAllowHeader(allowedMethods);
-        response.addResponseBody("");
+        responseBuilder.setStatusCode(200);
+        responseBuilder.setHeader("Allow", allowedMethods);
+        responseBuilder.setResponseBody("");
         return response;
     }
 }

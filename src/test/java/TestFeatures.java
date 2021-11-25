@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 public class TestFeatures {
@@ -22,7 +23,11 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 0\r\n\r\n", socketWrapper.sentResponse);
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Length: 0\r\n\r\n";
+
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
     }
 
     @Test
@@ -40,9 +45,13 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 11\r\n\r\nHello world";
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeaders = "Content-Length: 11\r\n\r\n";
+        byte[] expectedResponseBody = "Hello world".getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeaders, socketWrapper.sentResponseHeaders);
+        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
     }
 
     @Test
@@ -60,9 +69,13 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 11\r\n\r\nHello World";
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeaders = "Content-Length: 11\r\n\r\n";
+        byte[] expectedResponseBody = "Hello World".getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeaders, socketWrapper.sentResponseHeaders);
+        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
     }
 
     @Test
@@ -80,7 +93,11 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 0\r\n\r\n", socketWrapper.sentResponse);
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Length: 0\r\n\r\n";
+
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
     }
 
     @Test
@@ -98,7 +115,11 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 0\r\n\r\n", socketWrapper.sentResponse);
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Length: 0\r\n\r\n";
+
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
     }
 
     @Test
@@ -116,7 +137,11 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        Assertions.assertEquals("HTTP/1.1 405 Method Not Allowed\r\nConnection: close\r\nAllow: HEAD, OPTIONS\r\nContent-Length: 0\r\n\r\n", socketWrapper.sentResponse);
+        String expectedResponseLine = "HTTP/1.1 405 Method Not Allowed\r\n";
+        String expectedResponseHeader = "Allow: HEAD, OPTIONS\r\nContent-Length: 0\r\n\r\n";
+
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
     }
 
     @Test
@@ -134,9 +159,11 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nAllow: GET, HEAD, OPTIONS\r\nContent-Length: 0\r\n\r\n";
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Allow: GET, HEAD, OPTIONS\r\nContent-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
     }
 
     @Test
@@ -154,9 +181,11 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nAllow: GET, HEAD, OPTIONS, PUT, POST\r\nContent-Length: 0\r\n\r\n";
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Allow: GET, HEAD, OPTIONS, PUT, POST\r\nContent-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
     }
 
     @Test
@@ -174,9 +203,11 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 301 Moved Permanently\r\nConnection: close\r\nLocation: http://127.0.0.1:5000/simple_get\r\nContent-Length: 0\r\n\r\n";
+        String expectedResponseLine = "HTTP/1.1 301 Moved Permanently\r\n";
+        String expectedResponseHeader = "Location: http://127.0.0.1:5000/simple_get\r\nContent-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
     }
 
     @Test
@@ -194,9 +225,11 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 404 Not Found\r\nConnection: close\r\nContent-Length: 0\r\n\r\n";
+        String expectedResponseLine = "HTTP/1.1 404 Not Found\r\n";
+        String expectedResponseHeader = "Content-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
     }
 
     @Test
@@ -214,9 +247,13 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponse = "HTTP/1.1 500 Internal Server Error\r\nConnection: close\r\nContent-Length: 40\r\n\r\nRequest read as empty, please try again.";
+        String expectedResponseLine = "HTTP/1.1 500 Internal Server Error\r\n";
+        String expectedResponseHeader = "Content-Length: 40\r\n\r\n";
+        byte[] expectedResponseBody = "Request read as empty, please try again.".getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
     }
 
     @Test
@@ -236,9 +273,13 @@ public class TestFeatures {
 
         String responseText = "text response";
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/plain;charset=utf-8\r\nContent-Length: 13\r\n\r\n"+responseText;
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Type: text/plain;charset=utf-8\r\nContent-Length: 13\r\n\r\n";
+        byte[] expectedResponseBody = responseText.getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
     }
 
     @Test
@@ -258,9 +299,13 @@ public class TestFeatures {
 
         String responseText = "<html><body><p>HTML Response</p></body></html>";
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/html;charset=utf-8\r\nContent-Length: 46\r\n\r\n" + responseText;
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Type: text/html;charset=utf-8\r\nContent-Length: 46\r\n\r\n";
+        byte[] expectedResponseBody = responseText.getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
     }
 
     @Test
@@ -282,9 +327,13 @@ public class TestFeatures {
         responseJson.put("key1", "value1");
         responseJson.put("key2", "value2");
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: application/json;charset=utf-8\r\nContent-Length: 33\r\n\r\n" + responseJson;
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Type: application/json;charset=utf-8\r\nContent-Length: 33\r\n\r\n";
+        byte[] expectedResponseBody = responseJson.toString().getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
     }
 
     @Test
@@ -304,9 +353,13 @@ public class TestFeatures {
 
         String XMLString = "<note><body>XML Response</body></note>";
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: application/xml;charset=utf-8\r\nContent-Length: 38\r\n\r\n" + XMLString;
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Type: application/xml;charset=utf-8\r\nContent-Length: 38\r\n\r\n";
+        byte[] expectedResponseBody = XMLString.getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
     }
 
     @Test
@@ -326,9 +379,13 @@ public class TestFeatures {
 
         String responseString = "<html><body><p><strong>Status:</strong> pass</p></body></html>";
 
-        String expectedResponse = "HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Type: text/html;charset=utf-8\r\nContent-Length: 62\r\n\r\n" + responseString;
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Type: text/html;charset=utf-8\r\nContent-Length: 62\r\n\r\n";
+        byte[] expectedResponseBody = responseString.getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponse, socketWrapper.sentResponse);
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
     }
 
     @Test
@@ -349,6 +406,6 @@ public class TestFeatures {
         File file = new File("src/test/java/kitteh.jpg");
         byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
 
-        Assertions.assertEquals(expectedResponseBody.length, socketWrapper.responseBodyImage.length);
+        Assertions.assertEquals(expectedResponseBody.length, socketWrapper.sentResponseBody.length);
     }
 }

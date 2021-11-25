@@ -16,10 +16,11 @@ public class SimpleGetWithBody implements RoutingInterface{
     }
 
     private Response simpleGetWithBody() {
-        Response response = new Response();
+        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        Response response = new Response(responseBuilder);
         System.out.println("Simple Get with Body Identified");
-        response.setStatusCode(200);
-        response.addResponseBody("Hello world");
+        responseBuilder.setStatusCode(200);
+        responseBuilder.setResponseBody("Hello world");
         return response;
     }
 }

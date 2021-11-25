@@ -1,10 +1,11 @@
 public class ResourceNotFound {
 
     public static Response prepareResponse(Request request) {
-        Response response = new Response();
+        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        Response response = new Response(responseBuilder);
         System.out.println("Resource not Found");
-        response.setStatusCode(404);
-        response.addResponseBody("");
+        responseBuilder.setStatusCode(404);
+        responseBuilder.setResponseBody("");
         return response;
     }
 }

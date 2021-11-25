@@ -18,18 +18,20 @@ public class SimpleGet implements RoutingInterface{
     }
 
     private Response simpleGet() {
-        Response response = new Response();
+        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        Response response = new Response(responseBuilder);
         System.out.println("Simple Get Identified");
-        response.setStatusCode(200);
-        response.addResponseBody("");
+        responseBuilder.setStatusCode(200);
+        responseBuilder.setResponseBody("");
         return response;
     }
 
     private Response simpleHead() {
-        Response response = new Response();
+        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        Response response = new Response(responseBuilder);
         System.out.println("Simple Head Identified");
-        response.setStatusCode(200);
-        response.addResponseBody("");
+        responseBuilder.setStatusCode(200);
+        responseBuilder.setResponseBody("");
         return response;
     }
 }

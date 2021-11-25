@@ -7,9 +7,10 @@ public class ServerError implements RoutingInterface{
 
     @Override
     public Response prepareResponse() {
-        Response response = new Response();
-        response.setStatusCode(500);
-        response.addResponseBody(errorReason);
+        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        Response response = new Response(responseBuilder);
+        responseBuilder.setStatusCode(500);
+        responseBuilder.setResponseBody(errorReason);
         return response;
     }
 }

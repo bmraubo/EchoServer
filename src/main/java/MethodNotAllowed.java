@@ -1,11 +1,12 @@
 public class MethodNotAllowed {
 
     public static Response prepareResponse(String[] allowedMethods) {
-        Response response = new Response();
+        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        Response response = new Response(responseBuilder);
         System.out.println("Method not allowed!");
-        response.setStatusCode(405);
-        response.setAllowHeader(allowedMethods);
-        response.addResponseBody("");
+        responseBuilder.setStatusCode(405);
+        responseBuilder.setHeader("Allow", allowedMethods);
+        responseBuilder.setResponseBody("");
         return response;
     }
 }

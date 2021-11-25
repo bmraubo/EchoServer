@@ -99,26 +99,9 @@ public class TestServerSocket {
         testServer.start(port);
 
         Assertions.assertTrue(socketWrapper.dataSent);
-        Assertions.assertEquals("HTTP/1.1 200 OK\r\nConnection: close\r\nContent-Length: 0\r\n\r\n", socketWrapper.sentResponse);
+        Assertions.assertEquals("HTTP/1.1 200 OK\r\n", socketWrapper.sentResponseLine);
+        Assertions.assertEquals("Content-Length: 0\r\n\r\n", socketWrapper.sentResponseHeaders);
 
-    }
-
-    @Test
-    void SocketSwitchToImageOutputTest() throws IOException {
-        String testRequest = "GET /simple_get HTTP/1.1\r\n";
-
-        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
-        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
-        PrintWriter output = new PrintWriter(new StringWriter());
-
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-
-        Response testResponse = new Response();
-        testResponse.setContentType("image/jpg");
-
-        socketWrapper.sendResponseData(testResponse);
-
-        Assertions.assertTrue(socketWrapper.imageOutputSelected);
     }
 
     @Test
