@@ -15,7 +15,7 @@ public class SocketWrapperSpy implements SocketWrapper{
     String sentResponse;
     String sentResponseLine;
     String sentResponseHeaders;
-    String sentResponseBody;
+    byte[] sentResponseBody;
     boolean nullInputReceived;
     boolean imageOutputSelected;
     byte[] responseBodyImage;
