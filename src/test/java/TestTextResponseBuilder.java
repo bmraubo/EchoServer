@@ -47,6 +47,9 @@ public class TestTextResponseBuilder {
         TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
         testResponseBuilder.setResponseBody(testResponseBody);
 
+        String expectedHeaderValue = String.valueOf(testResponseBody.getBytes(StandardCharsets.UTF_8).length);
+
         Assertions.assertArrayEquals(testResponseBody.getBytes(StandardCharsets.UTF_8), testResponseBuilder.responseBody);
+        Assertions.assertEquals(expectedHeaderValue, testResponseBuilder.headers.get("Content-Length: "))
     }
 }
