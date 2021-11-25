@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 
 public class SocketWrapperSpy implements SocketWrapper{
@@ -12,6 +13,9 @@ public class SocketWrapperSpy implements SocketWrapper{
     boolean socketClosed;
     String dataReceived;
     String sentResponse;
+    String sentResponseLine;
+    String sentResponseHeaders;
+    String sentResponseBody;
     boolean nullInputReceived;
     boolean imageOutputSelected;
     byte[] responseBodyImage;
@@ -53,36 +57,12 @@ public class SocketWrapperSpy implements SocketWrapper{
 
     @Override
     public void sendResponseData(Response response) throws IOException {
-        if (response.contentType != null && response.contentType.contains("image/")) {
-            sendImageResponseData(response);
-        } else {
-            sendTextResponseData(response);
-        }
+        response.generateResponse();
+        System.out.println("Sending Response...");
+        sentResponseLine = response.responseLine;
+        sentResponseHeaders = response.responseHeaders;
+        sentResponseBody = response.responseBody;
         dataSent = true;
-    }
-
-    @Override
-    public void sendImageResponseData(Response response) throws IOException {
-        imageOutputSelected = true;
-        System.out.println("Sending Response...");
-        output.print(response.generateResponseLine());
-        sentResponse = response.generateResponseLine();
-        output.print(response.generateHeaders());
-        sentResponse = sentResponse + response.generateHeaders();
-        responseBodyImage = response.imageBody;
-    }
-
-    @Override
-    public void sendTextResponseData(Response response) {
-        System.out.println("Sending Response...");
-        output.print(response.generateResponseLine());
-        sentResponse = response.generateResponseLine();
-        output.print(response.generateHeaders());
-        sentResponse = sentResponse + response.generateHeaders();
-        if (response.sendBody) {
-            output.print(response.body);
-            sentResponse = sentResponse + response.body;
-        }
     }
 
     @Override
