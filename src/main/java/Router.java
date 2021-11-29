@@ -81,8 +81,8 @@ public class Router {
         return ResourceNotFound.prepareResponse(request);
     }
 
-    static Response serverError(String errorReason) {
+    static Response serverError(String errorReason, Request request) {
         ServerError error = new ServerError(errorReason);
-        return error.prepareResponse();
+        return error.prepareResponse(request);
     }
 }

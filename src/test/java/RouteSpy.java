@@ -2,7 +2,7 @@ public class RouteSpy implements RoutingInterface{
     boolean endpointReached;
 
     @Override
-    public Response prepareResponse() {
+    public Response prepareResponse(Request request) {
         endpointReached = true;
         TextResponseBuilder textResponseBuilder = new TextResponseBuilder();
         Response response = new Response(textResponseBuilder);

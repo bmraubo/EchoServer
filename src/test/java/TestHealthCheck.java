@@ -7,8 +7,10 @@ public class TestHealthCheck {
 
     @Test
     void HealthCheckTest() {
+        RequestBuilder requestBuilder = new RequestBuilder();
+        Request request = new Request(requestBuilder);
         HealthCheck healthCheck = new HealthCheck();
-        Response testResponse = healthCheck.prepareResponse();
+        Response testResponse = healthCheck.prepareResponse(request);
 
         testResponse.generateResponse();
 
