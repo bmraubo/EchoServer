@@ -5,6 +5,7 @@ public class RequestBuilder {
     String[] requestArray;
     String statusLine;
     LinkedHashMap<String, String> headers;
+    String body;
     boolean requestIncludesHeaders;
     boolean requestIncludesBody;
 
@@ -19,6 +20,9 @@ public class RequestBuilder {
         requestIncludesBody = checkForBody();
         if (requestIncludesHeaders) {
             extractHeaders();
+        }
+        if (requestIncludesBody) {
+            extractBody();
         }
     }
 
@@ -48,6 +52,11 @@ public class RequestBuilder {
 
     private String extractHeaderValue(String header) {
         return header.substring(header.indexOf(" ") + 1, header.length());
+    }
+
+    private void extractBody() {
+        body = requestArray[requestArray.length-1];
+
     }
 
     private void generateHeaderMap() {
