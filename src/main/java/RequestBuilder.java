@@ -30,6 +30,14 @@ public class RequestBuilder {
         return statusLine.split(" ")[0];
     }
 
+    public String getURI() {
+        return statusLine.split(" ")[1];
+    }
+
+    public String getProtocol() {
+        return statusLine.split(" ")[2];
+    }
+
     private void extractStatusLine() {
         statusLine = requestArray[0];
     }

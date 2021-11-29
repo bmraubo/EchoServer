@@ -33,4 +33,20 @@ public class TestRequest {
 
         Assertions.assertEquals("GET", requestBuilder.getMethod());
     }
+
+    @Test
+    void getURITest() {
+        RequestBuilder requestBuilder = new RequestBuilder();
+        requestBuilder.extractRequest(testRequest);
+
+        Assertions.assertEquals("/simple_get_with_body", requestBuilder.getURI());
+    }
+
+    @Test
+    void getProtocolTest() {
+        RequestBuilder requestBuilder = new RequestBuilder();
+        requestBuilder.extractRequest(testRequest);
+
+        Assertions.assertEquals("HTTP/1.1", requestBuilder.getProtocol());
+    }
 }
