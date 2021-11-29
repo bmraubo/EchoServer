@@ -44,6 +44,9 @@ public class Route {
             case ("/doggo.png"):
                 Doggo doggo = new Doggo();
                 return doggo.prepareResponse();
+            case ("/kisses.gif"):
+                Kisses kisses = new Kisses();
+                return kisses.prepareResponse();
         }
         return ResourceNotFound.prepareResponse(request);
     }
