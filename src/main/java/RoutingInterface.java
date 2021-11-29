@@ -1,4 +1,4 @@
 public interface RoutingInterface {
 
-    Response prepareResponse();
+    Response prepareResponse(Request request);
 }
