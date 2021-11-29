@@ -389,7 +389,7 @@ public class TestFeatures {
     }
 
     @Test
-    void ImageSendTest() throws IOException, InterruptedException {
+    void JPEGImageSendTest() throws IOException, InterruptedException {
         int port = 5000;
 
         String testRequest = "GET /kitteh.jpg HTTP/1.1\r\n";
@@ -403,9 +403,38 @@ public class TestFeatures {
 
         testServer.start(port);
 
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Type: image/jpeg\r\nContent-Length: 207922\r\n\r\n";
         File file = new File("src/test/java/kitteh.jpg");
         byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
 
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertEquals(expectedResponseBody.length, socketWrapper.sentResponseBody.length);
+    }
+
+    @Test
+    void PNGImageSendTest() throws IOException, InterruptedException {
+        int port = 5000;
+
+        String testRequest = "GET /doggo.png HTTP/1.1\r\n";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Type: image/png\r\nContent-Length: 351702\r\n\r\n";
+        File file = new File("src/test/java/doggo.png");
+        byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
+
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
         Assertions.assertEquals(expectedResponseBody.length, socketWrapper.sentResponseBody.length);
     }
 }
