@@ -25,4 +25,12 @@ public class TestRequest {
         requestBuilder.extractRequest(testRequest);
         Assertions.assertEquals("Hello World", requestBuilder.body);
     }
+
+    @Test
+    void getMethodTest() {
+        RequestBuilder requestBuilder = new RequestBuilder();
+        requestBuilder.extractRequest(testRequest);
+
+        Assertions.assertEquals("GET", requestBuilder.getMethod());
+    }
 }

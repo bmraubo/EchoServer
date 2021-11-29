@@ -26,6 +26,10 @@ public class RequestBuilder {
         }
     }
 
+    public String getMethod() {
+        return statusLine.split(" ")[0];
+    }
+
     private void extractStatusLine() {
         statusLine = requestArray[0];
     }
