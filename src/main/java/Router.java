@@ -49,10 +49,10 @@ public class Router {
                 return methodOptions.prepareResponse(request);
             case ("/method_options2"):
                 MethodOptions2 methodOptions2 = new MethodOptions2();
-                return methodOptions2.prepareResponse();
+                return methodOptions2.prepareResponse(request);
             case ("/redirect"):
-                Redirect redirect = new Redirect(request.method);
-                return redirect.prepareResponse();
+                Redirect redirect = new Redirect();
+                return redirect.prepareResponse(request);
             case ("/text_response"):
                 TextResponse textResponse = new TextResponse();
                 return textResponse.prepareResponse();
