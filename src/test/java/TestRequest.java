@@ -9,14 +9,14 @@ public class TestRequest {
         RequestBuilder requestBuilder = new RequestBuilder();
         requestBuilder.extractRequest(testRequest);
         Assertions.assertEquals("GET /simple_get_with_body HTTP/1.1", requestBuilder.statusLine);
-        Assertions.assertEquals("11", requestBuilder.headers.get("Content-Length"));
+
     }
 
     @Test
     void RequestHeadersExtractionTest() {
-        Request testRequest = new Request(this.testRequest);
-        Assertions.assertEquals(11, testRequest.contentLength);
-        Assertions.assertEquals("text/html", testRequest.contentType);
+        RequestBuilder requestBuilder = new RequestBuilder();
+        requestBuilder.extractRequest(testRequest);
+        Assertions.assertEquals("11", requestBuilder.headers.get("Content-Length"));
     }
 
     @Test

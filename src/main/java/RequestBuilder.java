@@ -5,6 +5,7 @@ public class RequestBuilder {
     String[] requestArray;
     String statusLine;
     LinkedHashMap<String, String> headers;
+    boolean requestIncludesHeaders;
     boolean requestIncludesBody;
 
     public RequestBuilder(){
@@ -14,7 +15,11 @@ public class RequestBuilder {
     public void extractRequest(String requestData){
         requestArray = requestData.split("\r\n");
         extractStatusLine();
+        requestIncludesHeaders = checkForHeaders();
         requestIncludesBody = checkForBody();
+        if (requestIncludesHeaders) {
+            extractHeaders();
+        }
     }
 
     private void extractStatusLine() {
@@ -23,13 +28,13 @@ public class RequestBuilder {
 
     private void extractHeaders() {
         if (requestIncludesBody) {
-            for (String x : Arrays.copyOfRange(requestArray, 1, requestArray.length -1)) {
+            for (String x : Arrays.copyOfRange(requestArray, 1, requestArray.length - 2)) {
                 String headerKey = extractHeaderKey(x);
                 String headerValue = extractHeaderValue(x);
                 headers.put(headerKey, headerValue);
             }
         } else {
-            for (String x : Arrays.copyOfRange(requestArray, 1, requestArray.length -1)) {
+            for (String x : Arrays.copyOfRange(requestArray, 1, requestArray.length - 1 )) {
                 String headerKey = extractHeaderKey(x);
                 String headerValue = extractHeaderValue(x);
                 headers.put(headerKey, headerValue);
@@ -56,5 +61,9 @@ public class RequestBuilder {
             }
         }
         return false;
+    }
+
+    private boolean checkForHeaders() {
+        return requestArray.length > 1;
     }
 }
