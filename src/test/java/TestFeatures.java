@@ -437,4 +437,29 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
         Assertions.assertEquals(expectedResponseBody.length, socketWrapper.sentResponseBody.length);
     }
+
+    @Test
+    void GIFImageSendTest() throws IOException, InterruptedException {
+        int port = 5000;
+
+        String testRequest = "GET /kisses.gif HTTP/1.1\r\n";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
+        Server testServer = new Server(socketWrapper);
+
+        testServer.start(port);
+
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        String expectedResponseHeader = "Content-Type: image/gif\r\nContent-Length: 432985\r\n\r\n";
+        File file = new File("src/test/java/kisses.gif");
+        byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
+
+        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
+        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertEquals(expectedResponseBody.length, socketWrapper.sentResponseBody.length);
+    }
 }
