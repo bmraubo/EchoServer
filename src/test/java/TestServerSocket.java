@@ -19,8 +19,9 @@ public class TestServerSocket {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
+        Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper);
+        Server testServer = new Server(socketWrapper, router);
 
         testServer.start(port);
 
@@ -37,8 +38,9 @@ public class TestServerSocket {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
+        Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper);
+        Server testServer = new Server(socketWrapper, router);
 
         testServer.start(port);
 
@@ -56,8 +58,9 @@ public class TestServerSocket {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
+        Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper);
+        Server testServer = new Server(socketWrapper, router);
 
         testServer.start(port);
 
@@ -75,8 +78,9 @@ public class TestServerSocket {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
+        Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper);
+        Server testServer = new Server(socketWrapper, router);
 
         testServer.start(port);
 
@@ -93,8 +97,10 @@ public class TestServerSocket {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
+
+        Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper);
+        Server testServer = new Server(socketWrapper, router);
 
         testServer.start(port);
 
@@ -114,8 +120,9 @@ public class TestServerSocket {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
+        Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper);
+        Server testServer = new Server(socketWrapper, router);
 
         testServer.start(port);
 

@@ -4,12 +4,12 @@ public class Server {
     SocketWrapper socketWrapper;
     Router router;
 
-    public Server(SocketWrapper socketWrapper) {
+    public Server(SocketWrapper socketWrapper, Router router) {
         this.socketWrapper = socketWrapper;
+        this.router = router;
     }
 
     public void start(int port) throws IOException, InterruptedException{
-        router = Routes.assignRoutes();
         socketWrapper.createSocket(port);
         while (socketWrapper.keepAlive()) {
             socketWrapper.acceptConnection();
