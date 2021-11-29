@@ -1,13 +1,11 @@
 public class SimpleGet implements RoutingInterface{
     String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
-    String method;
 
     @Override
     public Response prepareResponse(Request request) {
-        this.method = request.method;
-        if (method.equals("GET")) {
+        if (request.method.equals("GET")) {
             return simpleGet();
-        } else if (method.equals("HEAD")) {
+        } else if (request.method.equals("HEAD")) {
             return simpleHead();
         } else {
             return MethodNotAllowed.prepareResponse(allowedMethods);
