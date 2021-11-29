@@ -42,6 +42,10 @@ public class RequestBuilder {
         return headers;
     }
 
+    public String getBody() {
+        return body;
+    }
+
     private void extractStatusLine() {
         statusLine = requestArray[0];
     }
