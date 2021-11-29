@@ -1,4 +1,4 @@
-public class MethodOptions2 {
+public class MethodOptions2 implements RoutingInterface{
     String[] allowedMethods = {"GET", "HEAD", "OPTIONS", "PUT", "POST"};
 
     public Response prepareResponse(Request request) {

@@ -2,12 +2,14 @@ import java.io.IOException;
 
 public class Server {
     SocketWrapper socketWrapper;
+    Router router;
 
     public Server(SocketWrapper socketWrapper) {
         this.socketWrapper = socketWrapper;
     }
 
     public void start(int port) throws IOException, InterruptedException{
+        router = Routes.assignRoutes();
         socketWrapper.createSocket(port);
         while (socketWrapper.keepAlive()) {
             socketWrapper.acceptConnection();
@@ -23,7 +25,7 @@ public class Server {
                 RequestBuilder requestBuilder = new RequestBuilder();
                 Request request = new Request(requestBuilder);
                 request.parseRequest(requestData);
-                Response response = Router.routeConnection(request);
+                Response response = router.connect(request);
                 socketWrapper.sendResponseData(response);
                 socketWrapper.closeSocket();
             }
