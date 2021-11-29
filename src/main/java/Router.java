@@ -14,7 +14,7 @@ public class Router {
 
     public Response connect(Request request) {
         RoutingInterface endpoint = findRoute(request.uri);
-        return endpoint.prepareResponse(); // will need to have all endpoints take the whole Request for this to work.
+        return endpoint.prepareResponse(request); // will need to have all endpoints take the whole Request for this to work.
     }
 
     private RoutingInterface findRoute(String uri) {
@@ -33,8 +33,8 @@ public class Router {
     static Response routeConnection(Request request) {
         switch (request.uri) {
             case ("/simple_get"):
-                SimpleGet simpleGet = new SimpleGet(request.method);
-                return simpleGet.prepareResponse();
+                SimpleGet simpleGet = new SimpleGet();
+                return simpleGet.prepareResponse(request);
             case ("/simple_get_with_body"):
                 SimpleGetWithBody simpleGetWithBody = new SimpleGetWithBody(request.method);
                 return simpleGetWithBody.prepareResponse();
