@@ -9,6 +9,7 @@ public class TestRequest {
         RequestBuilder requestBuilder = new RequestBuilder();
         requestBuilder.extractRequest(testRequest);
         Assertions.assertEquals("GET /simple_get_with_body HTTP/1.1", requestBuilder.statusLine);
+        Assertions.assertEquals("11", requestBuilder.headers.get("Content-Length"));
     }
 
     @Test
