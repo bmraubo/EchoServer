@@ -31,4 +31,8 @@ public class Server {
         }
     }
 
+    public void setSocketWrapper(SocketWrapper socketWrapper) {
+        this.socketWrapper = socketWrapper;
+    }
+
 }
