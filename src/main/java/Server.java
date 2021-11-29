@@ -14,14 +14,14 @@ public class Server {
             String requestData = socketWrapper.readRequestData();
             if (requestData.equals("")) {
                 String errorReason = "Request read as empty, please try again.";
-                Response response = Route.serverError(errorReason);
+                Response response = Router.serverError(errorReason);
                 socketWrapper.sendResponseData(response);
                 socketWrapper.closeSocket();
             } else {
                 RequestBuilder requestBuilder = new RequestBuilder();
                 Request request = new Request(requestBuilder);
                 request.parseRequest(requestData);
-                Response response = Route.routeConnection(request);
+                Response response = Router.routeConnection(request);
                 socketWrapper.sendResponseData(response);
                 socketWrapper.closeSocket();
             }

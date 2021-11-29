@@ -1,4 +1,20 @@
-public class Route {
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
+public class Router {
+    HashMap<String, RoutingInterface> routes;
+
+    public Router() {
+        routes = generateRouteMap();
+    }
+
+    public void addRoute(String uri, RoutingInterface endpoint) {
+        routes.put(uri, endpoint);
+    }
+
+    private LinkedHashMap<String, RoutingInterface> generateRouteMap() {
+        return new LinkedHashMap<String, RoutingInterface>();
+    }
 
     static Response routeConnection(Request request) {
         switch (request.uri) {
