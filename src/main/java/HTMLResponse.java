@@ -3,7 +3,7 @@ public class HTMLResponse implements RoutingInterface{
     String responseBody = "<html><body><p>HTML Response</p></body></html>";
 
     @Override
-    public Response prepareResponse() {
+    public Response prepareResponse(Request request) {
         TextResponseBuilder responseBuilder = new TextResponseBuilder();
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);

@@ -3,7 +3,7 @@ public class TextResponse implements RoutingInterface{
     String responseBody = "text response";
 
     @Override
-    public Response prepareResponse() {
+    public Response prepareResponse(Request request) {
         TextResponseBuilder responseBuilder = new TextResponseBuilder();
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
