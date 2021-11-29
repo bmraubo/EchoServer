@@ -12,6 +12,20 @@ public class Router {
         routes.put(uri, endpoint);
     }
 
+    public Response connect(Request request) {
+        RoutingInterface endpoint = findRoute(request.uri);
+        return endpoint.prepareResponse(); // will need to have all endpoints take the whole Request for this to work.
+    }
+
+    private RoutingInterface findRoute(String uri) {
+        for (String key : routes.keySet()) {
+            if (uri.equals(key)) {
+                return routes.get(key);
+            }
+        }
+        return null; // will return Resource not Found
+    }
+
     private LinkedHashMap<String, RoutingInterface> generateRouteMap() {
         return new LinkedHashMap<String, RoutingInterface>();
     }
