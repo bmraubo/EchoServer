@@ -14,7 +14,7 @@ public class Router {
 
     public Response connect(Request request) {
         RoutingInterface endpoint = findRoute(request);
-        return endpoint.prepareResponse(request); // will need to have all endpoints take the whole Request for this to work.
+        return endpoint.prepareResponse(request);
     }
 
     private RoutingInterface findRoute(Request request) {
