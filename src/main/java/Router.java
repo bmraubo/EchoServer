@@ -30,7 +30,9 @@ public class Router {
         return new LinkedHashMap<String, RoutingInterface>();
     }
 
-    static Response serverError(String errorReason, Request request) {
+    static Response serverError(String errorReason) {
+        RequestBuilder requestBuilder = new RequestBuilder();
+        Request request = new Request(requestBuilder);
         ServerError error = new ServerError(errorReason);
         return error.prepareResponse(request);
     }

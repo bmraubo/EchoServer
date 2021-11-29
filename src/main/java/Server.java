@@ -14,10 +14,8 @@ public class Server {
             socketWrapper.acceptConnection();
             String requestData = socketWrapper.readRequestData();
             if (requestData.equals("")) {
-                RequestBuilder requestBuilder = new RequestBuilder();
-                Request request = new Request(requestBuilder);
                 String errorReason = "Request read as empty, please try again.";
-                Response response = Router.serverError(errorReason, request);
+                Response response = Router.serverError(errorReason);
                 socketWrapper.sendResponseData(response);
                 socketWrapper.closeSocket();
             } else {
