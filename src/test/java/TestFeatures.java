@@ -429,7 +429,7 @@ public class TestFeatures {
         testServer.start(port);
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
-        String expectedResponseHeader = "Content-Type: image/jpeg\r\nContent-Length: 207922\r\n\r\n";
+        String expectedResponseHeader = "Content-Type: image/png\r\nContent-Length: 351702\r\n\r\n";
         File file = new File("src/test/java/doggo.png");
         byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
 
