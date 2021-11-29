@@ -61,4 +61,26 @@ public class TestRequest {
 
         Assertions.assertEquals("11", headers.get("Content-Length"));
     }
+
+    @Test
+    void getBodyTest() {
+        RequestBuilder requestBuilder = new RequestBuilder();
+        requestBuilder.extractRequest(testRequest);
+
+        Assertions.assertEquals("Hello World", requestBuilder.getBody());
+    }
+
+    @Test
+    void parseRequestTest() {
+        RequestBuilder requestBuilder = new RequestBuilder();
+        Request request = new Request(requestBuilder);
+
+        request.parseRequest(testRequest);
+
+        Assertions.assertEquals("GET", request.method);
+        Assertions.assertEquals("/simple_get_with_body", request.uri);
+        Assertions.assertEquals("HTTP/1.1", request.protocol);
+        Assertions.assertEquals("11", request.headers.get("Content-Length"));
+        Assertions.assertEquals("Hello World", request.body);
+    }
 }
