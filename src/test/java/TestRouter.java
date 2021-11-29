@@ -11,4 +11,20 @@ public class TestRouter {
 
         Assertions.assertEquals(textResponse, testRouter.routes.get("/text_response"));
     }
+
+    @Test
+    void connectTest() {
+        String testRequestData = "GET /route_spy HTTP/1.1\r\n\r\n";
+        RequestBuilder requestBuilder = new RequestBuilder();
+        Request testRequest = new Request(requestBuilder);
+        testRequest.parseRequest(testRequestData);
+
+        Router testRouter = new Router();
+        RouteSpy routeSpy = new RouteSpy();
+        testRouter.addRoute("/route_spy", routeSpy);
+
+        testRouter.connect(testRequest);
+
+        Assertions.assertTrue(routeSpy.endpointReached);
+    }
 }
