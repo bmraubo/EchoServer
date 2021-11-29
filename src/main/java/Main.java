@@ -6,7 +6,8 @@ public class Main {
         int port = 5000;
 
         ServerSocketWrapper socketWrapper = new ServerSocketWrapper();
-        Server server = new Server(socketWrapper);
+        Router router = Routes.assignRoutes();
+        Server server = new Server(socketWrapper, router);
         System.out.println("Server Started");
         server.start(port);
     }
