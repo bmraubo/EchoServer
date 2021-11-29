@@ -1,13 +1,9 @@
 public class HeadRequest implements RoutingInterface{
     String[] allowedMethods = {"HEAD", "OPTIONS"};
-    String method;
 
-    public HeadRequest(String method) {
-        this.method = method;
-    }
     @Override
-    public Response prepareResponse() {
-        if (method.equals("HEAD")) {
+    public Response prepareResponse(Request request) {
+        if (request.method.equals("HEAD")) {
             return headRequest();
         } else {
             return MethodNotAllowed.prepareResponse(allowedMethods);

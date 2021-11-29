@@ -1,14 +1,9 @@
 public class SimpleGetWithBody implements RoutingInterface{
     String[] allowedMethods = {"GET", "OPTIONS"};
-    String method;
-
-    public SimpleGetWithBody (String method){
-        this.method = method;
-    }
 
     @Override
-    public Response prepareResponse() {
-        if (method.equals("GET")) {
+    public Response prepareResponse(Request request) {
+        if (request.method.equals("GET")) {
             return simpleGetWithBody();
         } else {
             return MethodNotAllowed.prepareResponse(allowedMethods);

@@ -1,6 +1,6 @@
-public class ResourceNotFound {
+public class ResourceNotFound implements RoutingInterface{
 
-    public static Response prepareResponse(Request request) {
+    public Response prepareResponse(Request request) {
         TextResponseBuilder responseBuilder = new TextResponseBuilder();
         Response response = new Response(responseBuilder);
         System.out.println("Resource not Found");

@@ -3,7 +3,7 @@ public class HealthCheck implements RoutingInterface{
     String responseBody = "<html><body><p><strong>Status:</strong> pass</p></body></html>";
 
     @Override
-    public Response prepareResponse() {
+    public Response prepareResponse(Request request) {
         TextResponseBuilder responseBuilder = new TextResponseBuilder();
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
