@@ -13,17 +13,17 @@ public class Router {
     }
 
     public Response connect(Request request) {
-        RoutingInterface endpoint = findRoute(request.uri);
+        RoutingInterface endpoint = findRoute(request);
         return endpoint.prepareResponse(request); // will need to have all endpoints take the whole Request for this to work.
     }
 
-    private RoutingInterface findRoute(String uri) {
+    private RoutingInterface findRoute(Request request) {
         for (String key : routes.keySet()) {
-            if (uri.equals(key)) {
+            if (request.uri.equals(key)) {
                 return routes.get(key);
             }
         }
-        return null; // will return Resource not Found
+        return new ResourceNotFound();
     }
 
     private LinkedHashMap<String, RoutingInterface> generateRouteMap() {
@@ -78,7 +78,8 @@ public class Router {
                 Kisses kisses = new Kisses();
                 return kisses.prepareResponse(request);
         }
-        return ResourceNotFound.prepareResponse(request);
+        ResourceNotFound resourceNotFound = new ResourceNotFound();
+        return resourceNotFound.prepareResponse(request);
     }
 
     static Response serverError(String errorReason, Request request) {
