@@ -20,7 +20,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -43,7 +44,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -68,7 +70,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -93,7 +96,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -116,7 +120,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -139,7 +144,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -162,7 +168,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -185,7 +192,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -208,7 +216,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -231,7 +240,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -254,7 +264,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -279,7 +290,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -306,7 +318,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -333,7 +346,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -362,7 +376,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -389,7 +404,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -416,7 +432,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -442,7 +459,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 
@@ -468,7 +486,8 @@ public class TestFeatures {
 
         Router router = Routes.assignRoutes();
         SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(socketWrapper, router);
+        Server testServer = new Server(router);
+        testServer.setSocketWrapper(socketWrapper);
 
         testServer.start(port);
 

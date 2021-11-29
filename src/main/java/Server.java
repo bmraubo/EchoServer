@@ -1,11 +1,10 @@
 import java.io.IOException;
 
 public class Server {
-    SocketWrapper socketWrapper;
+    SocketWrapper socketWrapper = new ServerSocketWrapper();
     Router router;
 
-    public Server(SocketWrapper socketWrapper, Router router) {
-        this.socketWrapper = socketWrapper;
+    public Server(Router router) {
         this.router = router;
     }
 
@@ -30,6 +29,10 @@ public class Server {
                 socketWrapper.closeSocket();
             }
         }
+    }
+
+    public void setSocketWrapper(SocketWrapper socketWrapper) {
+        this.socketWrapper = socketWrapper;
     }
 
 }
