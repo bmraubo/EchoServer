@@ -454,7 +454,7 @@ public class TestFeatures {
         testServer.start(port);
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
-        String expectedResponseHeader = "Content-Type: image/gif\r\nContent-Length: 351702\r\n\r\n";
+        String expectedResponseHeader = "Content-Type: image/gif\r\nContent-Length: 432985\r\n\r\n";
         File file = new File("src/test/java/kisses.gif");
         byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
 
