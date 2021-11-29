@@ -39,8 +39,8 @@ public class Router {
                 SimpleGetWithBody simpleGetWithBody = new SimpleGetWithBody();
                 return simpleGetWithBody.prepareResponse(request);
             case ("/echo_body"):
-                EchoBody echoBody = new EchoBody(request.method, request.body);
-                return echoBody.prepareResponse();
+                EchoBody echoBody = new EchoBody();
+                return echoBody.prepareResponse(request);
             case ("/head_request"):
                 HeadRequest headRequest = new HeadRequest(request.method);
                 return headRequest.prepareResponse();
