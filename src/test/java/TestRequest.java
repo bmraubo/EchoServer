@@ -2,14 +2,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TestRequest {
-    String testRequest = "POST / HTTP/1.1\r\nContent-Length: 11\r\nContent-Type: text/html\r\n\r\nHello World";
+    String testRequest = "GET /simple_get_with_body HTTP/1.1\r\nContent-Length: 11\r\n\r\nHello World";
 
     @Test
     void RequestLineExtractionTest() {
-        Request testRequest = new Request(this.testRequest);
-        Assertions.assertEquals("POST", testRequest.method);
-        Assertions.assertEquals("/", testRequest.uri);
-        Assertions.assertEquals("HTTP/1.1", testRequest.protocol);
+        RequestBuilder requestBuilder = new RequestBuilder();
+        requestBuilder.extractRequest(testRequest);
+        Assertions.assertEquals("GET /simple_get_with_body HTTP/1.1", requestBuilder.statusLine);
     }
 
     @Test
