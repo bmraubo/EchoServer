@@ -38,6 +38,10 @@ public class RequestBuilder {
         return statusLine.split(" ")[2];
     }
 
+    public LinkedHashMap<String, String> getHeaders() {
+        return headers;
+    }
+
     private void extractStatusLine() {
         statusLine = requestArray[0];
     }
