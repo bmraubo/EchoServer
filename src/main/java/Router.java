@@ -42,8 +42,8 @@ public class Router {
                 EchoBody echoBody = new EchoBody();
                 return echoBody.prepareResponse(request);
             case ("/head_request"):
-                HeadRequest headRequest = new HeadRequest(request.method);
-                return headRequest.prepareResponse();
+                HeadRequest headRequest = new HeadRequest();
+                return headRequest.prepareResponse(request);
             case ("/method_options"):
                 MethodOptions methodOptions = new MethodOptions();
                 return methodOptions.prepareResponse();
