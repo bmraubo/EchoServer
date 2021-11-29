@@ -21,7 +21,8 @@ public class TestRequest {
 
     @Test
     void RequestBodyExtractionTest() {
-        Request testRequest = new Request(this.testRequest);
-        Assertions.assertEquals("Hello World", testRequest.body);
+        RequestBuilder requestBuilder = new RequestBuilder();
+        requestBuilder.extractRequest(testRequest);
+        Assertions.assertEquals("Hello World", requestBuilder.body);
     }
 }
