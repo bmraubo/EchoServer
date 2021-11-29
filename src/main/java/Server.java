@@ -11,28 +11,37 @@ public class Server {
     public void start(int port) throws IOException, InterruptedException{
         socketWrapper.createSocket(port);
         while (socketWrapper.keepAlive()) {
+            Response response;
             socketWrapper.acceptConnection();
             String requestData = socketWrapper.readRequestData();
-            if (requestData.equals("")) {
-                RequestBuilder requestBuilder = new RequestBuilder();
-                Request request = new Request(requestBuilder);
-                String errorReason = "Request read as empty, please try again.";
-                Response response = Router.serverError(errorReason, request);
-                socketWrapper.sendResponseData(response);
-                socketWrapper.closeSocket();
+            if (validateRequestData(requestData)) {
+                response = processRequest(requestData);
             } else {
-                RequestBuilder requestBuilder = new RequestBuilder();
-                Request request = new Request(requestBuilder);
-                request.parseRequest(requestData);
-                Response response = router.connect(request);
-                socketWrapper.sendResponseData(response);
-                socketWrapper.closeSocket();
+                response = raiseServerError();
             }
+            socketWrapper.sendResponseData(response);
+            socketWrapper.closeSocket();
         }
     }
 
     public void setSocketWrapper(SocketWrapper socketWrapper) {
         this.socketWrapper = socketWrapper;
+    }
+
+    private boolean validateRequestData(String requestData) {
+        return requestData.length() != 0;
+    }
+
+    private Response raiseServerError() {
+        String errorReason = "Request read as empty, please try again.";
+        return Router.serverError(errorReason);
+    }
+
+    private Response processRequest(String requestData) {
+        RequestBuilder requestBuilder = new RequestBuilder();
+        Request request = new Request(requestBuilder);
+        request.parseRequest(requestData);
+        return router.connect(request);
     }
 
 }
