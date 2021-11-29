@@ -18,7 +18,9 @@ public class Server {
                 socketWrapper.sendResponseData(response);
                 socketWrapper.closeSocket();
             } else {
-                Request request = new Request(requestData);
+                RequestBuilder requestBuilder = new RequestBuilder();
+                Request request = new Request(requestBuilder);
+                request.parseRequest(requestData);
                 Response response = Route.routeConnection(request);
                 socketWrapper.sendResponseData(response);
                 socketWrapper.closeSocket();
