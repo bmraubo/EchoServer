@@ -46,7 +46,7 @@ public class Router {
                 return headRequest.prepareResponse(request);
             case ("/method_options"):
                 MethodOptions methodOptions = new MethodOptions();
-                return methodOptions.prepareResponse();
+                return methodOptions.prepareResponse(request);
             case ("/method_options2"):
                 MethodOptions2 methodOptions2 = new MethodOptions2();
                 return methodOptions2.prepareResponse();

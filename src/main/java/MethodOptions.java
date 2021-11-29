@@ -2,7 +2,7 @@ public class MethodOptions implements RoutingInterface{
     String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
 
     @Override
-    public Response prepareResponse() {
+    public Response prepareResponse(Request request) {
         TextResponseBuilder responseBuilder = new TextResponseBuilder();
         Response response = new Response(responseBuilder);
         System.out.println("Simple Options to Method Options Identified");
