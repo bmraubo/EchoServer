@@ -4,9 +4,9 @@ public class RouteSpy implements RoutingInterface{
     @Override
     public Response prepareResponse(Request request) {
         endpointReached = true;
-        TextResponseBuilder textResponseBuilder = new TextResponseBuilder();
-        Response response = new Response(textResponseBuilder);
-        textResponseBuilder.setStatusCode(200);
+        ResponseBuilder responseBuilder = new ResponseBuilder();
+        Response response = new Response(responseBuilder);
+        responseBuilder.setStatusCode(200);
         return response;
     }
 }

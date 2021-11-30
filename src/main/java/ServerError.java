@@ -1,4 +1,4 @@
-public class ServerError implements RoutingInterface{
+public class ServerError implements ErrorHandler{
     String errorReason;
 
     public ServerError(String errorReason) {
@@ -6,10 +6,10 @@ public class ServerError implements RoutingInterface{
     }
 
     @Override
-    public Response prepareResponse(Request request) {
-        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+    public Response prepareResponse() {
+        ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
-        responseBuilder.setStatusCode(500);
+        responseBuilder.setStatusCode(400);
         responseBuilder.setResponseBody(errorReason);
         return response;
     }

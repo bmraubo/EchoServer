@@ -3,7 +3,7 @@ public class MethodOptions implements RoutingInterface{
 
     @Override
     public Response prepareResponse(Request request) {
-        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         System.out.println("Simple Options to Method Options Identified");
         responseBuilder.setStatusCode(200);

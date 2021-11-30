@@ -31,9 +31,7 @@ public class Router {
     }
 
     static Response serverError(String errorReason) {
-        RequestBuilder requestBuilder = new RequestBuilder();
-        Request request = new Request(requestBuilder);
         ServerError error = new ServerError(errorReason);
-        return error.prepareResponse(request);
+        return error.prepareResponse();
     }
 }

@@ -10,11 +10,11 @@ public class TestResponse {
         int statusCode = 200;
         String testBody = "Hello World";
 
-        TextResponseBuilder textResponseBuilder = new TextResponseBuilder();
-        Response response = new Response(textResponseBuilder);
+        ResponseBuilder responseBuilder = new ResponseBuilder();
+        Response response = new Response(responseBuilder);
 
-        textResponseBuilder.setStatusCode(statusCode);
-        textResponseBuilder.setResponseBody(testBody);
+        responseBuilder.setStatusCode(statusCode);
+        responseBuilder.setResponseBody(testBody);
 
         response.generateResponse();
 

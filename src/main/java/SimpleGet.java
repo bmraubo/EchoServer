@@ -13,7 +13,7 @@ public class SimpleGet implements RoutingInterface{
     }
 
     private Response simpleGet() {
-        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         System.out.println("Simple Get Identified");
         responseBuilder.setStatusCode(200);
@@ -22,7 +22,7 @@ public class SimpleGet implements RoutingInterface{
     }
 
     private Response simpleHead() {
-        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         System.out.println("Simple Head Identified");
         responseBuilder.setStatusCode(200);

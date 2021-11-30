@@ -269,7 +269,7 @@ public class TestFeatures {
 
         testServer.start(port);
 
-        String expectedResponseLine = "HTTP/1.1 500 Internal Server Error\r\n";
+        String expectedResponseLine = "HTTP/1.1 400 Bad Request\r\n";
         String expectedResponseHeader = "Content-Length: 40\r\n\r\n";
         byte[] expectedResponseBody = "Request read as empty, please try again.".getBytes(StandardCharsets.UTF_8);
 
