@@ -3,11 +3,11 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
 
-public class TestTextResponseBuilder {
+public class TestResponseBuilder {
 
     @Test
     void createTextResponseBuilder() {
-        TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
+        ResponseBuilder testResponseBuilder = new ResponseBuilder();
 
         Assertions.assertNotNull(testResponseBuilder.statusCodeMap);
         Assertions.assertEquals("OK", testResponseBuilder.statusCodeMap.get(200));
@@ -18,7 +18,7 @@ public class TestTextResponseBuilder {
     void set200StatusCodeTest() {
         int statusCode = 200;
 
-        TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
+        ResponseBuilder testResponseBuilder = new ResponseBuilder();
         testResponseBuilder.setStatusCode(statusCode);
 
         Assertions.assertEquals(200, testResponseBuilder.statusCode);
@@ -32,7 +32,7 @@ public class TestTextResponseBuilder {
         String arrayHeaderType = "Allow";
         String[] arrayHeaderValue = {"GET", "OPTIONS"};
 
-        TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
+        ResponseBuilder testResponseBuilder = new ResponseBuilder();
         testResponseBuilder.setHeader(headerType, headerValue);
         testResponseBuilder.setHeader(arrayHeaderType,arrayHeaderValue);
 
@@ -44,7 +44,7 @@ public class TestTextResponseBuilder {
     void setResponseTextBodyTest() {
         String testResponseBody = "Hello World";
 
-        TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
+        ResponseBuilder testResponseBuilder = new ResponseBuilder();
         testResponseBuilder.setResponseBody(testResponseBody);
 
         String expectedHeaderValue = String.valueOf(testResponseBody.getBytes(StandardCharsets.UTF_8).length);
@@ -57,7 +57,7 @@ public class TestTextResponseBuilder {
     void generateResponseLineTest() {
         int statusCode = 200;
 
-        TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
+        ResponseBuilder testResponseBuilder = new ResponseBuilder();
         testResponseBuilder.setStatusCode(statusCode);
         String testResponseLine = testResponseBuilder.getResponseLine();
 
@@ -73,7 +73,7 @@ public class TestTextResponseBuilder {
         String arrayHeaderType = "Allow";
         String[] arrayHeaderValue = {"GET", "OPTIONS"};
 
-        TextResponseBuilder testResponseBuilder = new TextResponseBuilder();
+        ResponseBuilder testResponseBuilder = new ResponseBuilder();
         testResponseBuilder.setHeader(headerType, headerValue);
         testResponseBuilder.setHeader(arrayHeaderType,arrayHeaderValue);
 

@@ -11,7 +11,7 @@ public class Kisses implements RoutingInterface{
 
     @Override
     public Response prepareResponse(Request request) {
-        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", contentType);

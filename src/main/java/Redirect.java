@@ -4,7 +4,7 @@ public class Redirect implements RoutingInterface{
 
     @Override
     public Response prepareResponse(Request request) {
-        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         System.out.println("Redirecting");
         responseBuilder.setStatusCode(301);

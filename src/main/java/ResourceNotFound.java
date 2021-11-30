@@ -1,9 +1,10 @@
-public class ResourceNotFound implements RoutingInterface{
+public class ResourceNotFound implements ErrorHandler{
+    String errorMessage = "Resource not Found";
 
-    public Response prepareResponse(Request request) {
-        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+    public Response prepareResponse() {
+        ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
-        System.out.println("Resource not Found");
+        System.out.println(errorMessage);
         responseBuilder.setStatusCode(404);
         responseBuilder.setResponseBody("");
         return response;

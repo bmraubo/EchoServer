@@ -11,7 +11,7 @@ public class HeadRequest implements RoutingInterface{
     }
 
     private Response headRequest() {
-        TextResponseBuilder responseBuilder = new TextResponseBuilder();
+        ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         System.out.println("Simple Head Identified");
         responseBuilder.setStatusCode(200);
