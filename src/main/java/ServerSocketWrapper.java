@@ -18,19 +18,16 @@ public class ServerSocketWrapper implements SocketWrapper{
     }
 
     @Override
-    public void acceptConnection() throws IOException, InterruptedException {
-        int timeoutCounter = 0;
+    public boolean acceptConnection() throws IOException, InterruptedException {
         socket = serverSocket.accept();
         System.out.println("Connection accepted");
-        while ((socket.getInputStream().available() == 0) && (timeoutCounter < 1000)) {
-            System.out.println("Input Stream not available - Waiting...");
-            Thread.sleep(5);
-            timeoutCounter++;
+        boolean dataReceived = waitForData();
+        if (dataReceived) {
+            openIOStreams();
+            return true;
+        } else {
+            return false;
         }
-        InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
-        input = new BufferedReader(inputStream);
-        output = new PrintWriter(socket.getOutputStream(), true);
-        System.out.println("I/O Streams opened");
     }
 
     @Override
@@ -69,5 +66,26 @@ public class ServerSocketWrapper implements SocketWrapper{
     @Override
     public boolean keepAlive() {
         return keepAlive;
+    }
+
+    private boolean waitForData() throws IOException, InterruptedException {
+        int timeoutCounter = 0;
+        while ((socket.getInputStream().available() == 0) && (timeoutCounter < 1000)) {
+            System.out.println("Input Stream not available - Waiting...");
+            Thread.sleep(5);
+            timeoutCounter++;
+        }
+        if (socket.getInputStream().available() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void openIOStreams() throws IOException {
+        InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
+        input = new BufferedReader(inputStream);
+        output = new PrintWriter(socket.getOutputStream(), true);
+        System.out.println("I/O Streams opened");
     }
 }

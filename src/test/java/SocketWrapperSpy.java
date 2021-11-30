@@ -28,10 +28,11 @@ public class SocketWrapperSpy implements SocketWrapper{
     }
 
     @Override
-    public void acceptConnection() throws IOException {
+    public boolean acceptConnection() throws IOException {
         System.out.println("Connection accepted");
         System.out.println("I/O Streams opened");
         this.connectionAccepted = true;
+        return true;
     }
 
 
