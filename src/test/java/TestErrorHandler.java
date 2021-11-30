@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Time;
-
 public class TestErrorHandler {
 
     @Test
@@ -21,5 +19,6 @@ public class TestErrorHandler {
         Response response = timeoutError.prepareResponse();
 
         Assertions.assertEquals(408, response.responseBuilder.statusCode);
+        Assertions.assertEquals("Request Time-out", response.responseBuilder.reasonPhrase);
     }
 }
