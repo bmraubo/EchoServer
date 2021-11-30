@@ -22,10 +22,9 @@ public class ServerSocketWrapper implements SocketWrapper{
         socket = serverSocket.accept();
         System.out.println("Connection accepted");
         boolean dataReceived = waitForData();
-        InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
-        input = new BufferedReader(inputStream);
-        output = new PrintWriter(socket.getOutputStream(), true);
-        System.out.println("I/O Streams opened");
+        if (dataReceived) {
+            openIOStreams();
+        }
     }
 
     @Override
@@ -78,5 +77,12 @@ public class ServerSocketWrapper implements SocketWrapper{
         } else {
             return true;
         }
+    }
+
+    private void openIOStreams() throws IOException {
+        InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
+        input = new BufferedReader(inputStream);
+        output = new PrintWriter(socket.getOutputStream(), true);
+        System.out.println("I/O Streams opened");
     }
 }
