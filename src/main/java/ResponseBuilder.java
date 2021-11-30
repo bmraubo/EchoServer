@@ -73,6 +73,7 @@ public class ResponseBuilder {
         statusCodeMap.put(400, "Bad Request");
         statusCodeMap.put(404, "Not Found");
         statusCodeMap.put(405, "Method Not Allowed");
+        statusCodeMap.put(408, "Request Time-out");
         statusCodeMap.put(500, "Internal Server Error");
     }
 
