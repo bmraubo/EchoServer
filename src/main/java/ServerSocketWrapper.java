@@ -18,12 +18,15 @@ public class ServerSocketWrapper implements SocketWrapper{
     }
 
     @Override
-    public void acceptConnection() throws IOException, InterruptedException {
+    public boolean acceptConnection() throws IOException, InterruptedException {
         socket = serverSocket.accept();
         System.out.println("Connection accepted");
         boolean dataReceived = waitForData();
         if (dataReceived) {
             openIOStreams();
+            return true;
+        } else {
+            return false;
         }
     }
 
