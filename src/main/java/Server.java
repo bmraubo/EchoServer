@@ -4,6 +4,8 @@ public class Server {
     SocketWrapper socketWrapper = new ServerSocketWrapper();
     Router router;
 
+    boolean acceptedConnection;
+
     public Server(Router router) {
         this.router = router;
     }
@@ -12,9 +14,11 @@ public class Server {
         socketWrapper.createSocket(port);
         while (socketWrapper.keepAlive()) {
             Response response;
-            socketWrapper.acceptConnection();
+            acceptedConnection = socketWrapper.acceptConnection();
             String requestData = socketWrapper.readRequestData();
-            if (validateRequestData(requestData)) {
+            if (!acceptedConnection){
+                response = raiseTimeoutError();
+            } else if (validateRequestData(requestData)) {
                 response = processRequest(requestData);
             } else {
                 response = raiseServerError();
@@ -35,6 +39,11 @@ public class Server {
     private Response raiseServerError() {
         String errorReason = "Request read as empty, please try again.";
         return Router.serverError(errorReason);
+    }
+
+    private Response raiseTimeoutError() {
+        TimeoutError timeoutError = new TimeoutError();
+        return timeoutError.prepareResponse();
     }
 
     private Response processRequest(String requestData) {
