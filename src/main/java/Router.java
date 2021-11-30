@@ -14,6 +14,10 @@ public class Router {
 
     public Response connect(Request request) {
         RoutingInterface endpoint = findRoute(request);
+        if (endpoint == null) {
+            ResourceNotFound resourceNotFound = new ResourceNotFound();
+            return resourceNotFound.prepareResponse();
+        }
         return endpoint.prepareResponse(request);
     }
 
@@ -23,15 +27,15 @@ public class Router {
                 return routes.get(key);
             }
         }
-        return new ResourceNotFound();
+        return null;
     }
 
     private LinkedHashMap<String, RoutingInterface> generateRouteMap() {
         return new LinkedHashMap<String, RoutingInterface>();
     }
 
-    static Response serverError(String errorReason) {
-        ServerError error = new ServerError(errorReason);
+    static Response serverError(String errorMessage) {
+        ServerError error = new ServerError(errorMessage);
         return error.prepareResponse();
     }
 }
