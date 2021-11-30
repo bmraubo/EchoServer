@@ -9,7 +9,7 @@ public class ServerError implements ErrorHandler{
     public Response prepareResponse() {
         ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
-        responseBuilder.setStatusCode(400);
+        responseBuilder.setStatusCode(500);
         responseBuilder.setResponseBody(errorReason);
         return response;
     }
