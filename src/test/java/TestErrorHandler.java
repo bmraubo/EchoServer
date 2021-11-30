@@ -31,4 +31,13 @@ public class TestErrorHandler {
         Assertions.assertEquals(400, response.responseBuilder.statusCode);
         Assertions.assertEquals("Bad Request", response.responseBuilder.reasonPhrase);
     }
+
+    @Test
+    void ResourceNotFoundTest() {
+        ResourceNotFound resourceNotFound = new ResourceNotFound();
+        Response response = resourceNotFound.prepareResponse();
+
+        Assertions.assertEquals(404, response.responseBuilder.statusCode);
+        Assertions.assertEquals("Not Found", response.responseBuilder.reasonPhrase);
+    }
 }
