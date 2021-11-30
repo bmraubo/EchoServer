@@ -1,4 +1,4 @@
-public class RouteSpy implements RoutingInterface{
+public class RouteSpy implements Endpoint {
     boolean endpointReached;
 
     @Override

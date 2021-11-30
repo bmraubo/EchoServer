@@ -1,4 +1,4 @@
-public class XMLResponse implements RoutingInterface{
+public class XMLResponse implements Endpoint {
     String contentType = "application/xml;charset=utf-8";
     String responseBody = "<note><body>XML Response</body></note>";
 

@@ -1,7 +1,7 @@
 import java.io.File;
 import java.nio.file.Files;
 
-public class Doggo implements RoutingInterface{
+public class Doggo implements Endpoint {
     byte[] responseBody;
     String contentType = "image/png";
 

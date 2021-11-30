@@ -1,4 +1,4 @@
-public class MethodOptions implements RoutingInterface{
+public class MethodOptions implements Endpoint {
     String[] allowedMethods = {"GET", "HEAD", "OPTIONS"};
 
     @Override

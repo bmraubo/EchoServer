@@ -1,4 +1,4 @@
-public class SimpleGetWithBody implements RoutingInterface{
+public class SimpleGetWithBody implements Endpoint {
     String[] allowedMethods = {"GET", "OPTIONS"};
 
     @Override

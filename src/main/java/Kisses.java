@@ -1,7 +1,7 @@
 import java.io.File;
 import java.nio.file.Files;
 
-public class Kisses implements RoutingInterface{
+public class Kisses implements Endpoint {
     byte[] responseBody;
     String contentType = "image/gif";
 
