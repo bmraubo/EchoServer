@@ -1,3 +1,6 @@
+import site.bmraubo.echo_server_endpoints.*;
+import site.bmraubo.http_server.Router;
+
 public class Routes {
 
     static Router assignRoutes() {

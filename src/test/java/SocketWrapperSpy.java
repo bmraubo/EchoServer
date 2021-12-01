@@ -1,8 +1,11 @@
+import site.bmraubo.http_server.Response;
+import site.bmraubo.http_server.SocketWrapper;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class SocketWrapperSpy implements SocketWrapper{
+public class SocketWrapperSpy implements SocketWrapper {
     boolean keepAlive = true;
     BufferedReader input;
     PrintWriter output;
