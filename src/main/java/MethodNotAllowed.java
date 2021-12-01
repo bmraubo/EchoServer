@@ -1,3 +1,6 @@
+import site.bmraubo.HTTPServer.Response;
+import site.bmraubo.HTTPServer.ResponseBuilder;
+
 public class MethodNotAllowed {
 
     public static Response prepareResponse(String[] allowedMethods) {

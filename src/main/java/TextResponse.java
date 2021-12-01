@@ -1,3 +1,8 @@
+import site.bmraubo.HTTPServer.Endpoint;
+import site.bmraubo.HTTPServer.Request;
+import site.bmraubo.HTTPServer.Response;
+import site.bmraubo.HTTPServer.ResponseBuilder;
+
 public class TextResponse implements Endpoint {
     String contentType = "text/plain;charset=utf-8";
     String responseBody = "text response";

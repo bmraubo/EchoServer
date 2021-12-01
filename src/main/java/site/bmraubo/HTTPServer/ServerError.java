@@ -1,3 +1,5 @@
+package site.bmraubo.HTTPServer;
+
 public class ServerError implements ErrorHandler{
     String errorReason;
 

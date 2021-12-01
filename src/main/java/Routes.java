@@ -1,3 +1,5 @@
+import site.bmraubo.HTTPServer.Router;
+
 public class Routes {
 
     static Router assignRoutes() {

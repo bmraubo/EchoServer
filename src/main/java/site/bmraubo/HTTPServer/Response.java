@@ -1,9 +1,11 @@
-public class Response {
-    ResponseBuilder responseBuilder;
+package site.bmraubo.HTTPServer;
 
-    String responseLine;
-    String responseHeaders;
-    byte[] responseBody;
+public class Response {
+    public ResponseBuilder responseBuilder;
+
+    public String responseLine;
+    public String responseHeaders;
+    public byte[] responseBody;
 
     public Response(ResponseBuilder responseBuilder) {
         this.responseBuilder = responseBuilder;

@@ -1,3 +1,5 @@
+package site.bmraubo.HTTPServer;
+
 public class ResourceNotFound implements ErrorHandler{
     String errorMessage = "Resource not Found";
 

@@ -1,16 +1,18 @@
+package site.bmraubo.HTTPServer;
+
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.StringJoiner;
 
 public class ResponseBuilder {
-    String protocol = "HTTP/1.1";
+    public String protocol = "HTTP/1.1";
     String crlf = "\r\n";
-    HashMap<Integer, String> statusCodeMap;
-    int statusCode;
-    String reasonPhrase;
-    LinkedHashMap<String, String> headers;
-    byte[] responseBody;
+    public HashMap<Integer, String> statusCodeMap;
+    public int statusCode;
+    public String reasonPhrase;
+    public LinkedHashMap<String, String> headers;
+    public byte[] responseBody;
 
     public ResponseBuilder() {
         generateStatusCodeMap();

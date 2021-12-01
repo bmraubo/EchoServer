@@ -1,12 +1,14 @@
+package site.bmraubo.HTTPServer;
+
 import java.util.LinkedHashMap;
 
 public class Request {
     RequestBuilder requestBuilder;
-    String method;
-    String uri;
-    String protocol;
-    LinkedHashMap<String, String> headers;
-    String body;
+    public String method;
+    public String uri;
+    public String protocol;
+    public LinkedHashMap<String, String> headers;
+    public String body;
 
     public Request(RequestBuilder requestBuilder) {
         this.requestBuilder = requestBuilder;

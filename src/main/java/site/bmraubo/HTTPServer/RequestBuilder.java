@@ -1,11 +1,13 @@
+package site.bmraubo.HTTPServer;
+
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class RequestBuilder {
     String[] requestArray;
-    String statusLine;
-    LinkedHashMap<String, String> headers;
-    String body;
+    public String statusLine;
+    public LinkedHashMap<String, String> headers;
+    public String body;
     boolean requestIncludesHeaders;
     boolean requestIncludesBody;
 

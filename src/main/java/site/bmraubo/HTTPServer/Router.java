@@ -1,8 +1,10 @@
+package site.bmraubo.HTTPServer;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Router {
-    HashMap<String, Endpoint> routes;
+    public HashMap<String, Endpoint> routes;
 
     public Router() {
         routes = generateRouteMap();
