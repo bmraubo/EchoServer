@@ -1,5 +1,5 @@
-import site.bmraubo.echoServerEndpoints.*;
-import site.bmraubo.HTTPServer.Router;
+import site.bmraubo.echo_server_endpoints.*;
+import site.bmraubo.http_server.Router;
 
 public class Routes {
 

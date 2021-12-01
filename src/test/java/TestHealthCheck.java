@@ -1,9 +1,9 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import site.bmraubo.echoServerEndpoints.HealthCheck;
-import site.bmraubo.HTTPServer.Request;
-import site.bmraubo.HTTPServer.RequestBuilder;
-import site.bmraubo.HTTPServer.Response;
+import site.bmraubo.echo_server_endpoints.HealthCheck;
+import site.bmraubo.http_server.Request;
+import site.bmraubo.http_server.RequestBuilder;
+import site.bmraubo.http_server.Response;
 
 import java.nio.charset.StandardCharsets;
 

@@ -1,5 +1,5 @@
-import site.bmraubo.HTTPServer.Response;
-import site.bmraubo.HTTPServer.SocketWrapper;
+import site.bmraubo.http_server.Response;
+import site.bmraubo.http_server.SocketWrapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;

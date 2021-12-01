@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import site.bmraubo.HTTPServer.Request;
-import site.bmraubo.HTTPServer.RequestBuilder;
+import site.bmraubo.http_server.Request;
+import site.bmraubo.http_server.RequestBuilder;
 
 import java.util.LinkedHashMap;
 
