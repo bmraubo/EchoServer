@@ -1,18 +1,13 @@
+package site.bmraubo.echoServerEndpoints;
+
 import site.bmraubo.HTTPServer.Endpoint;
 import site.bmraubo.HTTPServer.Request;
 import site.bmraubo.HTTPServer.Response;
 import site.bmraubo.HTTPServer.ResponseBuilder;
 
-import java.io.File;
-import java.nio.file.Files;
-
-public class Kisses implements Endpoint {
-    byte[] responseBody;
-    String contentType = "image/gif";
-
-    public Kisses() {
-        convertImage();
-    }
+public class XMLResponse implements Endpoint {
+    String contentType = "application/xml;charset=utf-8";
+    String responseBody = "<note><body>XML Response</body></note>";
 
     @Override
     public Response prepareResponse(Request request) {
@@ -24,12 +19,4 @@ public class Kisses implements Endpoint {
         return response;
     }
 
-    private void convertImage() {
-        try {
-            File file = new File("src/main/java/kisses.gif");
-            this.responseBody = Files.readAllBytes(file.toPath());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

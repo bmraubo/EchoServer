@@ -1,11 +1,20 @@
+package site.bmraubo.echoServerEndpoints;
+
 import site.bmraubo.HTTPServer.Endpoint;
 import site.bmraubo.HTTPServer.Request;
 import site.bmraubo.HTTPServer.Response;
 import site.bmraubo.HTTPServer.ResponseBuilder;
 
-public class HealthCheck implements Endpoint {
-    String contentType = "text/html;charset=utf-8";
-    String responseBody = "<html><body><p><strong>Status:</strong> pass</p></body></html>";
+import java.io.File;
+import java.nio.file.Files;
+
+public class Kitteh implements Endpoint {
+    byte[] responseBody;
+    String contentType = "image/jpeg";
+
+    public Kitteh() {
+        convertImage();
+    }
 
     @Override
     public Response prepareResponse(Request request) {
@@ -16,4 +25,15 @@ public class HealthCheck implements Endpoint {
         responseBuilder.setResponseBody(responseBody);
         return response;
     }
+
+    private void convertImage() {
+        try {
+            File file = new File("src/main/java/site/bmraubo/Endpoints/kitteh.jpg");
+            this.responseBody = Files.readAllBytes(file.toPath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

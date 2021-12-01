@@ -1,11 +1,20 @@
+package site.bmraubo.echoServerEndpoints;
+
 import site.bmraubo.HTTPServer.Endpoint;
 import site.bmraubo.HTTPServer.Request;
 import site.bmraubo.HTTPServer.Response;
 import site.bmraubo.HTTPServer.ResponseBuilder;
 
-public class HTMLResponse implements Endpoint {
-    String contentType = "text/html;charset=utf-8";
-    String responseBody = "<html><body><p>HTML Response</p></body></html>";
+import java.io.File;
+import java.nio.file.Files;
+
+public class Kisses implements Endpoint {
+    byte[] responseBody;
+    String contentType = "image/gif";
+
+    public Kisses() {
+        convertImage();
+    }
 
     @Override
     public Response prepareResponse(Request request) {
@@ -15,5 +24,14 @@ public class HTMLResponse implements Endpoint {
         responseBuilder.setHeader("Content-Type", contentType);
         responseBuilder.setResponseBody(responseBody);
         return response;
+    }
+
+    private void convertImage() {
+        try {
+            File file = new File("src/main/java/site/bmraubo/Endpoints/kisses.gif");
+            this.responseBody = Files.readAllBytes(file.toPath());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

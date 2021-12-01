@@ -1,3 +1,5 @@
+package site.bmraubo.echoServerEndpoints;
+
 import org.json.JSONObject;
 import site.bmraubo.HTTPServer.Endpoint;
 import site.bmraubo.HTTPServer.Request;

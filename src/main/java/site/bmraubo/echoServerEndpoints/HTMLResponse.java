@@ -1,18 +1,13 @@
+package site.bmraubo.echoServerEndpoints;
+
 import site.bmraubo.HTTPServer.Endpoint;
 import site.bmraubo.HTTPServer.Request;
 import site.bmraubo.HTTPServer.Response;
 import site.bmraubo.HTTPServer.ResponseBuilder;
 
-import java.io.File;
-import java.nio.file.Files;
-
-public class Kitteh implements Endpoint {
-    byte[] responseBody;
-    String contentType = "image/jpeg";
-
-    public Kitteh() {
-        convertImage();
-    }
+public class HTMLResponse implements Endpoint {
+    String contentType = "text/html;charset=utf-8";
+    String responseBody = "<html><body><p>HTML Response</p></body></html>";
 
     @Override
     public Response prepareResponse(Request request) {
@@ -23,15 +18,4 @@ public class Kitteh implements Endpoint {
         responseBuilder.setResponseBody(responseBody);
         return response;
     }
-
-    private void convertImage() {
-        try {
-            File file = new File("src/main/java/kitteh.jpg");
-            this.responseBody = Files.readAllBytes(file.toPath());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }

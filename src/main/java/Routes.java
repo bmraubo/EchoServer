@@ -1,3 +1,4 @@
+import site.bmraubo.echoServerEndpoints.*;
 import site.bmraubo.HTTPServer.Router;
 
 public class Routes {

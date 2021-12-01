@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import site.bmraubo.echoServerEndpoints.TextResponse;
 import site.bmraubo.HTTPServer.Request;
 import site.bmraubo.HTTPServer.RequestBuilder;
 import site.bmraubo.HTTPServer.Router;

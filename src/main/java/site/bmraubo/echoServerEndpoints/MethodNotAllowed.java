@@ -1,3 +1,5 @@
+package site.bmraubo.echoServerEndpoints;
+
 import site.bmraubo.HTTPServer.Response;
 import site.bmraubo.HTTPServer.ResponseBuilder;
 

@@ -1,3 +1,5 @@
+package site.bmraubo.echoServerEndpoints;
+
 import site.bmraubo.HTTPServer.Endpoint;
 import site.bmraubo.HTTPServer.Request;
 import site.bmraubo.HTTPServer.Response;
@@ -26,7 +28,7 @@ public class Doggo implements Endpoint {
 
     private void convertImage() {
         try {
-            File file = new File("src/main/java/doggo.png");
+            File file = new File("src/main/java/site/bmraubo/Endpoints/doggo.png");
             this.responseBody = Files.readAllBytes(file.toPath());
         } catch (Exception e) {
             e.printStackTrace();
