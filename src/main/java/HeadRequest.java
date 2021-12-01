@@ -1,4 +1,4 @@
-public class HeadRequest implements RoutingInterface{
+public class HeadRequest implements Endpoint {
     String[] allowedMethods = {"HEAD", "OPTIONS"};
 
     @Override

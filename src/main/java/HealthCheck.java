@@ -1,4 +1,4 @@
-public class HealthCheck implements RoutingInterface{
+public class HealthCheck implements Endpoint {
     String contentType = "text/html;charset=utf-8";
     String responseBody = "<html><body><p><strong>Status:</strong> pass</p></body></html>";
 

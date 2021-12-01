@@ -1,4 +1,4 @@
-public class TextResponse implements RoutingInterface{
+public class TextResponse implements Endpoint {
     String contentType = "text/plain;charset=utf-8";
     String responseBody = "text response";
 

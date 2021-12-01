@@ -1,6 +1,6 @@
 import org.json.JSONObject;
 
-public class JSONResponse implements RoutingInterface{
+public class JSONResponse implements Endpoint {
     JSONObject responseBody = generateJSONResponse();
     String contentType = "application/json;charset=utf-8";
 

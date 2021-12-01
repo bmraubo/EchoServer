@@ -1,4 +1,4 @@
-public class EchoBody implements RoutingInterface{
+public class EchoBody implements Endpoint {
     String[] allowedMethods = {"POST", "OPTIONS"};
 
     public Response prepareResponse(Request request) {

@@ -1,7 +1,7 @@
 import java.io.File;
 import java.nio.file.Files;
 
-public class Kitteh implements RoutingInterface {
+public class Kitteh implements Endpoint {
     byte[] responseBody;
     String contentType = "image/jpeg";
 

@@ -2,18 +2,18 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Router {
-    HashMap<String, RoutingInterface> routes;
+    HashMap<String, Endpoint> routes;
 
     public Router() {
         routes = generateRouteMap();
     }
 
-    public void addRoute(String uri, RoutingInterface endpoint) {
+    public void addRoute(String uri, Endpoint endpoint) {
         routes.put(uri, endpoint);
     }
 
     public Response connect(Request request) {
-        RoutingInterface endpoint = findRoute(request);
+        Endpoint endpoint = findRoute(request);
         if (endpoint == null) {
             ResourceNotFound resourceNotFound = new ResourceNotFound();
             return resourceNotFound.prepareResponse();
@@ -21,7 +21,7 @@ public class Router {
         return endpoint.prepareResponse(request);
     }
 
-    private RoutingInterface findRoute(Request request) {
+    private Endpoint findRoute(Request request) {
         for (String key : routes.keySet()) {
             if (request.uri.equals(key)) {
                 return routes.get(key);
@@ -30,8 +30,8 @@ public class Router {
         return null;
     }
 
-    private LinkedHashMap<String, RoutingInterface> generateRouteMap() {
-        return new LinkedHashMap<String, RoutingInterface>();
+    private LinkedHashMap<String, Endpoint> generateRouteMap() {
+        return new LinkedHashMap<String, Endpoint>();
     }
 
     static Response serverError(String errorMessage) {

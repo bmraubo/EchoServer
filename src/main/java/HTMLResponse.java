@@ -1,4 +1,4 @@
-public class HTMLResponse implements RoutingInterface{
+public class HTMLResponse implements Endpoint {
     String contentType = "text/html;charset=utf-8";
     String responseBody = "<html><body><p>HTML Response</p></body></html>";
 

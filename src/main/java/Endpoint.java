@@ -1,4 +1,4 @@
-public interface RoutingInterface {
+public interface Endpoint {
 
     Response prepareResponse(Request request);
 }
