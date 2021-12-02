@@ -1,5 +1,4 @@
-import site.bmraubo.http_server.Response;
-import site.bmraubo.http_server.SocketWrapper;
+package site.bmraubo.http_server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,14 +9,14 @@ public class SocketWrapperSpy implements SocketWrapper {
     BufferedReader input;
     PrintWriter output;
     boolean socketCreated;
-    boolean connectionAccepted;
-    boolean dataSent;
-    boolean socketClosed;
-    String dataReceived;
-    String sentResponseLine;
-    String sentResponseHeaders;
-    byte[] sentResponseBody;
-    boolean nullInputReceived;
+    public boolean connectionAccepted;
+    public boolean dataSent;
+    public boolean socketClosed;
+    public String dataReceived;
+    public String sentResponseLine;
+    public String sentResponseHeaders;
+    public byte[] sentResponseBody;
+    public boolean nullInputReceived;
 
 
     public SocketWrapperSpy(BufferedReader input, PrintWriter output) {

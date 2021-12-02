@@ -1,7 +1,4 @@
-import site.bmraubo.http_server.Endpoint;
-import site.bmraubo.http_server.Request;
-import site.bmraubo.http_server.Response;
-import site.bmraubo.http_server.ResponseBuilder;
+package site.bmraubo.http_server;
 
 public class RouteSpy implements Endpoint {
     boolean endpointReached;
