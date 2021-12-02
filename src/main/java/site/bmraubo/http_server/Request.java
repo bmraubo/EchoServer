@@ -3,7 +3,7 @@ package site.bmraubo.http_server;
 import java.util.LinkedHashMap;
 
 public class Request {
-    RequestBuilder requestBuilder;
+    public RequestBuilder requestBuilder;
     public String method;
     public String uri;
     public String protocol;

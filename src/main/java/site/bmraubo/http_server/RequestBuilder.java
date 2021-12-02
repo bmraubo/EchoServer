@@ -5,9 +5,9 @@ import java.util.LinkedHashMap;
 
 public class RequestBuilder {
     String[] requestArray;
-    public String statusLine;
-    public LinkedHashMap<String, String> headers;
-    public String body;
+    String statusLine;
+    LinkedHashMap<String, String> headers;
+    String body;
     boolean requestIncludesHeaders;
     boolean requestIncludesBody;
 
