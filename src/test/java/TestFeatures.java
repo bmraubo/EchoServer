@@ -11,9 +11,7 @@ import java.nio.file.Files;
 public class TestFeatures {
 
     @Test
-    void SimpleGetTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void SimpleGetTest() {
         String testRequest = "GET /simple_get HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -32,9 +30,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleGetWithBodyTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void SimpleGetWithBodyTest() {
         String testRequest = "GET /simple_get_with_body HTTP/1.1\r\nContent-Length: 11\r\n\r\nHello World";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -55,9 +51,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimplePostTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void SimplePostTest() {
         String testRequest = "POST /echo_body HTTP/1.1\r\nContent-Length: 11\r\n\r\nHello World";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -78,9 +72,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleHeadToSimpleGetTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void SimpleHeadToSimpleGetTest() {
         String testRequest = "HEAD /simple_get HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -99,9 +91,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleHeadToHeadRequestTest() throws IOException, InterruptedException{
-        int port = 5000;
-
+    void SimpleHeadToHeadRequestTest() {
         String testRequest = "HEAD /head_request HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -120,9 +110,7 @@ public class TestFeatures {
     }
 
     @Test
-    void MethodNotAllowedTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void MethodNotAllowedTest() {
         String testRequest = "GET /head_request HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -141,9 +129,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleOptionsToMethodOptionsTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void SimpleOptionsToMethodOptionsTest() {
         String testRequest = "OPTIONS /method_options HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -162,9 +148,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleOptionsToMethodOptions2Test() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void SimpleOptionsToMethodOptions2Test() {
         String testRequest = "OPTIONS /method_options2 HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -183,9 +167,7 @@ public class TestFeatures {
     }
 
     @Test
-    void SimpleRedirectTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void SimpleRedirectTest() {
         String testRequest = "GET /redirect HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -204,9 +186,7 @@ public class TestFeatures {
     }
 
     @Test
-    void ResourceNotFoundTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void ResourceNotFoundTest() {
         String testRequest = "GET /resource_not_found HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -225,9 +205,7 @@ public class TestFeatures {
     }
 
     @Test
-    void TextResponseTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void TextResponseTest() {
         String testRequest = "GET /text_response HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -250,9 +228,7 @@ public class TestFeatures {
     }
 
     @Test
-    void HTMLResponseTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void HTMLResponseTest() {
         String testRequest = "GET /html_response HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -275,9 +251,7 @@ public class TestFeatures {
     }
 
     @Test
-    void JSONResponseTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void JSONResponseTest() {
         String testRequest = "GET /json_response HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -302,9 +276,7 @@ public class TestFeatures {
     }
 
     @Test
-    void XMLResponseTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void XMLResponseTest() {
         String testRequest = "GET /xml_response HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -327,9 +299,7 @@ public class TestFeatures {
     }
 
     @Test
-    void HealthCheckTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void HealthCheckTest() {
         String testRequest = "GET /health-check.html HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -352,9 +322,7 @@ public class TestFeatures {
     }
 
     @Test
-    void JPEGImageSendTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void JPEGImageSendTest() throws IOException {
         String testRequest = "GET /kitteh.jpg HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -376,9 +344,7 @@ public class TestFeatures {
     }
 
     @Test
-    void PNGImageSendTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void PNGImageSendTest() throws IOException {
         String testRequest = "GET /doggo.png HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
@@ -400,9 +366,7 @@ public class TestFeatures {
     }
 
     @Test
-    void GIFImageSendTest() throws IOException, InterruptedException {
-        int port = 5000;
-
+    void GIFImageSendTest() throws IOException {
         String testRequest = "GET /kisses.gif HTTP/1.1\r\n";
 
         InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
