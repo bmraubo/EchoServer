@@ -70,6 +70,11 @@ public class ServerSocketWrapper implements SocketWrapper{
         return keepAlive;
     }
 
+    @Override
+    public BufferedReader getInput() {
+        return input;
+    }
+
     private boolean waitForData() throws IOException, InterruptedException {
         int timeoutCounter = 0;
         while ((socket.getInputStream().available() == 0) && (timeoutCounter < 1000)) {

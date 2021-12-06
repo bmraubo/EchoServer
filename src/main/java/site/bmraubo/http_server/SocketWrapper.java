@@ -1,5 +1,6 @@
 package site.bmraubo.http_server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public interface SocketWrapper {
@@ -10,5 +11,6 @@ public interface SocketWrapper {
     void sendResponseData(Response response) throws IOException;
     void closeSocket() throws IOException;
     boolean keepAlive();
+    BufferedReader getInput();
 
 }
