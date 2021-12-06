@@ -6,6 +6,7 @@ public interface ConnectionWrapper {
     void openIOStreams();
     void buildRequest();
     void routeConnection();
+    void sendResponse();
     // void closeConnection();
 
 

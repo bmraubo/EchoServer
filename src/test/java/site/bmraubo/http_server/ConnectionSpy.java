@@ -16,6 +16,10 @@ public class ConnectionSpy implements ConnectionWrapper{
     boolean openedIOStreams;
     boolean requestBuilt;
     boolean connectionRouted;
+    boolean responseSent;
+    String responseLine;
+    String headers;
+    byte[] body;
 
     public ConnectionSpy(BufferedReader input, PrintWriter output, Router router) {
         this.input = input;
@@ -28,6 +32,7 @@ public class ConnectionSpy implements ConnectionWrapper{
         openIOStreams();
         buildRequest();
         routeConnection();
+        sendResponse();
     }
 
     @Override
@@ -47,5 +52,14 @@ public class ConnectionSpy implements ConnectionWrapper{
     public void routeConnection() {
         response = router.connect(request);
         connectionRouted = true;
+    }
+
+    @Override
+    public void sendResponse() {
+        response.generateResponse();
+        responseLine = response.responseLine;
+        headers = response.responseHeaders;
+        body = response.responseBody;
+        responseSent = true;
     }
 }
