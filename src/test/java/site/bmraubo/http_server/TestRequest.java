@@ -2,18 +2,31 @@ package site.bmraubo.http_server;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import site.bmraubo.http_server.Request;
-import site.bmraubo.http_server.RequestBuilder;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
 
 public class TestRequest {
     String testRequest = "GET /simple_get_with_body HTTP/1.1\r\nContent-Length: 11\r\n\r\nHello World";
+    InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+    BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+
+    @Test
+    void ReadBufferedStreamTest() {
+        RequestBuilder requestBuilder = new RequestBuilder();
+        requestBuilder.readBufferedStream(input);
+
+        Assertions.assertEquals(testRequest, requestBuilder.requestString);
+    }
 
     @Test
     void RequestLineExtractionTest() {
         RequestBuilder requestBuilder = new RequestBuilder();
-        requestBuilder.extractRequest(testRequest);
+        requestBuilder.readBufferedStream(input);
+        requestBuilder.extractRequest();
         Assertions.assertEquals("GET /simple_get_with_body HTTP/1.1", requestBuilder.statusLine);
 
     }
@@ -21,21 +34,24 @@ public class TestRequest {
     @Test
     void RequestHeadersExtractionTest() {
         RequestBuilder requestBuilder = new RequestBuilder();
-        requestBuilder.extractRequest(testRequest);
+        requestBuilder.readBufferedStream(input);
+        requestBuilder.extractRequest();
         Assertions.assertEquals("11", requestBuilder.headers.get("Content-Length"));
     }
 
     @Test
     void RequestBodyExtractionTest() {
         RequestBuilder requestBuilder = new RequestBuilder();
-        requestBuilder.extractRequest(testRequest);
+        requestBuilder.readBufferedStream(input);
+        requestBuilder.extractRequest();
         Assertions.assertEquals("Hello World", requestBuilder.body);
     }
 
     @Test
     void getMethodTest() {
         RequestBuilder requestBuilder = new RequestBuilder();
-        requestBuilder.extractRequest(testRequest);
+        requestBuilder.readBufferedStream(input);
+        requestBuilder.extractRequest();
 
         Assertions.assertEquals("GET", requestBuilder.getMethod());
     }
@@ -43,7 +59,8 @@ public class TestRequest {
     @Test
     void getURITest() {
         RequestBuilder requestBuilder = new RequestBuilder();
-        requestBuilder.extractRequest(testRequest);
+        requestBuilder.readBufferedStream(input);
+        requestBuilder.extractRequest();
 
         Assertions.assertEquals("/simple_get_with_body", requestBuilder.getURI());
     }
@@ -51,7 +68,8 @@ public class TestRequest {
     @Test
     void getProtocolTest() {
         RequestBuilder requestBuilder = new RequestBuilder();
-        requestBuilder.extractRequest(testRequest);
+        requestBuilder.readBufferedStream(input);
+        requestBuilder.extractRequest();
 
         Assertions.assertEquals("HTTP/1.1", requestBuilder.getProtocol());
     }
@@ -59,7 +77,8 @@ public class TestRequest {
     @Test
     void getHeadersTest() {
         RequestBuilder requestBuilder = new RequestBuilder();
-        requestBuilder.extractRequest(testRequest);
+        requestBuilder.readBufferedStream(input);
+        requestBuilder.extractRequest();
 
         LinkedHashMap<String, String> headers = requestBuilder.getHeaders();
 
@@ -69,17 +88,20 @@ public class TestRequest {
     @Test
     void getBodyTest() {
         RequestBuilder requestBuilder = new RequestBuilder();
-        requestBuilder.extractRequest(testRequest);
+        requestBuilder.readBufferedStream(input);
+        requestBuilder.extractRequest();
 
         Assertions.assertEquals("Hello World", requestBuilder.getBody());
     }
 
     @Test
     void parseRequestTest() {
+
+
         RequestBuilder requestBuilder = new RequestBuilder();
         Request request = new Request(requestBuilder);
 
-        request.parseRequest(testRequest);
+        request.parseRequest(input);
 
         Assertions.assertEquals("GET", request.method);
         Assertions.assertEquals("/simple_get_with_body", request.uri);
