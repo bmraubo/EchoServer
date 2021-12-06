@@ -79,6 +79,11 @@ public class SocketWrapperSpy implements SocketWrapper {
         return keepAlive;
     }
 
+    @Override
+    public BufferedReader getInput() {
+        return input;
+    }
+
     public boolean wasCreated() {
         return socketCreated;
     }

@@ -1,9 +1,11 @@
 package site.bmraubo.http_server;
 
+import java.io.BufferedReader;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class RequestBuilder {
+    String requestString;
     String[] requestArray;
     String statusLine;
     LinkedHashMap<String, String> headers;
@@ -15,8 +17,23 @@ public class RequestBuilder {
         generateHeaderMap();
     }
 
-    public void extractRequest(String requestData){
-        requestArray = requestData.split("\r\n");
+    public void readBufferedStream(BufferedReader input) {
+        try {
+            System.out.println("looking at data");
+            String data = "";
+            while ((input.ready())) {
+                data = data + Character.toString(input.read());
+            }
+            System.out.println("Data read");
+            System.out.println(data);
+            requestString = data;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void extractRequest(){
+        requestArray = requestString.split("\r\n");
         extractStatusLine();
         requestIncludesHeaders = checkForHeaders();
         requestIncludesBody = checkForBody();
