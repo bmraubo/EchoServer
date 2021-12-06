@@ -6,7 +6,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Connection implements ConnectionWrapper{
+public class Connection implements ConnectionWrapper, Runnable{
     Socket socket;
     Router router;
     BufferedReader input;
@@ -95,4 +95,9 @@ public class Connection implements ConnectionWrapper{
         }
     }
 
+    @Override
+    public void run() {
+        processRequest();
+        System.out.println("Thread complete");
+    }
 }

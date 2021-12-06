@@ -18,9 +18,9 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(port, 5, InetAddress.getByName("0.0.0.0"));
         while (running) {
             Socket socket = serverSocket.accept();
-            Connection connection = new Connection(socket, router);
-            connection.processRequest();
-            System.out.println("DONE");
+            Thread thread = new Thread(new Connection(socket, router));
+            thread.start();
+            System.out.println("Thread Started");
         }
     }
 
