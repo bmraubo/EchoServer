@@ -20,6 +20,11 @@ public class Connection implements ConnectionWrapper{
     }
 
     @Override
+    public void routeConnection() {
+
+    }
+
+    @Override
     public void processRequest() {
 
     }
