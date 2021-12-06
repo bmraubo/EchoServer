@@ -17,6 +17,7 @@ public class ConnectionSpy implements ConnectionWrapper{
     boolean requestBuilt;
     boolean connectionRouted;
     boolean responseSent;
+    boolean connectionClosed;
     String responseLine;
     String headers;
     byte[] body;
@@ -33,6 +34,7 @@ public class ConnectionSpy implements ConnectionWrapper{
         buildRequest();
         routeConnection();
         sendResponse();
+        closeConnection();
     }
 
     @Override
@@ -61,5 +63,10 @@ public class ConnectionSpy implements ConnectionWrapper{
         headers = response.responseHeaders;
         body = response.responseBody;
         responseSent = true;
+    }
+
+    @Override
+    public void closeConnection() {
+        connectionClosed = true;
     }
 }

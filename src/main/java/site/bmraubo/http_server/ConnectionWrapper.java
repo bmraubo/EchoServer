@@ -7,7 +7,7 @@ public interface ConnectionWrapper {
     void buildRequest();
     void routeConnection();
     void sendResponse();
-    // void closeConnection();
+    void closeConnection();
 
 
 
