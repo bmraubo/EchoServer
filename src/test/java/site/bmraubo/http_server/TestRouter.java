@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import site.bmraubo.echo_server_endpoints.TextResponse;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class TestRouter {
 
     @Test
@@ -18,9 +23,12 @@ public class TestRouter {
     @Test
     void connectTest() {
         String testRequestData = "GET /route_spy HTTP/1.1\r\n\r\n";
+        InputStream testInputStream = new ByteArrayInputStream(testRequestData.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+
         RequestBuilder requestBuilder = new RequestBuilder();
         Request testRequest = new Request(requestBuilder);
-        testRequest.parseRequest(testRequestData);
+        testRequest.parseRequest(input);
 
         Router testRouter = new Router();
         RouteSpy routeSpy = new RouteSpy();

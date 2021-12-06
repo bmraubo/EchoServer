@@ -1,5 +1,6 @@
 package site.bmraubo.http_server;
 
+import java.io.BufferedReader;
 import java.util.LinkedHashMap;
 
 public class Request {
@@ -14,8 +15,9 @@ public class Request {
         this.requestBuilder = requestBuilder;
     }
 
-    public void parseRequest(String requestData) {
-        requestBuilder.extractRequest(requestData);
+    public void parseRequest(BufferedReader input) {
+        requestBuilder.readBufferedStream(input);
+        requestBuilder.extractRequest();
         method = requestBuilder.getMethod();
         uri = requestBuilder.getURI();
         protocol = requestBuilder.getProtocol();
