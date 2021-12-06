@@ -1,47 +1,27 @@
 package site.bmraubo.http_server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server {
-    SocketWrapper socketWrapper = new ServerSocketWrapper();
     Router router;
+    boolean running = true;
 
-    boolean acceptedConnection;
 
     public Server(Router router) {
         this.router = router;
     }
 
-    public void start(int port) throws IOException, InterruptedException{
-        socketWrapper.createSocket(port);
-        while (socketWrapper.keepAlive()) {
-            Response response;
-            acceptedConnection = socketWrapper.acceptConnection();
-            if (!acceptedConnection){
-                response = raiseTimeoutError();
-            } else {
-                response = processRequest(socketWrapper.getInput());
-            }
-            socketWrapper.sendResponseData(response);
-            socketWrapper.closeSocket();
+    public void start(int port) throws IOException {
+        ServerSocket serverSocket = new ServerSocket(port, 5, InetAddress.getByName("0.0.0.0"));
+        while (running) {
+            Socket socket = serverSocket.accept();
+            Connection connection = new Connection(socket, router);
+            connection.processRequest();
+            System.out.println("DONE");
         }
-    }
-
-    public void setSocketWrapper(SocketWrapper socketWrapper) {
-        this.socketWrapper = socketWrapper;
-    }
-
-    private Response raiseTimeoutError() {
-        TimeoutError timeoutError = new TimeoutError();
-        return timeoutError.prepareResponse();
-    }
-
-    private Response processRequest(BufferedReader input) {
-        RequestBuilder requestBuilder = new RequestBuilder();
-        Request request = new Request(requestBuilder);
-        request.parseRequest(input);
-        return router.connect(request);
     }
 
 }
