@@ -15,6 +15,11 @@ public class Connection implements ConnectionWrapper{
     }
 
     @Override
+    public void buildRequest() {
+
+    }
+
+    @Override
     public void processRequest() {
 
     }
