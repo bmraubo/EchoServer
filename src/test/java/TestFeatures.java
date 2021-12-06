@@ -256,32 +256,6 @@ public class TestFeatures {
     }
 
     @Test
-    void EmptyRequestTest() throws IOException, InterruptedException {
-        int port = 5000;
-
-        byte[] testRequest = new byte[0];
-
-        InputStream testInputStream = new ByteArrayInputStream(testRequest);
-        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
-        PrintWriter output = new PrintWriter(new StringWriter());
-
-        Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
-
-        String expectedResponseLine = "HTTP/1.1 500 Internal Server Error\r\n";
-        String expectedResponseHeader = "Content-Length: 40\r\n\r\n";
-        byte[] expectedResponseBody = "Request read as empty, please try again.".getBytes(StandardCharsets.UTF_8);
-
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
-        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
-    }
-
-    @Test
     void TextResponseTest() throws IOException, InterruptedException {
         int port = 5000;
 

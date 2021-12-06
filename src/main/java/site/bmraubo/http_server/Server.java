@@ -1,5 +1,6 @@
 package site.bmraubo.http_server;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Server {
@@ -17,13 +18,10 @@ public class Server {
         while (socketWrapper.keepAlive()) {
             Response response;
             acceptedConnection = socketWrapper.acceptConnection();
-            String requestData = socketWrapper.readRequestData();
             if (!acceptedConnection){
                 response = raiseTimeoutError();
-            } else if (validateRequestData(requestData)) {
-                response = processRequest(requestData);
             } else {
-                response = raiseServerError();
+                response = processRequest(socketWrapper.getInput());
             }
             socketWrapper.sendResponseData(response);
             socketWrapper.closeSocket();
@@ -34,24 +32,15 @@ public class Server {
         this.socketWrapper = socketWrapper;
     }
 
-    private boolean validateRequestData(String requestData) {
-        return requestData.length() != 0;
-    }
-
-    private Response raiseServerError() {
-        String errorReason = "Request read as empty, please try again.";
-        return Router.serverError(errorReason);
-    }
-
     private Response raiseTimeoutError() {
         TimeoutError timeoutError = new TimeoutError();
         return timeoutError.prepareResponse();
     }
 
-    private Response processRequest(String requestData) {
+    private Response processRequest(BufferedReader input) {
         RequestBuilder requestBuilder = new RequestBuilder();
         Request request = new Request(requestBuilder);
-        request.parseRequest(requestData);
+        request.parseRequest(input);
         return router.connect(request);
     }
 
