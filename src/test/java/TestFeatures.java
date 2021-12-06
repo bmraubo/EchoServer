@@ -1,9 +1,8 @@
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import site.bmraubo.http_server.ConnectionSpy;
 import site.bmraubo.http_server.Router;
-import site.bmraubo.http_server.Server;
-import site.bmraubo.http_server.SocketWrapperSpy;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -22,17 +21,14 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         String expectedResponseHeader = "Content-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
     }
 
     @Test
@@ -46,19 +42,16 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         String expectedResponseHeaders = "Content-Length: 11\r\n\r\n";
         byte[] expectedResponseBody = "Hello world".getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeaders, socketWrapper.sentResponseHeaders);
-        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeaders, connectionSpy.headers);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
 
     @Test
@@ -72,19 +65,16 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         String expectedResponseHeaders = "Content-Length: 11\r\n\r\n";
         byte[] expectedResponseBody = "Hello World".getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeaders, socketWrapper.sentResponseHeaders);
-        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeaders, connectionSpy.headers);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
 
     @Test
@@ -98,17 +88,14 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         String expectedResponseHeader = "Content-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
     }
 
     @Test
@@ -122,17 +109,14 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         String expectedResponseHeader = "Content-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
     }
 
     @Test
@@ -146,17 +130,14 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 405 Method Not Allowed\r\n";
         String expectedResponseHeader = "Allow: HEAD, OPTIONS\r\nContent-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
     }
 
     @Test
@@ -170,17 +151,14 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         String expectedResponseHeader = "Allow: GET, HEAD, OPTIONS\r\nContent-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
     }
 
     @Test
@@ -194,17 +172,14 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         String expectedResponseHeader = "Allow: GET, HEAD, OPTIONS, PUT, POST\r\nContent-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
     }
 
     @Test
@@ -218,17 +193,14 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 301 Moved Permanently\r\n";
         String expectedResponseHeader = "Location: http://127.0.0.1:5000/simple_get\r\nContent-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
     }
 
     @Test
@@ -242,17 +214,14 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 404 Not Found\r\n";
         String expectedResponseHeader = "Content-Length: 0\r\n\r\n";
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
     }
 
     @Test
@@ -266,11 +235,8 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String responseText = "text response";
 
@@ -278,9 +244,9 @@ public class TestFeatures {
         String expectedResponseHeader = "Content-Type: text/plain;charset=utf-8\r\nContent-Length: 13\r\n\r\n";
         byte[] expectedResponseBody = responseText.getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
-        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
 
     @Test
@@ -294,11 +260,8 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String responseText = "<html><body><p>HTML Response</p></body></html>";
 
@@ -306,9 +269,9 @@ public class TestFeatures {
         String expectedResponseHeader = "Content-Type: text/html;charset=utf-8\r\nContent-Length: 46\r\n\r\n";
         byte[] expectedResponseBody = responseText.getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
-        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
 
     @Test
@@ -322,11 +285,8 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         JSONObject responseJson = new JSONObject();
         responseJson.put("key1", "value1");
@@ -336,9 +296,9 @@ public class TestFeatures {
         String expectedResponseHeader = "Content-Type: application/json;charset=utf-8\r\nContent-Length: 33\r\n\r\n";
         byte[] expectedResponseBody = responseJson.toString().getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
-        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
 
     @Test
@@ -352,11 +312,8 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String XMLString = "<note><body>XML Response</body></note>";
 
@@ -364,9 +321,9 @@ public class TestFeatures {
         String expectedResponseHeader = "Content-Type: application/xml;charset=utf-8\r\nContent-Length: 38\r\n\r\n";
         byte[] expectedResponseBody = XMLString.getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
-        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
 
     @Test
@@ -380,11 +337,8 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String responseString = "<html><body><p><strong>Status:</strong> pass</p></body></html>";
 
@@ -392,9 +346,9 @@ public class TestFeatures {
         String expectedResponseHeader = "Content-Type: text/html;charset=utf-8\r\nContent-Length: 62\r\n\r\n";
         byte[] expectedResponseBody = responseString.getBytes(StandardCharsets.UTF_8);
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
-        Assertions.assertArrayEquals(expectedResponseBody, socketWrapper.sentResponseBody);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
 
     @Test
@@ -408,20 +362,17 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         String expectedResponseHeader = "Content-Type: image/jpeg\r\nContent-Length: 207922\r\n\r\n";
         File file = new File("src/test/java/kitteh.jpg");
         byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
-        Assertions.assertEquals(expectedResponseBody.length, socketWrapper.sentResponseBody.length);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
 
     @Test
@@ -435,20 +386,17 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         String expectedResponseHeader = "Content-Type: image/png\r\nContent-Length: 351702\r\n\r\n";
         File file = new File("src/test/java/doggo.png");
         byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
-        Assertions.assertEquals(expectedResponseBody.length, socketWrapper.sentResponseBody.length);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
 
     @Test
@@ -462,19 +410,16 @@ public class TestFeatures {
         PrintWriter output = new PrintWriter(new StringWriter());
 
         Router router = Routes.assignRoutes();
-        SocketWrapperSpy socketWrapper = new SocketWrapperSpy(input, output);
-        Server testServer = new Server(router);
-        testServer.setSocketWrapper(socketWrapper);
-
-        testServer.start(port);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         String expectedResponseHeader = "Content-Type: image/gif\r\nContent-Length: 432985\r\n\r\n";
         File file = new File("src/test/java/kisses.gif");
         byte[] expectedResponseBody = Files.readAllBytes(file.toPath());
 
-        Assertions.assertEquals(expectedResponseLine, socketWrapper.sentResponseLine);
-        Assertions.assertEquals(expectedResponseHeader, socketWrapper.sentResponseHeaders);
-        Assertions.assertEquals(expectedResponseBody.length, socketWrapper.sentResponseBody.length);
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
 }

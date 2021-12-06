@@ -18,9 +18,9 @@ public class ConnectionSpy implements ConnectionWrapper{
     boolean connectionRouted;
     boolean responseSent;
     boolean connectionClosed;
-    String responseLine;
-    String headers;
-    byte[] body;
+    public String responseLine;
+    public String headers;
+    public byte[] body;
 
     public ConnectionSpy(BufferedReader input, PrintWriter output, Router router) {
         this.input = input;
