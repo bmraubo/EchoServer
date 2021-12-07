@@ -9,7 +9,6 @@ public class TestTaskMaster {
     void openTaskListTest() {
         LocalMemoryTaskList localMemoryTaskList = new LocalMemoryTaskList();
         TaskMaster taskMaster = new TaskMaster();
-
         taskMaster.openTaskList(localMemoryTaskList);
 
         Assertions.assertEquals(localMemoryTaskList, taskMaster.taskList);
@@ -21,12 +20,22 @@ public class TestTaskMaster {
 
         LocalMemoryTaskList localMemoryTaskList = new LocalMemoryTaskList();
         TaskMaster taskMaster = new TaskMaster();
-
         taskMaster.openTaskList(localMemoryTaskList);
-
         taskMaster.addTask(todoRequest);
 
-        Assertions.assertEquals(todoRequest, localMemoryTaskList.taskList.get(1).taskInfo);
+        Assertions.assertEquals(todoRequest, taskMaster.viewTask(1).taskInfo);
+    }
+
+    @Test
+    void viewTaskTest() {
+        String todoRequest = "{\"task\":\"a new task\"}";
+
+        LocalMemoryTaskList localMemoryTaskList = new LocalMemoryTaskList();
+        TaskMaster taskMaster = new TaskMaster();
+        taskMaster.openTaskList(localMemoryTaskList);
+        taskMaster.addTask(todoRequest);
+
+        Assertions.assertEquals(todoRequest, taskMaster.viewTask(1).taskInfo);
     }
 }
 

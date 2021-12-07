@@ -11,4 +11,8 @@ public class TaskMaster {
         Task task = new Task(taskInfo);
         taskList.addTask(task);
     }
+
+    public Task viewTask(int id) {
+        return taskList.viewTaskByID(id);
+    }
 }

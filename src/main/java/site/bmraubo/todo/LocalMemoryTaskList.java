@@ -15,6 +15,11 @@ public class LocalMemoryTaskList implements TaskList{
         taskList.put(task.id, task);
     }
 
+    @Override
+    public Task viewTaskByID(int id) {
+        return taskList.get(id);
+    }
+
     private void generateTaskList() {
         taskList = new LinkedHashMap<>();
     }

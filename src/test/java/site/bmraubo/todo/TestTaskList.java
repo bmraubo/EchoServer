@@ -24,4 +24,16 @@ public class TestTaskList {
         Assertions.assertEquals(task, localMemoryTaskList.taskList.get(1));
 
     }
+
+    @Test
+    void findTaskByID() {
+        String todoRequest = "{\"task\":\"a new task\"}";
+
+        Task task = new Task(todoRequest);
+        LocalMemoryTaskList localMemoryTaskList = new LocalMemoryTaskList();
+
+        localMemoryTaskList.addTask(task);
+
+        Assertions.assertEquals(todoRequest, localMemoryTaskList.viewTaskByID(1).taskInfo);
+    }
 }
