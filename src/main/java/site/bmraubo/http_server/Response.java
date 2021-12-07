@@ -1,7 +1,7 @@
 package site.bmraubo.http_server;
 
 public class Response {
-    public ResponseBuilder responseBuilder;
+    ResponseBuilder responseBuilder;
 
     public String responseLine;
     public String responseHeaders;
