@@ -11,4 +11,17 @@ public class TestTaskList {
 
         Assertions.assertNotNull(localMemoryTaskList.taskList);
     }
+
+    @Test
+    void addTaskTest() {
+        String todoRequest = "{\"task\":\"a new task\"}";
+
+        Task task = new Task(todoRequest);
+        LocalMemoryTaskList localMemoryTaskList = new LocalMemoryTaskList();
+
+        localMemoryTaskList.addTask(task);
+
+        Assertions.assertEquals(task, localMemoryTaskList.taskList.get(1));
+
+    }
 }
