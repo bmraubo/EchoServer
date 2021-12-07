@@ -6,13 +6,13 @@ import java.util.LinkedHashMap;
 import java.util.StringJoiner;
 
 public class ResponseBuilder {
-    public String protocol = "HTTP/1.1";
+    String protocol = "HTTP/1.1";
     String crlf = "\r\n";
-    public HashMap<Integer, String> statusCodeMap;
-    public int statusCode;
-    public String reasonPhrase;
-    public LinkedHashMap<String, String> headers;
-    public byte[] responseBody;
+    HashMap<Integer, String> statusCodeMap;
+    int statusCode;
+    String reasonPhrase;
+    LinkedHashMap<String, String> headers;
+    byte[] responseBody;
 
     public ResponseBuilder() {
         generateStatusCodeMap();

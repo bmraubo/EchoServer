@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.util.LinkedHashMap;
 
 public class Request {
-    public RequestBuilder requestBuilder;
+    RequestBuilder requestBuilder;
     public String method;
     public String uri;
     public String protocol;
