@@ -5,6 +5,7 @@ import site.bmraubo.http_server.Request;
 import site.bmraubo.http_server.Response;
 import site.bmraubo.http_server.ResponseBuilder;
 import site.bmraubo.todo.TaskList;
+import site.bmraubo.todo.TaskMaster;
 
 public class ToDo implements Endpoint {
     TaskList taskList;
@@ -16,6 +17,7 @@ public class ToDo implements Endpoint {
     @Override
     public Response prepareResponse(Request request) {
         if (validateContentType(request) && validateValues(request)) {
+            addTask(request.body);
             ResponseBuilder responseBuilder = new ResponseBuilder();
             Response response = new Response(responseBuilder);
             responseBuilder.setStatusCode(201);
@@ -42,4 +44,12 @@ public class ToDo implements Endpoint {
     private boolean validateValues(Request request) {
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
     }
+
+    private void addTask(String taskInfo) {
+        TaskMaster taskMaster = new TaskMaster();
+        taskMaster.openTaskList(taskList);
+        taskMaster.addTask(taskInfo);
+    }
+
+
 }

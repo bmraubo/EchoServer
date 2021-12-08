@@ -46,6 +46,7 @@ public class TestToDo {
         response.generateResponse();
 
         Assertions.assertEquals("HTTP/1.1 201 Created\r\n", response.responseLine);
+        Assertions.assertEquals(request.body, taskList.viewTaskByID(1).taskInfo);
 
     }
 
