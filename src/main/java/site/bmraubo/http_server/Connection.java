@@ -62,9 +62,11 @@ public class Connection implements ConnectionWrapper, Runnable{
             output.print(response.responseLine);
             output.print(response.responseHeaders);
             output.flush();
-            OutputStream output = socket.getOutputStream();
-            output.write(response.responseBody);
-            output.flush();
+            if (response.responseBody != null) {
+                OutputStream output = socket.getOutputStream();
+                output.write(response.responseBody);
+                output.flush();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
