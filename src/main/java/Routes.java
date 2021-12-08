@@ -20,6 +20,7 @@ public class Routes {
         router.addRoute("/kitteh.jpg", new Kitteh());
         router.addRoute("/doggo.png", new Doggo());
         router.addRoute("/kisses.gif", new Kisses());
+        router.addRoute("/todo", new ToDo());
         return router;
     }
 }
