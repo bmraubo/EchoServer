@@ -6,6 +6,8 @@ import site.bmraubo.http_server.Endpoint;
 import site.bmraubo.http_server.Request;
 import site.bmraubo.http_server.RequestBuilder;
 import site.bmraubo.http_server.Response;
+import site.bmraubo.todo.LocalMemoryTaskList;
+import site.bmraubo.todo.TaskList;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -37,8 +39,9 @@ public class TestToDo {
                 "{\"task\":\"a new task\"}";
 
         Request request = setUpRequest(testRequest);
+        TaskList taskList = new LocalMemoryTaskList();
 
-        Endpoint endpoint = new ToDo();
+        Endpoint endpoint = new ToDo(taskList);
         Response response = endpoint.prepareResponse(request);
         response.generateResponse();
 
@@ -58,8 +61,9 @@ public class TestToDo {
                 "a new task";
 
         Request request = setUpRequest(testRequest);
+        TaskList taskList = new LocalMemoryTaskList();
 
-        Endpoint endpoint = new ToDo();
+        Endpoint endpoint = new ToDo(taskList);
         Response response = endpoint.prepareResponse(request);
         response.generateResponse();
 
@@ -78,8 +82,9 @@ public class TestToDo {
                 "a new task";
 
         Request request = setUpRequest(testRequest);
+        TaskList taskList = new LocalMemoryTaskList();
 
-        Endpoint endpoint = new ToDo();
+        Endpoint endpoint = new ToDo(taskList);
         Response response = endpoint.prepareResponse(request);
         response.generateResponse();
 

@@ -4,8 +4,14 @@ import site.bmraubo.http_server.Endpoint;
 import site.bmraubo.http_server.Request;
 import site.bmraubo.http_server.Response;
 import site.bmraubo.http_server.ResponseBuilder;
+import site.bmraubo.todo.TaskList;
 
 public class ToDo implements Endpoint {
+    TaskList taskList;
+
+    public ToDo(TaskList taskList) {
+        this.taskList = taskList;
+    }
 
     @Override
     public Response prepareResponse(Request request) {
