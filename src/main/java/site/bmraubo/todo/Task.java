@@ -2,9 +2,9 @@ package site.bmraubo.todo;
 
 public class Task {
     int id;
-    String taskInfo;
-    String title;
-    String body;
+    public String taskInfo;
+    public String title;
+    public String body;
 
     public Task(String taskInfo) {
         this.taskInfo = taskInfo;

@@ -1,9 +1,13 @@
 import site.bmraubo.echo_server_endpoints.*;
 import site.bmraubo.http_server.Router;
+import site.bmraubo.todo.LocalMemoryTaskList;
+import site.bmraubo.todo.TaskList;
 
 public class Routes {
 
     static Router assignRoutes() {
+        TaskList taskList = new LocalMemoryTaskList();
+
         Router router = new Router();
         router.addRoute("/simple_get", new SimpleGet());
         router.addRoute("/simple_get_with_body", new SimpleGetWithBody());
@@ -20,6 +24,7 @@ public class Routes {
         router.addRoute("/kitteh.jpg", new Kitteh());
         router.addRoute("/doggo.png", new Doggo());
         router.addRoute("/kisses.gif", new Kisses());
+        router.addRoute("/todo", new ToDo(taskList));
         return router;
     }
 }

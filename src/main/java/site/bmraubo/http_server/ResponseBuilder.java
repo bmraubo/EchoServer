@@ -71,11 +71,13 @@ public class ResponseBuilder {
     private void generateStatusCodeMap() {
         statusCodeMap = new HashMap<Integer, String>();
         statusCodeMap.put(200, "OK");
+        statusCodeMap.put(201, "Created");
         statusCodeMap.put(301, "Moved Permanently");
         statusCodeMap.put(400, "Bad Request");
         statusCodeMap.put(404, "Not Found");
         statusCodeMap.put(405, "Method Not Allowed");
         statusCodeMap.put(408, "Request Time-out");
+        statusCodeMap.put(415, "Unsupported Media Type");
         statusCodeMap.put(500, "Internal Server Error");
     }
 
