@@ -39,6 +39,22 @@ public class RetrieveTask implements Endpoint {
                 return response;
             }
         }
+        if (request.method.equals("DELETE")) {
+            if (taskExists(taskID)) {
+                removeTask(taskID);
+                ResponseBuilder responseBuilder = new ResponseBuilder();
+                Response response = new Response(responseBuilder);
+                responseBuilder.setStatusCode(204);
+                responseBuilder.setResponseBody("");
+                return response;
+            } else {
+                ResponseBuilder responseBuilder = new ResponseBuilder();
+                Response response = new Response(responseBuilder);
+                responseBuilder.setStatusCode(204);
+                responseBuilder.setResponseBody("");
+                return response;
+            }
+        }
         return null;
     }
 
@@ -53,11 +69,21 @@ public class RetrieveTask implements Endpoint {
         task.updateTask(taskInfo);
     }
 
+    private void removeTask(int taskID) {
+        TaskMaster taskMaster = new TaskMaster();
+        taskMaster.openTaskList(taskList);
+        taskMaster.removeTask(taskID);
+    }
+
     private boolean validateContentType(Request request) {
         return request.headers.get("Content-Type").contains("application");
     }
 
     private boolean validateValues(Request request) {
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
+    }
+
+    private boolean taskExists(int id) {
+        return taskList.viewTaskByID(id) != null;
     }
 }

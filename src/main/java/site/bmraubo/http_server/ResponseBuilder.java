@@ -72,6 +72,7 @@ public class ResponseBuilder {
         statusCodeMap = new HashMap<Integer, String>();
         statusCodeMap.put(200, "OK");
         statusCodeMap.put(201, "Created");
+        statusCodeMap.put(204, "No Content");
         statusCodeMap.put(301, "Moved Permanently");
         statusCodeMap.put(400, "Bad Request");
         statusCodeMap.put(404, "Not Found");
