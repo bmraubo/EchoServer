@@ -25,6 +25,7 @@ public class Routes {
         router.addRoute("/doggo.png", new Doggo());
         router.addRoute("/kisses.gif", new Kisses());
         router.addRoute("/todo", new ToDo(taskList));
+        router.addRoute("/todo/.+", new RetrieveTask(taskList));
         return router;
     }
 }

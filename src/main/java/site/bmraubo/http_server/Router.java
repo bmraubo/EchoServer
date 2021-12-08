@@ -25,7 +25,7 @@ public class Router {
 
     private Endpoint findRoute(Request request) {
         for (String key : routes.keySet()) {
-            if (request.uri.equals(key)) {
+            if (request.uri.matches(key)) {
                 return routes.get(key);
             }
         }
