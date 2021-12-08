@@ -9,14 +9,14 @@ public class ToDo implements Endpoint {
 
     @Override
     public Response prepareResponse(Request request) {
-        if (validateTask(request) && validateValues(request)) {
+        if (validateContentType(request) && validateValues(request)) {
             ResponseBuilder responseBuilder = new ResponseBuilder();
             Response response = new Response(responseBuilder);
             responseBuilder.setStatusCode(201);
             responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
             responseBuilder.setResponseBody(request.body);
             return response;
-        } else if (validateTask(request) && !validateValues(request)) {
+        } else if (validateContentType(request) && !validateValues(request)) {
             ResponseBuilder responseBuilder = new ResponseBuilder();
             Response response = new Response(responseBuilder);
             responseBuilder.setStatusCode(400);
@@ -29,7 +29,7 @@ public class ToDo implements Endpoint {
         }
     }
 
-    private boolean validateTask(Request request) {
+    private boolean validateContentType(Request request) {
         return request.headers.get("Content-Type").contains("application");
     }
 
