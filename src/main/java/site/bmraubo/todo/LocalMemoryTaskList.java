@@ -3,7 +3,7 @@ package site.bmraubo.todo;
 import java.util.LinkedHashMap;
 
 public class LocalMemoryTaskList implements TaskList{
-    LinkedHashMap<Integer, Task> taskList;
+    public LinkedHashMap<Integer, Task> taskList;
 
     public LocalMemoryTaskList() {
         generateTaskList();
@@ -18,6 +18,11 @@ public class LocalMemoryTaskList implements TaskList{
     @Override
     public Task viewTaskByID(int id) {
         return taskList.get(id);
+    }
+
+    @Override
+    public void removeTask(int id) {
+        taskList.remove(id);
     }
 
     private void generateTaskList() {
