@@ -17,9 +17,11 @@ public class ToDo implements Endpoint {
             responseBuilder.setResponseBody(request.body);
             return response;
         } else {
-            // create 400 response
+            ResponseBuilder responseBuilder = new ResponseBuilder();
+            Response response = new Response(responseBuilder);
+            responseBuilder.setStatusCode(400);
+            return response;
         }
-        return null;
     }
 
     private boolean validateTask(Request request) {
