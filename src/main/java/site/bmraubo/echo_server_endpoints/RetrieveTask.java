@@ -23,7 +23,7 @@ public class RetrieveTask implements Endpoint {
                 updateTask(taskID, request.body);
                 ResponseBuilder responseBuilder = new ResponseBuilder();
                 Response response = new Response(responseBuilder);
-                responseBuilder.setStatusCode(201);
+                responseBuilder.setStatusCode(200);
                 responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
                 responseBuilder.setResponseBody(request.body);
                 return response;
@@ -43,9 +43,8 @@ public class RetrieveTask implements Endpoint {
     }
 
     private int getTaskID(String uri) {
-        return Integer.parseInt(uri.substring(5));
+        return Integer.parseInt(uri.substring(6));
     }
-
 
     private void updateTask(int taskID, String taskInfo) {
         TaskMaster taskMaster = new TaskMaster();
