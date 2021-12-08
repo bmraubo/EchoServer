@@ -15,4 +15,8 @@ public class TaskMaster {
     public Task viewTask(int id) {
         return taskList.viewTaskByID(id);
     }
+
+    public void removeTask(int id) {
+        taskList.removeTask(id);
+    }
 }

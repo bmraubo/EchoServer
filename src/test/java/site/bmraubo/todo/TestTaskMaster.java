@@ -37,5 +37,20 @@ public class TestTaskMaster {
 
         Assertions.assertEquals(todoRequest, taskMaster.viewTask(1).taskInfo);
     }
+
+    @Test
+    void removeTaskTest() {
+        String todoRequest = "{\"task\":\"a new task\"}";
+
+        LocalMemoryTaskList localMemoryTaskList = new LocalMemoryTaskList();
+        TaskMaster taskMaster = new TaskMaster();
+        taskMaster.openTaskList(localMemoryTaskList);
+
+        taskMaster.addTask(todoRequest);
+
+        taskMaster.removeTask(1);
+
+        Assertions.assertNull(taskMaster.viewTask(1));
+    }
 }
 
