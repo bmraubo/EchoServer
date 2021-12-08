@@ -36,4 +36,18 @@ public class TestTaskList {
 
         Assertions.assertEquals(todoRequest, localMemoryTaskList.viewTaskByID(1).taskInfo);
     }
+
+    @Test
+    void removeTaskTest() {
+        String todoRequest = "{\"task\":\"a new task\"}";
+
+        Task task = new Task(todoRequest);
+        LocalMemoryTaskList localMemoryTaskList = new LocalMemoryTaskList();
+
+        localMemoryTaskList.addTask(task);
+
+        localMemoryTaskList.removeTask(1);
+
+        Assertions.assertNull(localMemoryTaskList.viewTaskByID(1));
+    }
 }

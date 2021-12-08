@@ -20,6 +20,10 @@ public class LocalMemoryTaskList implements TaskList{
         return taskList.get(id);
     }
 
+    public void removeTask(int id) {
+        taskList.remove(id);
+    }
+
     private void generateTaskList() {
         taskList = new LinkedHashMap<>();
     }
