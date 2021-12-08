@@ -25,4 +25,16 @@ public class TestTask
 
         Assertions.assertEquals(233, task.id);
     }
+
+    @Test
+    void updateTaskTest() {
+        String initialRequest = "{\"task\":\"a new task\"}";
+        Task task = new Task(initialRequest);
+
+        String updatedTaskInfo = "{\"task\":\"an updated task\"}";
+
+        task.updateTask(updatedTaskInfo);
+
+        Assertions.assertEquals("{\"task\":\"an updated task\"}", task.taskInfo);
+    }
 }

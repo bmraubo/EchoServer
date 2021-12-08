@@ -11,6 +11,11 @@ public class Task {
         extractTaskInformation();
     }
 
+    public void updateTask(String taskInfo) {
+        this.taskInfo = taskInfo;
+        extractTaskInformation();
+    }
+
     public void setTaskID(int id) {
         this.id = id;
     }
