@@ -386,4 +386,8 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
     }
+
+    @Test
+    void name() {
+    }
 }
