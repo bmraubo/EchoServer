@@ -49,12 +49,7 @@ public class RetrieveTask implements Endpoint {
     private Response passTest(Request request) {
         // this implementation only exists because of peculiarity of test suite
         // Really it should return 404 - Resource Not Found
-        ResponseBuilder responseBuilder = new ResponseBuilder();
-        Response response = new Response(responseBuilder);
-        responseBuilder.setStatusCode(200);
-        responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
-        responseBuilder.setResponseBody(request.body);
-        return response;
+        return successfulPutResponse(request);
     }
 
     private Response successfulPutResponse(Request request) {
