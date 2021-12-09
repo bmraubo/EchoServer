@@ -388,6 +388,107 @@ public class TestFeatures {
     }
 
     @Test
-    void name() {
+    void createTaskTest() {
+        String testRequest = "POST /todo HTTP/1.1\r\n" +
+                "Content-Type: application/json\r\n" +
+                "Connection: close\r\n" +
+                "Host: 127.0.0.1:5000\r\n" +
+                "User-Agent: http.rb/4.3.0\r\n" +
+                "Content-Length: 21\r\n" +
+                "\r\n" +
+                "{\"task\":\"a new task\"}";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        Router router = Routes.assignRoutes();
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
+
+        String expectedResponseLine = "HTTP/1.1 201 Created\r\n";
+        byte[] expectedBody = "{\"task\":\"a new task\"}".getBytes(StandardCharsets.UTF_8);
+
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertArrayEquals(expectedBody, connectionSpy.body);
+    }
+
+    @Test
+    void updateTaskTest() {
+        String testRequest = "POST /todo HTTP/1.1\r\n" +
+                "Content-Type: application/json\r\n" +
+                "Connection: close\r\n" +
+                "Host: 127.0.0.1:5000\r\n" +
+                "User-Agent: http.rb/4.3.0\r\n" +
+                "Content-Length: 21\r\n" +
+                "\r\n" +
+                "{\"task\":\"a new task\"}";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        Router router = Routes.assignRoutes();
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
+
+        String updateRequest = "PUT /todo/1 HTTP/1.1\r\n" +
+                "Content-Type: application/json\r\n" +
+                "Connection: close\r\n" +
+                "Host: 127.0.0.1:5000\r\n" +
+                "User-Agent: http.rb/4.3.0\r\n" +
+                "Content-Length: 26\r\n" +
+                "\r\n" +
+                "{\"task\":\"an updated task\"}";
+
+        testInputStream = new ByteArrayInputStream(updateRequest.getBytes());
+        input = new BufferedReader(new InputStreamReader(testInputStream));
+        output = new PrintWriter(new StringWriter());
+
+        connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
+
+        String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
+        byte[] expectedResponseBody = "{\"task\":\"an updated task\"}".getBytes(StandardCharsets.UTF_8);
+
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+    }
+
+    @Test
+    void deleteTaskTest() {
+        String testRequest = "POST /todo HTTP/1.1\r\n" +
+                "Content-Type: application/json\r\n" +
+                "Connection: close\r\n" +
+                "Host: 127.0.0.1:5000\r\n" +
+                "User-Agent: http.rb/4.3.0\r\n" +
+                "Content-Length: 21\r\n" +
+                "\r\n" +
+                "{\"task\":\"a new task\"}";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        Router router = Routes.assignRoutes();
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
+
+        String deleteRequest = "DELETE /todo/1 HTTP/1.1\r\n" +
+                "Connection: close\r\n" +
+                "Host: 127.0.0.1:5000\r\n" +
+                "User-Agent: http.rb/4.3.0\r\n" +
+                "\r\n";
+
+        testInputStream = new ByteArrayInputStream(deleteRequest.getBytes());
+        input = new BufferedReader(new InputStreamReader(testInputStream));
+        output = new PrintWriter(new StringWriter());
+
+        connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
+
+        String expectedResponseLine = "HTTP/1.1 204 No Content\r\n";
+
+        Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
     }
 }
