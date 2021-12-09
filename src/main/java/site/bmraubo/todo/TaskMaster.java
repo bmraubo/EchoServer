@@ -16,6 +16,11 @@ public class TaskMaster {
         return taskList.viewTaskByID(id);
     }
 
+    public void updateTask(int taskID, String taskInfo) {
+        Task task = viewTask(taskID);
+        task.updateTask(taskInfo);
+    }
+
     public void removeTask(int id) {
         taskList.removeTask(id);
     }

@@ -18,23 +18,28 @@ public class ToDo implements Endpoint {
     public Response prepareResponse(Request request) {
         if (validateContentType(request) && validateValues(request)) {
             addTask(request.body);
-            ResponseBuilder responseBuilder = new ResponseBuilder();
-            Response response = new Response(responseBuilder);
-            responseBuilder.setStatusCode(201);
-            responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
-            responseBuilder.setResponseBody(request.body);
-            return response;
+            return successfulResponse(request);
         } else if (validateContentType(request) && !validateValues(request)) {
-            ResponseBuilder responseBuilder = new ResponseBuilder();
-            Response response = new Response(responseBuilder);
-            responseBuilder.setStatusCode(400);
-            return response;
+            return unsuccessfulResponse(400);
         } else {
-            ResponseBuilder responseBuilder = new ResponseBuilder();
-            Response response = new Response(responseBuilder);
-            responseBuilder.setStatusCode(415);
-            return response;
+            return unsuccessfulResponse(415);
         }
+    }
+
+    private Response successfulResponse(Request request) {
+        ResponseBuilder responseBuilder = new ResponseBuilder();
+        Response response = new Response(responseBuilder);
+        responseBuilder.setStatusCode(201);
+        responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
+        responseBuilder.setResponseBody(request.body);
+        return response;
+    }
+
+    private Response unsuccessfulResponse(int statusCode) {
+        ResponseBuilder responseBuilder = new ResponseBuilder();
+        Response response = new Response(responseBuilder);
+        responseBuilder.setStatusCode(statusCode);
+        return response;
     }
 
     private boolean validateContentType(Request request) {
