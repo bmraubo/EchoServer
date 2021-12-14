@@ -3,6 +3,7 @@ package site.bmraubo.todo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
 public class PostgresTaskList implements TaskList{
@@ -29,7 +30,6 @@ public class PostgresTaskList implements TaskList{
     @Override
     public void addTask(Task task) {
         try {
-            String sqlQuery = "INSERT INTO Tasks(taskinfo) VALUES('" + task.taskInfo + "')";
             PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo) VALUES(?)");
             addTaskStatement.setString(1, task.taskInfo);
             addTaskStatement.executeUpdate();
@@ -41,12 +41,46 @@ public class PostgresTaskList implements TaskList{
 
     @Override
     public Task viewTaskByID(int id) {
+        try {
+            PreparedStatement addTaskStatement = conn.prepareStatement("SELECT * FROM Tasks WHERE taskid=?");
+            addTaskStatement.setInt(1, id);
+            ResultSet resultSet = addTaskStatement.executeQuery();
+            resultSet.next();
+            Task task = new Task(resultSet.getString("taskinfo"));
+            task.setTaskID(id);
+            System.out.println(resultSet.getString("taskinfo"));
+            return task;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Task updateTask(int id, String taskInfo) {
+        try {
+            PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=? WHERE taskid=?");
+            addTaskStatement.setString(1, taskInfo);
+            addTaskStatement.setInt(2, id);
+            addTaskStatement.executeUpdate();
+            Task task = new Task(taskInfo);
+            task.setTaskID(id);
+            System.out.println(taskInfo);
+            return task;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public void removeTask(int id) {
-
+        try {
+            PreparedStatement addTaskStatement = conn.prepareStatement("DELETE FROM Tasks WHERE taskid=?");
+            addTaskStatement.setInt(1, id);
+            addTaskStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
