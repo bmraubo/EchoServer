@@ -19,7 +19,7 @@ public class PostgresTaskList implements TaskList{
             String url = "jdbc:postgresql://localhost:5432/tasklist";
             Properties properties = new Properties();
             properties.setProperty("user", "postgres");
-            properties.setProperty("password", "WARna1444.");
+            properties.setProperty("password", "test1111");
             conn = DriverManager.getConnection(url, properties);
             System.out.println("Database Connection Successful");
         } catch (Exception e) {
