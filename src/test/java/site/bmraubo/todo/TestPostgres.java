@@ -24,6 +24,17 @@ public class TestPostgres {
         tearDownDatabase(postgresSpy);
     }
 
+    @Test
+    void viewTaskTest() {
+        PostgresSpy postgresSpy = new PostgresSpy();
+        seedDatabase(postgresSpy);
+        Task testTask = postgresSpy.viewTaskByID(1);
+
+        Assertions.assertTrue(postgresSpy.viewedTask);
+        Assertions.assertEquals("{\"task\":\"seed task info\"}", testTask.taskInfo);
+        tearDownDatabase(postgresSpy);
+    }
+
     private void seedDatabase(PostgresSpy postgresSpy) {
         postgresSpy.seedDatabase();
     }

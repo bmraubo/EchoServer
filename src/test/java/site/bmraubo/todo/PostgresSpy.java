@@ -3,6 +3,7 @@ package site.bmraubo.todo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Properties;
 
 public class PostgresSpy implements TaskList{
@@ -43,15 +44,24 @@ public class PostgresSpy implements TaskList{
             addedTask = false;
             e.printStackTrace();
         }
-
     }
 
     @Override
     public Task viewTaskByID(int id) {
-        Task testTask = new Task("{\"task\":\"test task\"}");
-        testTask.setTaskID(id);
-        viewedTask = true;
-        return testTask;
+        try {
+            PreparedStatement addTaskStatement = conn.prepareStatement("SELECT * FROM Tasks WHERE taskid=?");
+            addTaskStatement.setInt(1, id);
+            ResultSet resultSet = addTaskStatement.executeQuery();
+            resultSet.next();
+            Task task = new Task(resultSet.getString("taskinfo"));
+            task.setTaskID(resultSet.getInt("taskid"));
+            viewedTask = true;
+            return task;
+        } catch (Exception e) {
+            viewedTask = false;
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
