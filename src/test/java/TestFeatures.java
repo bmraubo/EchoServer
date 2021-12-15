@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import site.bmraubo.http_server.ConnectionSpy;
 import site.bmraubo.http_server.Router;
+import site.bmraubo.todo.PostgresSpy;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -18,7 +19,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -27,6 +30,7 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -37,7 +41,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -48,6 +54,7 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeaders, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -58,7 +65,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -69,6 +78,7 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeaders, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -79,7 +89,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -88,6 +100,7 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -98,7 +111,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -107,6 +122,7 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -117,7 +133,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -126,6 +144,7 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -136,7 +155,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -145,6 +166,7 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -155,7 +177,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -164,6 +188,7 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -174,7 +199,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -183,6 +210,7 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -193,7 +221,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -202,6 +232,7 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -212,7 +243,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -225,6 +258,7 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -235,7 +269,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -248,6 +284,7 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -258,7 +295,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -273,6 +312,7 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -283,7 +323,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -296,6 +338,7 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -306,7 +349,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -319,6 +364,7 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -329,7 +375,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -341,6 +389,7 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -351,7 +400,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -363,6 +414,7 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -373,7 +425,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -385,6 +439,7 @@ public class TestFeatures {
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertEquals(expectedResponseHeader, connectionSpy.headers);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -402,7 +457,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -411,6 +468,7 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertArrayEquals(expectedBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -428,7 +486,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -453,6 +513,7 @@ public class TestFeatures {
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
+        taskList.tearDownDatabase();
     }
 
     @Test
@@ -470,7 +531,9 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = RoutesFake.assignRoutes();
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -490,5 +553,6 @@ public class TestFeatures {
         String expectedResponseLine = "HTTP/1.1 204 No Content\r\n";
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
+        taskList.tearDownDatabase();
     }
 }

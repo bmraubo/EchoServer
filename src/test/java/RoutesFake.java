@@ -1,11 +1,9 @@
 import site.bmraubo.echo_server_endpoints.*;
 import site.bmraubo.http_server.Router;
-import site.bmraubo.todo.PostgresSpy;
 import site.bmraubo.todo.TaskList;
 
 public class RoutesFake {
-    static Router assignRoutes() {
-        TaskList taskList = new PostgresSpy();
+    static Router assignRoutes(TaskList taskList) {
 
         Router router = new Router();
         router.addRoute("/simple_get", new SimpleGet());
