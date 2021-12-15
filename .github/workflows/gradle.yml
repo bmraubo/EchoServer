@@ -34,7 +34,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Set up PostgreSQL
-      run: node .github/workflows/client.js
+      run: node client.js
       env:
         POSTGRES_HOST: postgres
         POSTGRES_PORT: 5432
