@@ -45,11 +45,13 @@ public class PostgresTaskList implements TaskList{
             PreparedStatement addTaskStatement = conn.prepareStatement("SELECT * FROM Tasks WHERE taskid=?");
             addTaskStatement.setInt(1, id);
             ResultSet resultSet = addTaskStatement.executeQuery();
-            resultSet.next();
-            Task task = new Task(resultSet.getString("taskinfo"));
-            task.setTaskID(resultSet.getInt("taskid"));
-            System.out.print("Task Updated");
-            return task;
+            if (resultSet.next()) {
+                Task task = new Task(resultSet.getString("taskinfo"));
+                task.setTaskID(resultSet.getInt("taskid"));
+                return task;
+            } else {
+                return null;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

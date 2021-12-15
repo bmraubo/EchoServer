@@ -51,11 +51,14 @@ public class PostgresSpy implements TaskList{
             PreparedStatement addTaskStatement = conn.prepareStatement("SELECT * FROM Tasks WHERE taskid=?");
             addTaskStatement.setInt(1, id);
             ResultSet resultSet = addTaskStatement.executeQuery();
-            resultSet.next();
-            Task task = new Task(resultSet.getString("taskinfo"));
-            task.setTaskID(resultSet.getInt("taskid"));
-            viewedTask = true;
-            return task;
+            if (resultSet.next()) {
+                Task task = new Task(resultSet.getString("taskinfo"));
+                task.setTaskID(resultSet.getInt("taskid"));
+                viewedTask = true;
+                return task;
+            } else {
+                return null;
+            }
         } catch (Exception e) {
             viewedTask = false;
             e.printStackTrace();
