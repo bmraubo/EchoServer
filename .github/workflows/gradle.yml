@@ -24,7 +24,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     env:
-      POSTGRES_HOST: postgres
+      POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432
       POSTGRES_PASSWORD: test1111
       POSTGRES_USER: postgres
