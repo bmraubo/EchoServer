@@ -56,7 +56,7 @@ public class PostgresTaskList implements TaskList{
         return null;
     }
 
-    public Task updateTask(int id, String taskInfo) {
+    public void updateTask(int id, String taskInfo) {
         try {
             PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=? WHERE taskid=?");
             addTaskStatement.setString(1, taskInfo);
@@ -65,11 +65,9 @@ public class PostgresTaskList implements TaskList{
             Task task = new Task(taskInfo);
             task.setTaskID(id);
             System.out.println(taskInfo);
-            return task;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     @Override
