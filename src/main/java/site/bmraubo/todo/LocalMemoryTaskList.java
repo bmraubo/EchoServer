@@ -21,6 +21,12 @@ public class LocalMemoryTaskList implements TaskList{
     }
 
     @Override
+    public void updateTask(int id, String taskInfo) {
+        Task task = viewTaskByID(id);
+        task.updateTask(taskInfo);
+    }
+
+    @Override
     public void removeTask(int id) {
         taskList.remove(id);
     }

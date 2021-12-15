@@ -12,8 +12,7 @@ public class TestTask
 
         Task task = new Task(todoRequest);
 
-        Assertions.assertEquals("task", task.title);
-        Assertions.assertEquals("a new task", task.body);
+        Assertions.assertEquals(todoRequest, task.taskInfo);
     }
 
     @Test

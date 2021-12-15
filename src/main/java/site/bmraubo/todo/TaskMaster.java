@@ -17,8 +17,7 @@ public class TaskMaster {
     }
 
     public void updateTask(int taskID, String taskInfo) {
-        Task task = viewTask(taskID);
-        task.updateTask(taskInfo);
+        taskList.updateTask(taskID, taskInfo);
     }
 
     public void removeTask(int id) {
