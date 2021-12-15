@@ -30,7 +30,6 @@ public class PostgresSpy implements TaskList{
             connectionEstablished = false;
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -66,7 +65,16 @@ public class PostgresSpy implements TaskList{
 
     @Override
     public void updateTask(int id, String taskInfo) {
-        updatedTask = true;
+        try {
+            PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=? WHERE taskid=?");
+            addTaskStatement.setString(1, taskInfo);
+            addTaskStatement.setInt(2, id);
+            addTaskStatement.executeUpdate();
+            updatedTask = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            updatedTask = false;
+        }
     }
 
     @Override
