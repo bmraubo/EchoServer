@@ -18,7 +18,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -37,7 +37,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -58,7 +58,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -79,7 +79,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -98,7 +98,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -117,7 +117,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -136,7 +136,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -155,7 +155,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -174,7 +174,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -193,7 +193,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -212,7 +212,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -235,7 +235,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -258,7 +258,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -283,7 +283,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -306,7 +306,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -329,7 +329,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -351,7 +351,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -373,7 +373,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -402,7 +402,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -428,7 +428,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
@@ -470,7 +470,7 @@ public class TestFeatures {
         BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
         PrintWriter output = new PrintWriter(new StringWriter());
 
-        Router router = Routes.assignRoutes();
+        Router router = RoutesFake.assignRoutes();
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
