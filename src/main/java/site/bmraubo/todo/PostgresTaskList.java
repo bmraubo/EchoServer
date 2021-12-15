@@ -48,8 +48,7 @@ public class PostgresTaskList implements TaskList{
             resultSet.next();
             Task task = new Task(resultSet.getString("taskinfo"));
             task.setTaskID(resultSet.getInt("taskid"));
-            System.out.println("Task Title: " + task.title);
-            System.out.println("Task Body: " + task.body);
+            System.out.print("Task Updated");
             return task;
         } catch (Exception e) {
             e.printStackTrace();

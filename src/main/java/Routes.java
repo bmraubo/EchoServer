@@ -1,12 +1,12 @@
 import site.bmraubo.echo_server_endpoints.*;
 import site.bmraubo.http_server.Router;
-import site.bmraubo.todo.LocalMemoryTaskList;
+import site.bmraubo.todo.PostgresTaskList;
 import site.bmraubo.todo.TaskList;
 
 public class Routes {
 
     static Router assignRoutes() {
-        TaskList taskList = new LocalMemoryTaskList();
+        TaskList taskList = new PostgresTaskList();
 
         Router router = new Router();
         router.addRoute("/simple_get", new SimpleGet());
