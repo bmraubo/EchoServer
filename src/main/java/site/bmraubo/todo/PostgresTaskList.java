@@ -47,8 +47,9 @@ public class PostgresTaskList implements TaskList{
             ResultSet resultSet = addTaskStatement.executeQuery();
             resultSet.next();
             Task task = new Task(resultSet.getString("taskinfo"));
-            task.setTaskID(id);
-            System.out.println(resultSet.getString("taskinfo"));
+            task.setTaskID(resultSet.getInt("taskid"));
+            System.out.println("Task Title: " + task.title);
+            System.out.println("Task Body: " + task.body);
             return task;
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +65,7 @@ public class PostgresTaskList implements TaskList{
             addTaskStatement.executeUpdate();
             Task task = new Task(taskInfo);
             task.setTaskID(id);
-            System.out.println(taskInfo);
+            System.out.println("Task Updated");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,6 +77,7 @@ public class PostgresTaskList implements TaskList{
             PreparedStatement addTaskStatement = conn.prepareStatement("DELETE FROM Tasks WHERE taskid=?");
             addTaskStatement.setInt(1, id);
             addTaskStatement.executeUpdate();
+            System.out.println("Task "+id+" Removed");
         } catch (Exception e) {
             e.printStackTrace();
         }
