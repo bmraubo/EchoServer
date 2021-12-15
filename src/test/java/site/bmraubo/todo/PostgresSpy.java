@@ -72,14 +72,23 @@ public class PostgresSpy implements TaskList{
             addTaskStatement.executeUpdate();
             updatedTask = true;
         } catch (Exception e) {
-            e.printStackTrace();
             updatedTask = false;
+            e.printStackTrace();
         }
     }
 
     @Override
     public void removeTask(int id) {
-        removedTask = true;
+        try {
+            PreparedStatement addTaskStatement = conn.prepareStatement("DELETE FROM Tasks WHERE taskid=?");
+            addTaskStatement.setInt(1, id);
+            addTaskStatement.executeUpdate();
+            removedTask = true;
+        } catch (Exception e) {
+            removedTask = false;
+            e.printStackTrace();
+        }
+
     }
 
     public void seedDatabase() {

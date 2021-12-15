@@ -47,6 +47,17 @@ public class TestPostgres {
         tearDownDatabase(postgresSpy);
     }
 
+    @Test
+    void removeTaskTest() {
+        PostgresSpy postgresSpy = new PostgresSpy();
+        seedDatabase(postgresSpy);
+
+        postgresSpy.removeTask(1);
+
+        Assertions.assertTrue(postgresSpy.removedTask);
+        tearDownDatabase(postgresSpy);
+    }
+
     private void seedDatabase(PostgresSpy postgresSpy) {
         postgresSpy.seedDatabase();
     }
