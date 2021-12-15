@@ -17,7 +17,7 @@ jobs:
         image: postgres
         env:
           POSTGRES_PASSWORD: test1111
-          POSTGRES_DB: tasklist
+          POSTGRES_DB: testdb
         ports:
           - 5432:5432
         options: >-

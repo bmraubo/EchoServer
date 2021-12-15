@@ -7,8 +7,28 @@ public class TestPostgres {
 
     @Test
     void DatabaseConnectionTest() {
-        PostgresTaskList postgresTaskList = new PostgresTaskList();
+        PostgresSpy postgresSpy = new PostgresSpy();
 
-        Assertions.assertNotNull(postgresTaskList.conn);
+        Assertions.assertTrue(postgresSpy.connectionEstablished);
+    }
+
+    @Test
+    void addTaskToDatabaseTest() {
+        Task testTask = new Task("{\"task\":\"test task info\"}");
+
+        PostgresSpy postgresSpy = new PostgresSpy();
+        seedDatabase(postgresSpy);
+        postgresSpy.addTask(testTask);
+
+        Assertions.assertTrue(postgresSpy.addedTask);
+        tearDownDatabase(postgresSpy);
+    }
+
+    private void seedDatabase(PostgresSpy postgresSpy) {
+        postgresSpy.seedDatabase();
+    }
+
+    private void tearDownDatabase(PostgresSpy postgresSpy) {
+        postgresSpy.tearDownDatabase();
     }
 }
