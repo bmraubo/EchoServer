@@ -8,6 +8,7 @@ import java.util.Properties;
 
 public class PostgresTaskList implements TaskList{
     Connection conn;
+    boolean success;
 
     public PostgresTaskList() {
         connectToDatabase();
@@ -34,7 +35,9 @@ public class PostgresTaskList implements TaskList{
             addTaskStatement.setString(1, task.taskInfo);
             addTaskStatement.executeUpdate();
             System.out.println("Task Added");
+            success = true;
         } catch (Exception e) {
+            success = false;
             e.printStackTrace();
         }
     }
@@ -63,7 +66,9 @@ public class PostgresTaskList implements TaskList{
             addTaskStatement.setInt(2, id);
             addTaskStatement.executeUpdate();
             System.out.println("Task Updated");
+            success = true;
         } catch (Exception e) {
+            success = false;
             e.printStackTrace();
         }
     }
@@ -75,14 +80,16 @@ public class PostgresTaskList implements TaskList{
             addTaskStatement.setInt(1, id);
             addTaskStatement.executeUpdate();
             System.out.println("Task "+id+" Removed");
+            success = true;
         } catch (Exception e) {
+            success = false;
             e.printStackTrace();
         }
     }
 
     @Override
     public boolean actionSuccessful() {
-        return false;
+        return success;
     }
 
 
