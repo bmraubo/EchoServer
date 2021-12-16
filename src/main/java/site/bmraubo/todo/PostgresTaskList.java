@@ -64,8 +64,6 @@ public class PostgresTaskList implements TaskList{
             addTaskStatement.setString(1, taskInfo);
             addTaskStatement.setInt(2, id);
             addTaskStatement.executeUpdate();
-            Task task = new Task(taskInfo);
-            task.setTaskID(id);
             System.out.println("Task Updated");
         } catch (Exception e) {
             e.printStackTrace();
