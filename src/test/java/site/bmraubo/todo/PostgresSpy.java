@@ -8,6 +8,7 @@ import java.util.Properties;
 
 public class PostgresSpy implements TaskList{
     Connection conn;
+    boolean success;
     boolean connectionEstablished;
     boolean addedTask;
     boolean viewedTask;
@@ -38,8 +39,10 @@ public class PostgresSpy implements TaskList{
             PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo) VALUES(?)");
             addTaskStatement.setString(1, task.taskInfo);
             addTaskStatement.executeUpdate();
+            success = true;
             addedTask = true;
         } catch (Exception e) {
+            success = false;
             addedTask = false;
             e.printStackTrace();
         }
@@ -73,8 +76,10 @@ public class PostgresSpy implements TaskList{
             addTaskStatement.setString(1, taskInfo);
             addTaskStatement.setInt(2, id);
             addTaskStatement.executeUpdate();
+            success = true;
             updatedTask = true;
         } catch (Exception e) {
+            success = false;
             updatedTask = false;
             e.printStackTrace();
         }
@@ -86,12 +91,19 @@ public class PostgresSpy implements TaskList{
             PreparedStatement addTaskStatement = conn.prepareStatement("DELETE FROM Tasks WHERE taskid=?");
             addTaskStatement.setInt(1, id);
             addTaskStatement.executeUpdate();
+            success = true;
             removedTask = true;
         } catch (Exception e) {
+            success = false;
             removedTask = false;
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public boolean actionSuccessful() {
+        return success;
     }
 
     public void seedDatabase() {
