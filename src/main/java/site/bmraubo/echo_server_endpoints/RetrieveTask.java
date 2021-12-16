@@ -27,8 +27,11 @@ public class RetrieveTask implements Endpoint {
                 // workaround for test suite problem
                 return passTest(request);
             }
-            updateTask(taskID, request.body);
-            return successfulPutResponse(request);
+            if (updateTask(taskID, request.body)) {
+                return successfulPutResponse(request);
+            } else {
+                return new ServerError("Database Error").prepareResponse();
+            }
         } else if (validateContentType(request) && !validateValues(request)) {
             return unsuccessfulResponse(400);
         } else {
@@ -38,8 +41,11 @@ public class RetrieveTask implements Endpoint {
 
     private Response processDeleteRequest(int taskID) {
         if (taskExists(taskID)) {
-            removeTask(taskID);
-            return successfulDeleteResponse();
+            if (removeTask(taskID)) {
+                return successfulDeleteResponse();
+            } else {
+                return new ServerError("Database Error").prepareResponse();
+            }
         } else {
             return unsuccessfulResponse(204);
         }
@@ -79,16 +85,18 @@ public class RetrieveTask implements Endpoint {
         return Integer.parseInt(uri.substring(6));
     }
 
-    private void updateTask(int taskID, String taskInfo) {
+    private boolean updateTask(int taskID, String taskInfo) {
         TaskMaster taskMaster = new TaskMaster();
         taskMaster.openTaskList(taskList);
         taskMaster.updateTask(taskID, taskInfo);
+        return taskMaster.checkActionOutcome();
     }
 
-    private void removeTask(int taskID) {
+    private boolean removeTask(int taskID) {
         TaskMaster taskMaster = new TaskMaster();
         taskMaster.openTaskList(taskList);
         taskMaster.removeTask(taskID);
+        return taskMaster.checkActionOutcome();
     }
 
     private boolean validateContentType(Request request) {
