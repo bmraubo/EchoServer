@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 public class LocalMemoryTaskList implements TaskList{
     public LinkedHashMap<Integer, Task> taskList;
+    boolean success;
 
     public LocalMemoryTaskList() {
         generateTaskList();
@@ -13,6 +14,7 @@ public class LocalMemoryTaskList implements TaskList{
     public void addTask(Task task) {
         task.setTaskID(calculateNextAvailableID());
         taskList.put(task.id, task);
+        success = true;
     }
 
     @Override
@@ -24,16 +26,18 @@ public class LocalMemoryTaskList implements TaskList{
     public void updateTask(int id, String taskInfo) {
         Task task = viewTaskByID(id);
         task.updateTask(taskInfo);
+        success = true;
     }
 
     @Override
     public void removeTask(int id) {
         taskList.remove(id);
+        success = true;
     }
 
     @Override
     public boolean actionSuccessful() {
-        return false;
+        return success;
     }
 
     private void generateTaskList() {
