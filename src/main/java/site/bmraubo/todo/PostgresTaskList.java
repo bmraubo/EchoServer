@@ -49,8 +49,6 @@ public class PostgresTaskList implements TaskList{
                 Task task = new Task(resultSet.getString("taskinfo"));
                 task.setTaskID(resultSet.getInt("taskid"));
                 return task;
-            } else {
-                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,8 +80,10 @@ public class PostgresTaskList implements TaskList{
         }
     }
 
-
-
+    @Override
+    public boolean actionSuccessful() {
+        return false;
+    }
 
 
 }

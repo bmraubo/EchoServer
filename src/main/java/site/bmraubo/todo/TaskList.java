@@ -6,4 +6,5 @@ public interface TaskList {
     Task viewTaskByID(int id);
     void updateTask(int id, String taskInfo);
     void removeTask(int id);
+    boolean actionSuccessful();
 }

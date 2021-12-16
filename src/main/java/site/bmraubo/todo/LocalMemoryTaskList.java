@@ -31,6 +31,11 @@ public class LocalMemoryTaskList implements TaskList{
         taskList.remove(id);
     }
 
+    @Override
+    public boolean actionSuccessful() {
+        return false;
+    }
+
     private void generateTaskList() {
         taskList = new LinkedHashMap<>();
     }
