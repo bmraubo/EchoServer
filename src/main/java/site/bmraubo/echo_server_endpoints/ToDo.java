@@ -1,9 +1,6 @@
 package site.bmraubo.echo_server_endpoints;
 
-import site.bmraubo.http_server.Endpoint;
-import site.bmraubo.http_server.Request;
-import site.bmraubo.http_server.Response;
-import site.bmraubo.http_server.ResponseBuilder;
+import site.bmraubo.http_server.*;
 import site.bmraubo.todo.TaskList;
 import site.bmraubo.todo.TaskMaster;
 
@@ -17,8 +14,11 @@ public class ToDo implements Endpoint {
     @Override
     public Response prepareResponse(Request request) {
         if (validateContentType(request) && validateValues(request)) {
-            addTask(request.body);
-            return successfulResponse(request);
+            if (addTask(request.body)) {
+                return successfulResponse(request);
+            } else {
+                return new ServerError("Database Error").prepareResponse();
+            }
         } else if (validateContentType(request) && !validateValues(request)) {
             return unsuccessfulResponse(400);
         } else {
@@ -50,10 +50,11 @@ public class ToDo implements Endpoint {
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
     }
 
-    private void addTask(String taskInfo) {
+    private boolean addTask(String taskInfo) {
         TaskMaster taskMaster = new TaskMaster();
         taskMaster.openTaskList(taskList);
         taskMaster.addTask(taskInfo);
+        return taskMaster.checkActionOutcome();
     }
 
 
