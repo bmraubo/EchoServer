@@ -23,4 +23,8 @@ public class TaskMaster {
     public void removeTask(int id) {
         taskList.removeTask(id);
     }
+
+    public boolean checkActionOutcome() {
+        return taskList.actionSuccessful();
+    }
 }
