@@ -605,4 +605,24 @@ public class TestFeatures {
         Assertions.assertEquals("HTTP/1.1 200 OK\r\n", connectionSpy.responseLine);
         Assertions.assertArrayEquals(expectedBody, connectionSpy.body);
     }
+
+    @Test
+    void retrieveAllTasksTest() {
+        String testRequest = "GET /todos HTTP/1.1\r\n";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
+
+        byte[] expectedBody = "{\"1\": \"{\"task\":\"seed task info\"}\"}".getBytes(StandardCharsets.UTF_8);
+
+        Assertions.assertEquals("HTTP/1.1 200 OK\r\n", connectionSpy.responseLine);
+        Assertions.assertArrayEquals(expectedBody, connectionSpy.body);
+    }
 }
