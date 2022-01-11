@@ -36,10 +36,10 @@ public class RetrieveTask implements Endpoint {
         if (validateContentType(request) && validateValues(request)) {
             if (!taskExists(taskID)) {
                 // workaround for test suite problem
-                return passTest(request);
+                return passTest(request, taskID);
             }
             if (updateTask(taskID, request.body)) {
-                return successfulPutResponse(request);
+                return successfulPutResponse(request, taskID);
             } else {
                 return new ServerError("Database Error").prepareResponse();
             }
@@ -71,18 +71,19 @@ public class RetrieveTask implements Endpoint {
         return response;
     }
 
-    private Response passTest(Request request) {
+    private Response passTest(Request request, int taskID) {
         // this implementation only exists because of peculiarity of test suite
         // Really it should return 404 - Resource Not Found
-        return successfulPutResponse(request);
+        return successfulPutResponse(request, taskID);
     }
 
-    private Response successfulPutResponse(Request request) {
+    private Response successfulPutResponse(Request request, int taskID) {
+        Task task = taskList.viewTaskByID(taskID);
         ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
-        responseBuilder.setResponseBody(request.body);
+        responseBuilder.setResponseBody(task.taskJSON.toString());
         return response;
     }
 

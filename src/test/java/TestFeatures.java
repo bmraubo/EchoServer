@@ -474,25 +474,6 @@ public class TestFeatures {
 
     @Test
     void updateTaskTest() {
-        String testRequest = "POST /todo HTTP/1.1\r\n" +
-                "Content-Type: application/json\r\n" +
-                "Connection: close\r\n" +
-                "Host: 127.0.0.1:5000\r\n" +
-                "User-Agent: http.rb/4.3.0\r\n" +
-                "Content-Length: 21\r\n" +
-                "\r\n" +
-                "{\"task\":\"a new task\"}";
-
-        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
-        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
-        PrintWriter output = new PrintWriter(new StringWriter());
-
-        PostgresSpy taskList = new PostgresSpy();
-        taskList.seedDatabase();
-        Router router = RoutesFake.assignRoutes(taskList);
-        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
-        connectionSpy.processRequest();
-
         String updateRequest = "PUT /todo/1 HTTP/1.1\r\n" +
                 "Content-Type: application/json\r\n" +
                 "Connection: close\r\n" +
@@ -500,17 +481,25 @@ public class TestFeatures {
                 "User-Agent: http.rb/4.3.0\r\n" +
                 "Content-Length: 26\r\n" +
                 "\r\n" +
-                "{\"task\":\"an updated task\"}";
+                "{\"task\":\"an updated task\",\"done\":\"false\"}";
 
-        testInputStream = new ByteArrayInputStream(updateRequest.getBytes());
-        input = new BufferedReader(new InputStreamReader(testInputStream));
-        output = new PrintWriter(new StringWriter());
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
+        InputStream testInputStream = new ByteArrayInputStream(updateRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
 
-        connectionSpy = new ConnectionSpy(input, output, router);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
-        byte[] expectedResponseBody = "{\"task\":\"an updated task\"}".getBytes(StandardCharsets.UTF_8);
+        JSONObject expectedResponseJSON = new JSONObject();
+        //expectedResponseJSON.put("id", 1);
+        expectedResponseJSON.put("task", "an updated task");
+        expectedResponseJSON.put("done", "false");
+        System.out.println(expectedResponseJSON);
+        byte[] expectedResponseBody = expectedResponseJSON.toString().getBytes(StandardCharsets.UTF_8);
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertArrayEquals(expectedResponseBody, connectionSpy.body);
@@ -582,7 +571,7 @@ public class TestFeatures {
 
         Task retrievedTask = restartedTaskList.viewTaskByID(2);
 
-        Assertions.assertEquals("{\"task\":\"a persistent task\"}", retrievedTask.taskInfo);
+        Assertions.assertEquals("a persistent task", retrievedTask.taskJSON.get("task"));
         restartedTaskList.tearDownDatabase();
     }
 
