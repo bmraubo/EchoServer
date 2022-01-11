@@ -1,6 +1,7 @@
 package site.bmraubo.echo_server_endpoints;
 
 import site.bmraubo.http_server.*;
+import site.bmraubo.todo.Task;
 import site.bmraubo.todo.TaskList;
 import site.bmraubo.todo.TaskMaster;
 
@@ -15,10 +16,20 @@ public class RetrieveTask implements Endpoint {
     public Response prepareResponse(Request request) {
         int taskID = getTaskID(request.uri);
         return switch (request.method) {
+            case ("GET") -> processGetRequest(request, taskID);
             case ("PUT") -> processPutRequest(request, taskID);
             case ("DELETE") -> processDeleteRequest(taskID);
             default -> new ResourceNotFound().prepareResponse();
         };
+    }
+
+    private Response processGetRequest(Request request, int taskID) {
+        if (taskExists(taskID)) {
+            Task task = getTaskInfo(taskID);
+            return successfulGetRequest(request, task);
+        } else {
+            return new ResourceNotFound().prepareResponse();
+        }
     }
 
     private Response processPutRequest(Request request, int taskID) {
@@ -49,6 +60,15 @@ public class RetrieveTask implements Endpoint {
         } else {
             return unsuccessfulResponse(204);
         }
+    }
+
+    private Response successfulGetRequest(Request request, Task task) {
+        ResponseBuilder responseBuilder = new ResponseBuilder();
+        Response response = new Response(responseBuilder);
+        responseBuilder.setStatusCode(200);
+        responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
+        responseBuilder.setResponseBody(task.taskInfo);
+        return response;
     }
 
     private Response passTest(Request request) {
@@ -83,6 +103,12 @@ public class RetrieveTask implements Endpoint {
 
     private int getTaskID(String uri) {
         return Integer.parseInt(uri.substring(6));
+    }
+
+    private Task getTaskInfo(int taskID) {
+        TaskMaster taskMaster= new TaskMaster();
+        taskMaster.openTaskList(taskList);
+        return taskMaster.viewTask(taskID);
     }
 
     private boolean updateTask(int taskID, String taskInfo) {
