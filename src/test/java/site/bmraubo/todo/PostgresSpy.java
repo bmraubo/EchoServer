@@ -98,10 +98,12 @@ public class PostgresSpy implements TaskList{
 
     @Override
     public void updateTask(int id, String taskInfo) {
+        Task task = new Task(taskInfo);
         try {
-            PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=? WHERE taskid=?");
-            addTaskStatement.setString(1, taskInfo);
-            addTaskStatement.setInt(2, id);
+            PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=?, done=? WHERE taskid=?");
+            addTaskStatement.setString(1, task.taskJSON.getString("task"));
+            addTaskStatement.setBoolean(2, task.taskJSON.getBoolean("done"));
+            addTaskStatement.setInt(3, id);
             addTaskStatement.executeUpdate();
             success = true;
             updatedTask = true;

@@ -45,10 +45,11 @@ public class TestPostgres {
         PostgresSpy postgresSpy = new PostgresSpy();
         seedDatabase(postgresSpy);
 
-        postgresSpy.updateTask(1, "{\"task\":\"updated task info\"}");
+        postgresSpy.updateTask(1, "{\"task\":\"updated task info\", \"done\": \"false\"}");
 
         Assertions.assertTrue(postgresSpy.updatedTask);
-        Assertions.assertEquals("{\"task\":\"updated task info\"}", postgresSpy.viewTaskByID(1).taskInfo);
+        Assertions.assertEquals("updated task info", postgresSpy.viewTaskByID(1).taskJSON.getString("task"));
+        Assertions.assertFalse(postgresSpy.viewTaskByID(1).taskJSON.getBoolean("done"));
         tearDownDatabase(postgresSpy);
     }
 
