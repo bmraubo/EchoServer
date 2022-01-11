@@ -15,10 +15,19 @@ public class RetrieveTask implements Endpoint {
     public Response prepareResponse(Request request) {
         int taskID = getTaskID(request.uri);
         return switch (request.method) {
+            case ("GET") -> processGetRequest(request, taskID);
             case ("PUT") -> processPutRequest(request, taskID);
             case ("DELETE") -> processDeleteRequest(taskID);
             default -> new ResourceNotFound().prepareResponse();
         };
+    }
+
+    private Response processGetRequest(Request request, int taskID) {
+        if (taskExists(taskID)) {
+            // successful get request - send task info
+        } else {
+            // resource not found
+        }
     }
 
     private Response processPutRequest(Request request, int taskID) {
@@ -49,6 +58,15 @@ public class RetrieveTask implements Endpoint {
         } else {
             return unsuccessfulResponse(204);
         }
+    }
+
+    private Response successfulGetRequest(Request request, int taskID) {
+        ResponseBuilder responseBuilder = new ResponseBuilder();
+        Response response = new Response(responseBuilder);
+        responseBuilder.setStatusCode(200);
+        responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
+        // response builder -> add task info to body
+        return response;
     }
 
     private Response passTest(Request request) {
