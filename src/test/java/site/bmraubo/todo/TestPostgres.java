@@ -1,5 +1,6 @@
 package site.bmraubo.todo;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -69,12 +70,16 @@ public class TestPostgres {
         PostgresSpy postgresSpy = new PostgresSpy();
         seedDatabase(postgresSpy);
 
-        JSONObject taskListJSON = postgresSpy.getAllTasks();
+        JSONArray taskListJSON = postgresSpy.getAllTasks();
 
+        JSONArray testArray = new JSONArray();
         JSONObject expectedList = new JSONObject();
-        expectedList.put("1", "{\"task\":\"seed task info\"}");
+        expectedList.put("id", 1);
+        expectedList.put("task", "seed task info");
+        expectedList.put("done", false);
+        testArray.put(expectedList);
 
-        Assertions.assertEquals(expectedList.toString(), taskListJSON.toString());
+        Assertions.assertEquals(testArray.toString(), taskListJSON.toString());
     }
 
     private void seedDatabase(PostgresSpy postgresSpy) {

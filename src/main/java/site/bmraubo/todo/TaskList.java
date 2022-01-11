@@ -1,12 +1,12 @@
 package site.bmraubo.todo;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 
 public interface TaskList {
 
     void addTask(Task task);
     Task viewTaskByID(int id);
-    JSONObject getAllTasks();
+    JSONArray getAllTasks();
     void updateTask(int id, String taskInfo);
     void removeTask(int id);
     boolean actionSuccessful();
