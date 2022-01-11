@@ -603,6 +603,6 @@ public class TestFeatures {
         byte[] expectedBody = "{\"task\":\"seed task info\"}".getBytes(StandardCharsets.UTF_8);
 
         Assertions.assertEquals("HTTP/1.1 200 OK\r\n", connectionSpy.responseLine);
-        Assertions.assertEquals(expectedBody, connectionSpy.body);
+        Assertions.assertArrayEquals(expectedBody, connectionSpy.body);
     }
 }

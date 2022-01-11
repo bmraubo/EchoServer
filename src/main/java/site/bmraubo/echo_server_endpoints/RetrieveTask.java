@@ -25,9 +25,10 @@ public class RetrieveTask implements Endpoint {
 
     private Response processGetRequest(Request request, int taskID) {
         if (taskExists(taskID)) {
-            // successful get request - send task info
+            Task task = getTaskInfo(taskID);
+            return successfulGetRequest(request, task);
         } else {
-            // resource not found
+            return new ResourceNotFound().prepareResponse();
         }
     }
 
@@ -61,12 +62,12 @@ public class RetrieveTask implements Endpoint {
         }
     }
 
-    private Response successfulGetRequest(Request request, int taskID) {
+    private Response successfulGetRequest(Request request, Task task) {
         ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
-        // response builder -> add task info to body
+        responseBuilder.setResponseBody(task.taskInfo);
         return response;
     }
 
