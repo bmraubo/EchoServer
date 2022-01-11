@@ -5,8 +5,7 @@ import org.json.JSONObject;
 public class Task {
     int id;
     public String taskInfo;
-    public String body;
-    JSONObject taskJSON;
+    public JSONObject taskJSON;
 
     public Task(String taskInfo) {
         this.taskInfo = taskInfo;
