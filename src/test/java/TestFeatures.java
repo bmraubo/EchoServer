@@ -585,4 +585,24 @@ public class TestFeatures {
         Assertions.assertEquals("{\"task\":\"a persistent task\"}", retrievedTask.taskInfo);
         restartedTaskList.tearDownDatabase();
     }
+
+    @Test
+    void retrieveTaskTest() {
+        String testRequest = "GET /todo/1 HTTP/1.1\r\n";
+
+        InputStream testInputStream = new ByteArrayInputStream(testRequest.getBytes());
+        BufferedReader input = new BufferedReader(new InputStreamReader(testInputStream));
+        PrintWriter output = new PrintWriter(new StringWriter());
+
+        PostgresSpy taskList = new PostgresSpy();
+        taskList.seedDatabase();
+        Router router = RoutesFake.assignRoutes(taskList);
+        ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
+        connectionSpy.processRequest();
+
+        byte[] expectedBody = "{\"task\":\"seed task info\"}".getBytes(StandardCharsets.UTF_8);
+
+        Assertions.assertEquals("HTTP/1.1 200 OK\r\n", connectionSpy.responseLine);
+        Assertions.assertEquals(expectedBody, connectionSpy.body);
+    }
 }
