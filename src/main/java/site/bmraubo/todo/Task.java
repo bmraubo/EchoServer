@@ -19,6 +19,7 @@ public class Task {
 
     public void setTaskID(int id) {
         this.id = id;
+        taskJSON.put("id", id);
     }
 
     private JSONObject convertTaskInfoToJSON() {

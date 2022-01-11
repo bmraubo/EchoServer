@@ -22,6 +22,7 @@ public class TestPostgres {
         postgresSpy.addTask(testTask);
 
         Assertions.assertTrue(postgresSpy.addedTask);
+        Assertions.assertEquals(2, testTask.taskJSON.getInt("id"));
         tearDownDatabase(postgresSpy);
     }
 

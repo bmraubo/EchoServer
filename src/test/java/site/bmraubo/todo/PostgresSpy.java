@@ -38,9 +38,12 @@ public class PostgresSpy implements TaskList{
     @Override
     public void addTask(Task task) {
         try {
-            PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo) VALUES(?)");
+            PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo) VALUES(?) RETURNING taskid");
             addTaskStatement.setString(1, task.taskInfo);
-            addTaskStatement.executeUpdate();
+            ResultSet resultSet = addTaskStatement.executeQuery();
+            if (resultSet.next()) {
+                task.setTaskID(resultSet.getInt("taskid"));
+            }
             success = true;
             addedTask = true;
         } catch (Exception e) {
@@ -127,9 +130,9 @@ public class PostgresSpy implements TaskList{
 
     public void seedDatabase() {
         try {
-            PreparedStatement createTable = conn.prepareStatement("CREATE TABLE Tasks (TaskID SERIAL PRIMARY KEY, TaskInfo varchar(255))");
+            PreparedStatement createTable = conn.prepareStatement("CREATE TABLE Tasks (TaskID SERIAL PRIMARY KEY, TaskInfo varchar(255), done boolean)");
             createTable.executeUpdate();
-            Task seedTask = new Task("{\"task\":\"seed task info\"}");
+            Task seedTask = new Task("{\"task\":\"seed task info\", \"done\": \"false\"}");
             addTask(seedTask);
         } catch (Exception e) {
             e.printStackTrace();
