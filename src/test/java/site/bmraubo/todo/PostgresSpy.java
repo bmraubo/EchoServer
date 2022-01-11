@@ -62,7 +62,10 @@ public class PostgresSpy implements TaskList{
             addTaskStatement.setInt(1, id);
             ResultSet resultSet = addTaskStatement.executeQuery();
             if (resultSet.next()) {
-                Task task = new Task(resultSet.getString("taskinfo"));
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("task", resultSet.getString("taskinfo"));
+                jsonObject.put("done", resultSet.getBoolean("done"));
+                Task task = new Task(jsonObject.toString());
                 task.setTaskID(resultSet.getInt("taskid"));
                 viewedTask = true;
                 return task;

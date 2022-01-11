@@ -34,7 +34,9 @@ public class TestPostgres {
         Task testTask = postgresSpy.viewTaskByID(1);
 
         Assertions.assertTrue(postgresSpy.viewedTask);
-        Assertions.assertEquals("{\"task\":\"seed task info\"}", testTask.taskInfo);
+        Assertions.assertEquals("seed task info", testTask.taskJSON.get("task"));
+        Assertions.assertEquals(1, testTask.taskJSON.get("id"));
+        Assertions.assertEquals(false, testTask.taskJSON.get("done"));
         tearDownDatabase(postgresSpy);
     }
 
