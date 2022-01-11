@@ -12,7 +12,7 @@ public class TestTask
 
         Task task = new Task(todoRequest);
 
-        Assertions.assertEquals(todoRequest, task.taskInfo);
+        Assertions.assertEquals("a new task", task.taskJSON.get("task"));
     }
 
     @Test
