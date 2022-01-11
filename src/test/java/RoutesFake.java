@@ -23,6 +23,7 @@ public class RoutesFake {
         router.addRoute("/kisses.gif", new Kisses());
         router.addRoute("/todo", new ToDo(taskList));
         router.addRoute("/todo/.+", new RetrieveTask(taskList));
+        router.addRoute("/todos", new RetrieveAllTasks(taskList));
         return router;
     }
 }

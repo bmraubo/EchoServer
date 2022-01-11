@@ -1,5 +1,6 @@
 package site.bmraubo.todo;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -56,6 +57,19 @@ public class TestPostgres {
 
         Assertions.assertTrue(postgresSpy.removedTask);
         tearDownDatabase(postgresSpy);
+    }
+
+    @Test
+    void retrieveAllTasksTest() {
+        PostgresSpy postgresSpy = new PostgresSpy();
+        seedDatabase(postgresSpy);
+
+        JSONObject taskListJSON = postgresSpy.getAllTasks();
+
+        JSONObject expectedList = new JSONObject();
+        expectedList.put("1", "{\"task\":\"seed task info\"}");
+
+        Assertions.assertEquals(expectedList.toString(), taskListJSON.toString());
     }
 
     private void seedDatabase(PostgresSpy postgresSpy) {

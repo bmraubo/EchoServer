@@ -620,7 +620,10 @@ public class TestFeatures {
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
-        byte[] expectedBody = "{\"1\": \"{\"task\":\"seed task info\"}\"}".getBytes(StandardCharsets.UTF_8);
+        JSONObject expectedList = new JSONObject();
+        expectedList.put("1", "{\"task\":\"seed task info\"}");
+
+        byte[] expectedBody = expectedList.toString().getBytes(StandardCharsets.UTF_8);
 
         Assertions.assertEquals("HTTP/1.1 200 OK\r\n", connectionSpy.responseLine);
         Assertions.assertArrayEquals(expectedBody, connectionSpy.body);
