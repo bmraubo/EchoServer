@@ -1,5 +1,7 @@
 package site.bmraubo.todo;
 
+import org.json.JSONObject;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -57,6 +59,23 @@ public class PostgresTaskList implements TaskList{
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public JSONObject getAllTasks() {
+        JSONObject taskListJSON = new JSONObject();
+        try {
+            PreparedStatement addTaskStatement = conn.prepareStatement("SELECT * FROM Tasks");
+            ResultSet resultSet = addTaskStatement.executeQuery();
+            if (resultSet.next()) {
+                String taskID = resultSet.getString("taskid");
+                String taskInfo = resultSet.getString("taskinfo");
+                taskListJSON.put(taskID, taskInfo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return taskListJSON;
     }
 
     public void updateTask(int id, String taskInfo) {

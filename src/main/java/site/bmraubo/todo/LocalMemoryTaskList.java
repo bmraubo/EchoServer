@@ -1,5 +1,7 @@
 package site.bmraubo.todo;
 
+import org.json.JSONObject;
+
 import java.util.LinkedHashMap;
 
 public class LocalMemoryTaskList implements TaskList{
@@ -20,6 +22,11 @@ public class LocalMemoryTaskList implements TaskList{
     @Override
     public Task viewTaskByID(int id) {
         return taskList.get(id);
+    }
+
+    @Override
+    public JSONObject getAllTasks() {
+        return null;
     }
 
     @Override
