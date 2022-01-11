@@ -12,10 +12,6 @@ public class Task {
         taskJSON = convertTaskInfoToJSON();
     }
 
-    public void updateTask(String taskInfo) {
-        this.taskInfo = taskInfo;
-    }
-
     public void setTaskID(int id) {
         this.id = id;
     }
