@@ -1,6 +1,7 @@
 package site.bmraubo.echo_server_endpoints;
 
 import site.bmraubo.http_server.*;
+import site.bmraubo.todo.Task;
 import site.bmraubo.todo.TaskList;
 import site.bmraubo.todo.TaskMaster;
 
@@ -101,6 +102,12 @@ public class RetrieveTask implements Endpoint {
 
     private int getTaskID(String uri) {
         return Integer.parseInt(uri.substring(6));
+    }
+
+    private Task getTaskInfo(int taskID) {
+        TaskMaster taskMaster= new TaskMaster();
+        taskMaster.openTaskList(taskList);
+        return taskMaster.viewTask(taskID);
     }
 
     private boolean updateTask(int taskID, String taskInfo) {
