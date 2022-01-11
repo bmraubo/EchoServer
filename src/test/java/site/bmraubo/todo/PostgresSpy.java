@@ -38,11 +38,13 @@ public class PostgresSpy implements TaskList{
     @Override
     public void addTask(Task task) {
         try {
-            PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo) VALUES(?) RETURNING taskid");
-            addTaskStatement.setString(1, task.taskInfo);
+            PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo, done) VALUES(?, ?) RETURNING taskid");
+            addTaskStatement.setString(1, task.taskJSON.getString("task"));
+            addTaskStatement.setBoolean(2, false);
             ResultSet resultSet = addTaskStatement.executeQuery();
             if (resultSet.next()) {
                 task.setTaskID(resultSet.getInt("taskid"));
+                task.taskJSON.put("done", false);
             }
             success = true;
             addedTask = true;

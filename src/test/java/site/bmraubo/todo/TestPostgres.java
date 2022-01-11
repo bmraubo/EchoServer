@@ -23,6 +23,7 @@ public class TestPostgres {
 
         Assertions.assertTrue(postgresSpy.addedTask);
         Assertions.assertEquals(2, testTask.taskJSON.getInt("id"));
+        Assertions.assertFalse(testTask.taskJSON.getBoolean("done"));
         tearDownDatabase(postgresSpy);
     }
 
