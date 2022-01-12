@@ -1,3 +1,4 @@
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -495,9 +496,9 @@ public class TestFeatures {
 
         String expectedResponseLine = "HTTP/1.1 200 OK\r\n";
         JSONObject expectedResponseJSON = new JSONObject();
-        //expectedResponseJSON.put("id", 1);
+        expectedResponseJSON.put("id", 1);
         expectedResponseJSON.put("task", "an updated task");
-        expectedResponseJSON.put("done", "false");
+        expectedResponseJSON.put("done", false);
         System.out.println(expectedResponseJSON);
         byte[] expectedResponseBody = expectedResponseJSON.toString().getBytes(StandardCharsets.UTF_8);
 
@@ -589,7 +590,7 @@ public class TestFeatures {
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
-        byte[] expectedBody = "{\"task\":\"seed task info\"}".getBytes(StandardCharsets.UTF_8);
+        byte[] expectedBody = "{\"task\":\"seed task info\",\"done\":false}".getBytes(StandardCharsets.UTF_8);
 
         Assertions.assertEquals("HTTP/1.1 200 OK\r\n", connectionSpy.responseLine);
         Assertions.assertArrayEquals(expectedBody, connectionSpy.body);
@@ -609,10 +610,12 @@ public class TestFeatures {
         ConnectionSpy connectionSpy = new ConnectionSpy(input, output, router);
         connectionSpy.processRequest();
 
-        JSONObject expectedList = new JSONObject();
-        expectedList.put("1", "{\"task\":\"seed task info\"}");
+        JSONArray jsonArray = new JSONArray();
+        String expectedJSONString = "{\"id\":1,\"task\":\"seed task info\",\"done\":false}";
+        JSONObject expectedList = new JSONObject(expectedJSONString);
+        jsonArray.put(expectedList);
 
-        byte[] expectedBody = expectedList.toString().getBytes(StandardCharsets.UTF_8);
+        byte[] expectedBody = jsonArray.toString().getBytes(StandardCharsets.UTF_8);
 
         Assertions.assertEquals("HTTP/1.1 200 OK\r\n", connectionSpy.responseLine);
         Assertions.assertArrayEquals(expectedBody, connectionSpy.body);
