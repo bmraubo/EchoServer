@@ -1,6 +1,6 @@
 package site.bmraubo.todo;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.util.LinkedHashMap;
 
@@ -25,7 +25,7 @@ public class LocalMemoryTaskList implements TaskList{
     }
 
     @Override
-    public JSONObject getAllTasks() {
+    public JSONArray getAllTasks() {
         return null;
     }
 

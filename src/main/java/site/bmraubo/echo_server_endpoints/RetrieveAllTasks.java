@@ -1,6 +1,6 @@
 package site.bmraubo.echo_server_endpoints;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 import site.bmraubo.http_server.Endpoint;
 import site.bmraubo.http_server.Request;
 import site.bmraubo.http_server.Response;
@@ -9,7 +9,7 @@ import site.bmraubo.todo.TaskList;
 
 public class RetrieveAllTasks implements Endpoint {
     TaskList taskList;
-    JSONObject taskListJSON;
+    JSONArray taskListJSON;
     String contentType = "application/json;charset=utf-8";
 
     public RetrieveAllTasks(TaskList taskList) {

@@ -1,5 +1,6 @@
 package site.bmraubo.todo;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.Connection;
@@ -38,9 +39,14 @@ public class PostgresSpy implements TaskList{
     @Override
     public void addTask(Task task) {
         try {
-            PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo) VALUES(?)");
-            addTaskStatement.setString(1, task.taskInfo);
-            addTaskStatement.executeUpdate();
+            PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo, done) VALUES(?, ?) RETURNING taskid");
+            addTaskStatement.setString(1, task.taskJSON.getString("task"));
+            addTaskStatement.setBoolean(2, false);
+            ResultSet resultSet = addTaskStatement.executeQuery();
+            if (resultSet.next()) {
+                task.setTaskID(resultSet.getInt("taskid"));
+                task.taskJSON.put("done", false);
+            }
             success = true;
             addedTask = true;
         } catch (Exception e) {
@@ -57,7 +63,10 @@ public class PostgresSpy implements TaskList{
             addTaskStatement.setInt(1, id);
             ResultSet resultSet = addTaskStatement.executeQuery();
             if (resultSet.next()) {
-                Task task = new Task(resultSet.getString("taskinfo"));
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("task", resultSet.getString("taskinfo"));
+                jsonObject.put("done", resultSet.getBoolean("done"));
+                Task task = new Task(jsonObject.toString());
                 task.setTaskID(resultSet.getInt("taskid"));
                 viewedTask = true;
                 return task;
@@ -72,28 +81,35 @@ public class PostgresSpy implements TaskList{
     }
 
     @Override
-    public JSONObject getAllTasks() {
-        JSONObject taskListJSON = new JSONObject();
+    public JSONArray getAllTasks() {
+        JSONArray jsonArray = new JSONArray();
         try {
             PreparedStatement addTaskStatement = conn.prepareStatement("SELECT * FROM Tasks");
             ResultSet resultSet = addTaskStatement.executeQuery();
             if (resultSet.next()) {
-                String taskID = resultSet.getString("taskid");
+                JSONObject taskData = new JSONObject();
+                int taskID = resultSet.getInt("taskid");
                 String taskInfo = resultSet.getString("taskinfo");
-                taskListJSON.put(taskID, taskInfo);
+                boolean done = resultSet.getBoolean("done");
+                taskData.put("id", taskID);
+                taskData.put("task", taskInfo);
+                taskData.put("done", done);
+                jsonArray.put(taskData);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return taskListJSON;
+        return jsonArray;
     }
 
     @Override
     public void updateTask(int id, String taskInfo) {
+        Task task = new Task(taskInfo);
         try {
-            PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=? WHERE taskid=?");
-            addTaskStatement.setString(1, taskInfo);
-            addTaskStatement.setInt(2, id);
+            PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=?, done=? WHERE taskid=?");
+            addTaskStatement.setString(1, task.taskJSON.getString("task"));
+            addTaskStatement.setBoolean(2, task.taskJSON.getBoolean("done"));
+            addTaskStatement.setInt(3, id);
             addTaskStatement.executeUpdate();
             success = true;
             updatedTask = true;
@@ -127,9 +143,9 @@ public class PostgresSpy implements TaskList{
 
     public void seedDatabase() {
         try {
-            PreparedStatement createTable = conn.prepareStatement("CREATE TABLE Tasks (TaskID SERIAL PRIMARY KEY, TaskInfo varchar(255))");
+            PreparedStatement createTable = conn.prepareStatement("CREATE TABLE Tasks (TaskID SERIAL PRIMARY KEY, TaskInfo varchar(255), done boolean)");
             createTable.executeUpdate();
-            Task seedTask = new Task("{\"task\":\"seed task info\"}");
+            Task seedTask = new Task("{\"task\":\"seed task info\", \"done\": \"false\"}");
             addTask(seedTask);
         } catch (Exception e) {
             e.printStackTrace();
