@@ -34,10 +34,14 @@ public class PostgresTaskList implements TaskList{
     @Override
     public void addTask(Task task) {
         try {
-            PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo) VALUES(?)");
-            addTaskStatement.setString(1, task.taskInfo);
-            addTaskStatement.executeUpdate();
-            System.out.println("Task Added");
+            PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo, done) VALUES(?, ?) RETURNING taskid");
+            addTaskStatement.setString(1, task.taskJSON.getString("task"));
+            addTaskStatement.setBoolean(2, false);
+            ResultSet resultSet = addTaskStatement.executeQuery();
+            if (resultSet.next()) {
+                task.setTaskID(resultSet.getInt("taskid"));
+                task.taskJSON.put("done", false);
+            }
             success = true;
         } catch (Exception e) {
             success = false;
@@ -68,7 +72,7 @@ public class PostgresTaskList implements TaskList{
         try {
             PreparedStatement addTaskStatement = conn.prepareStatement("SELECT * FROM Tasks");
             ResultSet resultSet = addTaskStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 JSONObject taskData = new JSONObject();
                 int taskID = resultSet.getInt("taskid");
                 String taskInfo = resultSet.getString("taskinfo");
