@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Properties;
 
 public class PostgresTaskList implements TaskList{
     Connection conn;
@@ -20,11 +19,8 @@ public class PostgresTaskList implements TaskList{
 
     public void connectToDatabase() {
         try {
-            String url = "jdbc:postgresql://localhost:5432/tasklist";
-            Properties properties = new Properties();
-            properties.setProperty("user", "postgres");
-            properties.setProperty("password", "test1111");
-            conn = DriverManager.getConnection(url, properties);
+            String url = System.getenv("JDBC_DATABASE_URL");
+            conn = DriverManager.getConnection(url);
             System.out.println("Database Connection Successful");
         } catch (Exception e) {
             e.printStackTrace();
