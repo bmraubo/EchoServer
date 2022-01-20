@@ -1,1 +1,1 @@
-web: java
+web: java -jar build/libs/EchoServer-1.0-SNAPSHOT.jar
