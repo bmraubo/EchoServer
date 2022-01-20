@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Properties;
 
 public class PostgresTaskList implements TaskList{
     Connection conn;
@@ -20,11 +19,8 @@ public class PostgresTaskList implements TaskList{
 
     public void connectToDatabase() {
         try {
-            String url = "jdbc:postgresql://localhost:5432/tasklist";
-            Properties properties = new Properties();
-            properties.setProperty("user", "postgres");
-            properties.setProperty("password", "test1111");
-            conn = DriverManager.getConnection(url, properties);
+            String url = System.getenv("JDBC_DATABASE_URL");
+            conn = DriverManager.getConnection(url);
             System.out.println("Database Connection Successful");
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,10 +30,14 @@ public class PostgresTaskList implements TaskList{
     @Override
     public void addTask(Task task) {
         try {
-            PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo) VALUES(?)");
-            addTaskStatement.setString(1, task.taskInfo);
-            addTaskStatement.executeUpdate();
-            System.out.println("Task Added");
+            PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo, done) VALUES(?, ?) RETURNING taskid");
+            addTaskStatement.setString(1, task.taskJSON.getString("task"));
+            addTaskStatement.setBoolean(2, false);
+            ResultSet resultSet = addTaskStatement.executeQuery();
+            if (resultSet.next()) {
+                task.setTaskID(resultSet.getInt("taskid"));
+                task.taskJSON.put("done", false);
+            }
             success = true;
         } catch (Exception e) {
             success = false;
@@ -68,7 +68,7 @@ public class PostgresTaskList implements TaskList{
         try {
             PreparedStatement addTaskStatement = conn.prepareStatement("SELECT * FROM Tasks");
             ResultSet resultSet = addTaskStatement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 JSONObject taskData = new JSONObject();
                 int taskID = resultSet.getInt("taskid");
                 String taskInfo = resultSet.getString("taskinfo");
