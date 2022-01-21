@@ -42,7 +42,7 @@ task copyToLib(type: Copy) {
     from(configurations.runtimeClasspath)
 }
 
-stage.dependsOn(copyToLib)
+build.dependsOn(copyToLib)
 
 gradle.taskGraph.whenReady {
     taskGraph ->
