@@ -1,1 +1,1 @@
-web: java -jar build/libs/EchoServer-1.0-SNAPSHOT.jar -jar build/libs/checker-qual-3.5.0.jar -jar build/libs/json-20210307.jar -jar build/libs/postgresql-42.3.1.jar
+web: java $JAVA_OPTS -jar build/libs/EchoServer-1.0-SNAPSHOT.jar -jar build/libs/checker-qual-3.5.0.jar -jar build/libs/json-20210307.jar -jar build/libs/postgresql-42.3.1.jar
