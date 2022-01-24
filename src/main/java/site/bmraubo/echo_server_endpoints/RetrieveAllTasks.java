@@ -23,6 +23,7 @@ public class RetrieveAllTasks implements Endpoint {
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", contentType);
+        responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
         responseBuilder.setResponseBody(taskListJSON.toString());
         return response;
     }
