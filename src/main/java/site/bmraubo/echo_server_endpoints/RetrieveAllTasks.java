@@ -24,6 +24,7 @@ public class RetrieveAllTasks implements Endpoint {
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", contentType);
         responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
+        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
         responseBuilder.setResponseBody(taskListJSON.toString());
         return response;
     }

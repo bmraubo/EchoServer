@@ -32,6 +32,7 @@ public class ToDo implements Endpoint {
         responseBuilder.setStatusCode(201);
         responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
         responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
+        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
         responseBuilder.setResponseBody(request.body);
         return response;
     }
