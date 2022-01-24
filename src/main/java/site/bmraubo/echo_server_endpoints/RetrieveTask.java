@@ -53,7 +53,7 @@ public class RetrieveTask implements Endpoint {
                 return new ServerError("Database Error").prepareResponse();
             }
         } else {
-            return unsuccessfulResponse(500);
+            return unsuccessfulResponse(400);
         }
     }
 
