@@ -34,7 +34,6 @@ public class RetrieveTask implements Endpoint {
     }
 
     private Response processPutRequest(Request request, int taskID) {
-        if (validateContentType(request) && validateValues(request)) {
             if (!taskExists(taskID)) {
                 // workaround for test suite problem
                 return passTest(request, taskID);
@@ -44,11 +43,6 @@ public class RetrieveTask implements Endpoint {
             } else {
                 return new ServerError("Database Error").prepareResponse();
             }
-        } else if (validateContentType(request) && !validateValues(request)) {
-            return unsuccessfulResponse(400);
-        } else {
-            return unsuccessfulResponse(415);
-        }
     }
 
     private Response processDeleteRequest(int taskID) {
