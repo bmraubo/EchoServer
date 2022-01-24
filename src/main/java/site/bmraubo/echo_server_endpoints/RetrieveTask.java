@@ -19,7 +19,7 @@ public class RetrieveTask implements Endpoint {
             case ("GET") -> processGetRequest(request, taskID);
             case ("PUT") -> processPutRequest(request, taskID);
             case ("DELETE") -> processDeleteRequest(taskID);
-            case ("OPTION") -> processOptionRequest();
+            case ("OPTIONS") -> processOptionsRequest();
             default -> new ResourceNotFound().prepareResponse();
         };
     }
@@ -107,7 +107,7 @@ public class RetrieveTask implements Endpoint {
         return response;
     }
 
-    private Response processOptionRequest() {
+    private Response processOptionsRequest() {
         ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
