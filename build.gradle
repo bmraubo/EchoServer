@@ -26,27 +26,27 @@ test {
 
 jar {
     manifest {
-        attributes(
-                'Main-Class': 'Main'
-        )
+        attributes 'Main-Class': 'Main'
+    }
+    from {
+        configurations.implementation.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
-
-
 
 task stage(dependsOn: ['build', 'clean'])
 build.mustRunAfter clean
 
 task copyToLib(type: Copy) {
+    configurations.implementation.setCanBeResolved(true)
     into "$buildDir/libs"
-    from(configurations.runtimeClasspath)
+    from(configurations.implementation)
 }
 
-build.dependsOn(copyToLib)
+stage.dependsOn(copyToLib)
 
 gradle.taskGraph.whenReady {
     taskGraph ->
         if (taskGraph.hasTask(stage)) {
             test.enabled = false
         }
-}
+    }
