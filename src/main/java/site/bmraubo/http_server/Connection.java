@@ -88,7 +88,6 @@ public class Connection implements ConnectionWrapper, Runnable{
         try {
             int timeoutCounter = 0;
             while ((socket.getInputStream().available() == 0) && (timeoutCounter < 1000)) {
-                System.out.println("Input Stream not available - Waiting...");
                 Thread.sleep(5);
                 timeoutCounter++;
             }
