@@ -143,9 +143,12 @@ public class RetrieveTask implements Endpoint {
         return request.headers.get("Content-Type").contains("text/plain;charset=UTF-8");
     }
 
+    /*
     private boolean validateValues(Request request) {
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
     }
+
+     */
 
     private boolean taskExists(int id) {
         return taskList.viewTaskByID(id) != null;
