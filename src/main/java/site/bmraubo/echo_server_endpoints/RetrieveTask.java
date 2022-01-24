@@ -19,6 +19,7 @@ public class RetrieveTask implements Endpoint {
             case ("GET") -> processGetRequest(request, taskID);
             case ("PUT") -> processPutRequest(request, taskID);
             case ("DELETE") -> processDeleteRequest(taskID);
+            case ("OPTION") -> processOptionRequest();
             default -> new ResourceNotFound().prepareResponse();
         };
     }
@@ -104,6 +105,14 @@ public class RetrieveTask implements Endpoint {
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(statusCode);
         return response;
+    }
+
+    private Response processOptionRequest() {
+        ResponseBuilder responseBuilder = new ResponseBuilder();
+        Response response = new Response(responseBuilder);
+        responseBuilder.setStatusCode(200);
+        responseBuilder.setResponseBody("");
+        return response
     }
 
     private int getTaskID(String uri) {
