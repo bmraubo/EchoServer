@@ -68,6 +68,7 @@ public class RetrieveTask implements Endpoint {
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
         responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
+        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
         responseBuilder.setResponseBody(task.taskInfo);
         return response;
     }
@@ -85,6 +86,7 @@ public class RetrieveTask implements Endpoint {
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
         responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
+        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
         responseBuilder.setResponseBody(task.taskJSON.toString());
         return response;
     }
