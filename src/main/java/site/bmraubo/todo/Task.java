@@ -9,6 +9,7 @@ public class Task {
 
     public Task(String taskInfo) {
         this.taskInfo = taskInfo;
+        System.out.println(taskInfo);
         taskJSON = convertTaskInfoToJSON();
     }
 
