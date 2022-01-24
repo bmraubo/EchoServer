@@ -50,4 +50,3 @@ gradle.taskGraph.whenReady {
             test.enabled = false
         }
     }
-}
