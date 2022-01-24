@@ -112,7 +112,7 @@ public class RetrieveTask implements Endpoint {
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
         responseBuilder.setResponseBody("");
-        return response
+        return response;
     }
 
     private int getTaskID(String uri) {
