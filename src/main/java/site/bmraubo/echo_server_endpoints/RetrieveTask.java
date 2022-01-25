@@ -88,6 +88,7 @@ public class RetrieveTask implements Endpoint {
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(204);
         responseBuilder.setResponseBody("");
+        setCORSHeaders(responseBuilder);
         return response;
     }
 
