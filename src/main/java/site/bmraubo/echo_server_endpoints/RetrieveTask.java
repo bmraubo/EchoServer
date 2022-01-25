@@ -35,10 +35,6 @@ public class RetrieveTask implements Endpoint {
 
     private Response processPutRequest(Request request, int taskID) {
         if (validateContentType(request) && validateValues(request)) {
-            if (!taskExists(taskID)) {
-                // workaround for test suite problem
-                return passTest(request, taskID);
-            }
             if (updateTask(taskID, request.body)) {
                 return successfulPutResponse(request, taskID);
             } else {
@@ -74,12 +70,6 @@ public class RetrieveTask implements Endpoint {
         setCORSHeaders(responseBuilder);
         responseBuilder.setResponseBody(task.taskInfo);
         return response;
-    }
-
-    private Response passTest(Request request, int taskID) {
-        // this implementation only exists because of peculiarity of test suite
-        // Really it should return 404 - Resource Not Found
-        return successfulPutResponse(request, taskID);
     }
 
     private Response successfulPutResponse(Request request, int taskID) {
@@ -146,6 +136,7 @@ public class RetrieveTask implements Endpoint {
     }
 
     private boolean validateValues(Request request) {
+        System.out.println(request.body);
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
     }
 
