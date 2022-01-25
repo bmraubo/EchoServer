@@ -96,7 +96,7 @@ public class PostgresTaskList implements TaskList{
             PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=?, data=? WHERE taskid=?");
             addTaskStatement.setString(1, taskData.getString("task"));
             addTaskStatement.setBoolean(2, taskData.getBoolean("done"));
-            addTaskStatement.setInt(2, id);
+            addTaskStatement.setInt(2, taskData.getInt("id"));
             addTaskStatement.executeUpdate();
             System.out.println("Task Updated");
             success = true;

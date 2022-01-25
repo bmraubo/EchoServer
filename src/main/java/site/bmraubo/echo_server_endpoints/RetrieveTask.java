@@ -122,6 +122,7 @@ public class RetrieveTask implements Endpoint {
     private boolean updateTask(int taskID, String taskInfo) {
         TaskMaster taskMaster = new TaskMaster();
         JSONObject taskData = new JSONObject(taskInfo);
+        System.out.println(taskData);
         taskMaster.openTaskList(taskList);
         taskMaster.updateTask(taskID, taskData);
         return taskMaster.checkActionOutcome();
