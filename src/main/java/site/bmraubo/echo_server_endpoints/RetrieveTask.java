@@ -45,8 +45,11 @@ public class RetrieveTask implements Endpoint {
                 return new ServerError("Database Error").prepareResponse();
             }
         } else if (validateContentType(request) && !validateValues(request)) {
+            System.out.println("Failed to validate JSON values");
+            System.out.println(request.body);
             return unsuccessfulResponse(400);
         } else {
+            System.out.println("Failed to validate Content Type");
             return unsuccessfulResponse(415);
         }
     }
@@ -139,12 +142,10 @@ public class RetrieveTask implements Endpoint {
     }
 
     private boolean validateContentType(Request request) {
-        System.out.println("Failed to validate Content Type");
         return request.headers.get("Content-Type").contains("application/json");
     }
 
     private boolean validateValues(Request request) {
-        System.out.println("Failed to validate JSON values");
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
     }
 
