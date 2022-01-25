@@ -62,8 +62,7 @@ public class RetrieveTask implements Endpoint {
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
-        responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
-        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
+        setCORSHeaders(responseBuilder);
         responseBuilder.setResponseBody(task.taskInfo);
         return response;
     }
@@ -80,8 +79,7 @@ public class RetrieveTask implements Endpoint {
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
-        responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
-        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
+        setCORSHeaders(responseBuilder);
         responseBuilder.setResponseBody(task.taskJSON.toString());
         return response;
     }
@@ -104,6 +102,7 @@ public class RetrieveTask implements Endpoint {
     private Response processOptionsRequest() {
         ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
+        setCORSHeaders(responseBuilder);
         responseBuilder.setStatusCode(200);
         responseBuilder.setResponseBody("");
         return response;
@@ -146,5 +145,11 @@ public class RetrieveTask implements Endpoint {
 
     private boolean taskExists(int id) {
         return taskList.viewTaskByID(id) != null;
+    }
+
+    private void setCORSHeaders(ResponseBuilder responseBuilder) {
+        responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
+        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
+        responseBuilder.setHeader("Access-Control-Allow-Headers", "*");
     }
 }
