@@ -13,17 +13,13 @@ public class ToDo implements Endpoint {
 
     @Override
     public Response prepareResponse(Request request) {
-        if (validateContentType(request) && validateValues(request)) {
+
             if (addTask(request.body)) {
                 return successfulResponse(request);
             } else {
                 return new ServerError("Database Error").prepareResponse();
             }
-        } else if (validateContentType(request) && !validateValues(request)) {
-            return unsuccessfulResponse(400);
-        } else {
-            return unsuccessfulResponse(415);
-        }
+
     }
 
     private Response successfulResponse(Request request) {
@@ -44,6 +40,7 @@ public class ToDo implements Endpoint {
         return response;
     }
 
+    /*
     private boolean validateContentType(Request request) {
         return request.headers.get("Content-Type").contains("application");
     }
@@ -51,6 +48,8 @@ public class ToDo implements Endpoint {
     private boolean validateValues(Request request) {
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
     }
+
+     */
 
     private boolean addTask(String taskInfo) {
         TaskMaster taskMaster = new TaskMaster();

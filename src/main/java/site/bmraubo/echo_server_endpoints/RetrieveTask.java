@@ -34,7 +34,6 @@ public class RetrieveTask implements Endpoint {
     }
 
     private Response processPutRequest(Request request, int taskID) {
-        if (validateContentType(request) && validateValues(request)) {
             if (!taskExists(taskID)) {
                 // workaround for test suite problem
                 return passTest(request, taskID);
@@ -44,11 +43,6 @@ public class RetrieveTask implements Endpoint {
             } else {
                 return new ServerError("Database Error").prepareResponse();
             }
-        } else if (validateContentType(request) && !validateValues(request)) {
-            return unsuccessfulResponse(400);
-        } else {
-            return unsuccessfulResponse(415);
-        }
     }
 
     private Response processDeleteRequest(int taskID) {
@@ -59,7 +53,7 @@ public class RetrieveTask implements Endpoint {
                 return new ServerError("Database Error").prepareResponse();
             }
         } else {
-            return unsuccessfulResponse(204);
+            return unsuccessfulResponse(400);
         }
     }
 
@@ -142,9 +136,12 @@ public class RetrieveTask implements Endpoint {
         return request.headers.get("Content-Type").contains("application/json");
     }
 
+    /*
     private boolean validateValues(Request request) {
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
     }
+
+     */
 
     private boolean taskExists(int id) {
         return taskList.viewTaskByID(id) != null;
