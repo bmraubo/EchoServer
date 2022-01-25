@@ -9,8 +9,6 @@ public class Response {
 
     public Response(ResponseBuilder responseBuilder) {
         this.responseBuilder = responseBuilder;
-        responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
-        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
     }
 
     public void generateResponse() {
