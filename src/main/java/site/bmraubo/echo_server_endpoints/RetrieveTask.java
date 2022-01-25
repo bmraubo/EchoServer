@@ -42,7 +42,7 @@ public class RetrieveTask implements Endpoint {
             }
         } else if (validateContentType(request) && !validateValues(request)) {
             System.out.println("Failed to validate JSON values");
-            System.out.println(request.body);
+            System.out.println("CONTENT BODY: "+request.body);
             return unsuccessfulResponse(400);
         } else {
             System.out.println("Failed to validate Content Type");
