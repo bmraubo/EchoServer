@@ -52,8 +52,15 @@ public class PostgresTaskList implements TaskList{
             addTaskStatement.setInt(1, id);
             ResultSet resultSet = addTaskStatement.executeQuery();
             if (resultSet.next()) {
-                Task task = new Task(resultSet.getString("taskinfo"));
-                task.setTaskID(resultSet.getInt("taskid"));
+                int taskID = resultSet.getInt("taskid");
+                String taskInfo = resultSet.getString("taskinfo");
+                boolean doneStatus = resultSet.getBoolean("done");
+                JSONObject taskData = new JSONObject();
+                taskData.put("id", taskID);
+                taskData.put("task", taskInfo);
+                taskData.put("done", doneStatus);
+                Task task = new Task(taskData.toString());
+                task.setTaskID(taskID);
                 return task;
             }
         } catch (Exception e) {
