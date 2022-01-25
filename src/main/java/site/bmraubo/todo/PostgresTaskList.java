@@ -93,7 +93,7 @@ public class PostgresTaskList implements TaskList{
 
     public void updateTask(int id, JSONObject taskData) {
         try {
-            PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=?, data=? WHERE taskid=?");
+            PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=?, done=? WHERE taskid=?");
             addTaskStatement.setString(1, taskData.getString("task"));
             addTaskStatement.setBoolean(2, taskData.getBoolean("done"));
             addTaskStatement.setInt(3, taskData.getInt("id"));
