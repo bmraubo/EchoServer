@@ -1,6 +1,7 @@
 package site.bmraubo.todo;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.LinkedHashMap;
 
@@ -30,9 +31,9 @@ public class LocalMemoryTaskList implements TaskList{
     }
 
     @Override
-    public void updateTask(int id, String taskInfo) {
+    public void updateTask(int id, JSONObject taskData) {
         Task task = viewTaskByID(id);
-        task.updateTask(taskInfo);
+        task.updateTask(taskData.toString());
         success = true;
     }
 

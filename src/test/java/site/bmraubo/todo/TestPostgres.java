@@ -46,7 +46,7 @@ public class TestPostgres {
         PostgresSpy postgresSpy = new PostgresSpy();
         seedDatabase(postgresSpy);
 
-        postgresSpy.updateTask(1, "{\"task\":\"updated task info\", \"done\": \"false\"}");
+        postgresSpy.updateTask(1, new JSONObject("{\"task\":\"updated task info\", \"done\": \"false\"}"));
 
         Assertions.assertTrue(postgresSpy.updatedTask);
         Assertions.assertEquals("updated task info", postgresSpy.viewTaskByID(1).taskJSON.getString("task"));

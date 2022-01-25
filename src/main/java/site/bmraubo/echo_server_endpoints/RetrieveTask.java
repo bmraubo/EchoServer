@@ -1,5 +1,6 @@
 package site.bmraubo.echo_server_endpoints;
 
+import org.json.JSONObject;
 import site.bmraubo.http_server.*;
 import site.bmraubo.todo.Task;
 import site.bmraubo.todo.TaskList;
@@ -120,8 +121,9 @@ public class RetrieveTask implements Endpoint {
 
     private boolean updateTask(int taskID, String taskInfo) {
         TaskMaster taskMaster = new TaskMaster();
+        JSONObject taskData = new JSONObject(taskInfo);
         taskMaster.openTaskList(taskList);
-        taskMaster.updateTask(taskID, taskInfo);
+        taskMaster.updateTask(taskID, taskData);
         return taskMaster.checkActionOutcome();
     }
 

@@ -1,5 +1,6 @@
 package site.bmraubo.todo;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -47,10 +48,10 @@ public class TestTaskMaster {
         taskMaster.openTaskList(localMemoryTaskList);
         taskMaster.addTask(todoRequest);
 
-        String updatedTask = "{\"task\":\"an updated task\"}";
+        JSONObject updatedTask = new JSONObject("{\"task\":\"an updated task\"}");
         taskMaster.updateTask(1, updatedTask);
 
-        Assertions.assertEquals(updatedTask, taskMaster.viewTask(1).taskInfo);
+        Assertions.assertEquals(updatedTask.toString(), taskMaster.viewTask(1).taskInfo);
     }
 
     @Test
