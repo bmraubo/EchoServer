@@ -1,5 +1,7 @@
 package site.bmraubo.todo;
 
+import org.json.JSONObject;
+
 public class TaskMaster {
     TaskList taskList;
 
@@ -16,8 +18,8 @@ public class TaskMaster {
         return taskList.viewTaskByID(id);
     }
 
-    public void updateTask(int taskID, String taskInfo) {
-        taskList.updateTask(taskID, taskInfo);
+    public void updateTask(int taskID, JSONObject taskData) {
+        taskList.updateTask(taskID, taskData);
     }
 
     public void removeTask(int id) {

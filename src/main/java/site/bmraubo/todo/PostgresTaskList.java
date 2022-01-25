@@ -52,8 +52,15 @@ public class PostgresTaskList implements TaskList{
             addTaskStatement.setInt(1, id);
             ResultSet resultSet = addTaskStatement.executeQuery();
             if (resultSet.next()) {
-                Task task = new Task(resultSet.getString("taskinfo"));
-                task.setTaskID(resultSet.getInt("taskid"));
+                int taskID = resultSet.getInt("taskid");
+                String taskInfo = resultSet.getString("taskinfo");
+                boolean doneStatus = resultSet.getBoolean("done");
+                JSONObject taskData = new JSONObject();
+                taskData.put("id", taskID);
+                taskData.put("task", taskInfo);
+                taskData.put("done", doneStatus);
+                Task task = new Task(taskData.toString());
+                task.setTaskID(taskID);
                 return task;
             }
         } catch (Exception e) {
@@ -84,11 +91,12 @@ public class PostgresTaskList implements TaskList{
         return jsonArray;
     }
 
-    public void updateTask(int id, String taskInfo) {
+    public void updateTask(int id, JSONObject taskData) {
         try {
-            PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=? WHERE taskid=?");
-            addTaskStatement.setString(1, taskInfo);
-            addTaskStatement.setInt(2, id);
+            PreparedStatement addTaskStatement = conn.prepareStatement("UPDATE Tasks SET taskinfo=?, done=? WHERE taskid=?");
+            addTaskStatement.setString(1, taskData.getString("task"));
+            addTaskStatement.setBoolean(2, taskData.getBoolean("done"));
+            addTaskStatement.setInt(3, taskData.getInt("id"));
             addTaskStatement.executeUpdate();
             System.out.println("Task Updated");
             success = true;
