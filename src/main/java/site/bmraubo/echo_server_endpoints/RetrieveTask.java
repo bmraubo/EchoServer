@@ -139,10 +139,12 @@ public class RetrieveTask implements Endpoint {
     }
 
     private boolean validateContentType(Request request) {
+        System.out.println("Failed to validate Content Type");
         return request.headers.get("Content-Type").contains("application/json");
     }
 
     private boolean validateValues(Request request) {
+        System.out.println("Failed to validate JSON values");
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
     }
 
