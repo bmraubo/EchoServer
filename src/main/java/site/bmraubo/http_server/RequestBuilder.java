@@ -34,6 +34,8 @@ public class RequestBuilder {
 
     public void extractRequest(){
         requestArray = requestString.split("\r\n");
+        System.out.println("REQUEST String" + requestString);
+        System.out.println("REQUEST ARRAY" + requestArray);
         extractStatusLine();
         requestIncludesHeaders = checkForHeaders();
         requestIncludesBody = checkForBody();
@@ -94,6 +96,7 @@ public class RequestBuilder {
     }
 
     private void extractBody() {
+        System.out.println(requestArray[requestArray.length-1]);
         body = requestArray[requestArray.length-1];
 
     }
@@ -104,10 +107,13 @@ public class RequestBuilder {
 
     private boolean checkForBody() {
         for (String x : requestArray) {
+            System.out.println(x);
             if (x.startsWith("Content-Length")) {
+                System.out.println("Body Identified");
                 return true;
             }
         }
+        System.out.println("No Body Identified");
         return false;
     }
 

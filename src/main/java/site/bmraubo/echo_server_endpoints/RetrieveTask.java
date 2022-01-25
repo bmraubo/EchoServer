@@ -19,6 +19,7 @@ public class RetrieveTask implements Endpoint {
             case ("GET") -> processGetRequest(request, taskID);
             case ("PUT") -> processPutRequest(request, taskID);
             case ("DELETE") -> processDeleteRequest(taskID);
+            case ("OPTIONS") -> processOptionsRequest();
             default -> new ResourceNotFound().prepareResponse();
         };
     }
@@ -34,18 +35,17 @@ public class RetrieveTask implements Endpoint {
 
     private Response processPutRequest(Request request, int taskID) {
         if (validateContentType(request) && validateValues(request)) {
-            if (!taskExists(taskID)) {
-                // workaround for test suite problem
-                return passTest(request, taskID);
-            }
             if (updateTask(taskID, request.body)) {
                 return successfulPutResponse(request, taskID);
             } else {
                 return new ServerError("Database Error").prepareResponse();
             }
         } else if (validateContentType(request) && !validateValues(request)) {
+            System.out.println("Failed to validate JSON values");
+            System.out.println("CONTENT BODY: "+request.body);
             return unsuccessfulResponse(400);
         } else {
+            System.out.println("Failed to validate Content Type");
             return unsuccessfulResponse(415);
         }
     }
@@ -67,16 +67,9 @@ public class RetrieveTask implements Endpoint {
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
-        responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
-        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
+        setCORSHeaders(responseBuilder);
         responseBuilder.setResponseBody(task.taskInfo);
         return response;
-    }
-
-    private Response passTest(Request request, int taskID) {
-        // this implementation only exists because of peculiarity of test suite
-        // Really it should return 404 - Resource Not Found
-        return successfulPutResponse(request, taskID);
     }
 
     private Response successfulPutResponse(Request request, int taskID) {
@@ -85,8 +78,7 @@ public class RetrieveTask implements Endpoint {
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(200);
         responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
-        responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
-        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
+        setCORSHeaders(responseBuilder);
         responseBuilder.setResponseBody(task.taskJSON.toString());
         return response;
     }
@@ -96,6 +88,7 @@ public class RetrieveTask implements Endpoint {
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(204);
         responseBuilder.setResponseBody("");
+        setCORSHeaders(responseBuilder);
         return response;
     }
 
@@ -103,6 +96,15 @@ public class RetrieveTask implements Endpoint {
         ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(statusCode);
+        return response;
+    }
+
+    private Response processOptionsRequest() {
+        ResponseBuilder responseBuilder = new ResponseBuilder();
+        Response response = new Response(responseBuilder);
+        setCORSHeaders(responseBuilder);
+        responseBuilder.setStatusCode(200);
+        responseBuilder.setResponseBody("");
         return response;
     }
 
@@ -135,10 +137,17 @@ public class RetrieveTask implements Endpoint {
     }
 
     private boolean validateValues(Request request) {
+        System.out.println(request.body);
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
     }
 
     private boolean taskExists(int id) {
         return taskList.viewTaskByID(id) != null;
+    }
+
+    private void setCORSHeaders(ResponseBuilder responseBuilder) {
+        responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
+        responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
+        responseBuilder.setHeader("Access-Control-Allow-Headers", "*");
     }
 }
