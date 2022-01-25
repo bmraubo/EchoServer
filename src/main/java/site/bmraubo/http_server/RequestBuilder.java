@@ -95,6 +95,7 @@ public class RequestBuilder {
     }
 
     private void extractBody() {
+        System.out.println(requestArray[requestArray.length-1]);
         body = requestArray[requestArray.length-1];
 
     }
