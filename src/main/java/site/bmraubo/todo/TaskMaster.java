@@ -9,9 +9,10 @@ public class TaskMaster {
         this.taskList = taskList;
     }
 
-    public void addTask(String taskInfo) {
+    public Task addTask(String taskInfo) {
         Task task = new Task(taskInfo);
         taskList.addTask(task);
+        return task;
     }
 
     public Task viewTask(int id) {

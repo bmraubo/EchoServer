@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public interface TaskList {
 
-    void addTask(Task task);
+    Task addTask(Task task);
     Task viewTaskByID(int id);
     JSONArray getAllTasks();
     void updateTask(int id, JSONObject taskData);

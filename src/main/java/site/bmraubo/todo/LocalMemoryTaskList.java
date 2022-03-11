@@ -14,10 +14,11 @@ public class LocalMemoryTaskList implements TaskList{
     }
 
     @Override
-    public void addTask(Task task) {
+    public Task addTask(Task task) {
         task.setTaskID(calculateNextAvailableID());
         taskList.put(task.id, task);
         success = true;
+        return task;
     }
 
     @Override

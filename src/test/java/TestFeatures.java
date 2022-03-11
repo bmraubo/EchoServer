@@ -466,7 +466,7 @@ public class TestFeatures {
         connectionSpy.processRequest();
 
         String expectedResponseLine = "HTTP/1.1 201 Created\r\n";
-        byte[] expectedBody = "{\"task\":\"a new task\"}".getBytes(StandardCharsets.UTF_8);
+        byte[] expectedBody = "{\"task\":\"a new task\",\"id\":2,\"done\":false}".getBytes(StandardCharsets.UTF_8);
 
         Assertions.assertEquals(expectedResponseLine, connectionSpy.responseLine);
         Assertions.assertArrayEquals(expectedBody, connectionSpy.body);
