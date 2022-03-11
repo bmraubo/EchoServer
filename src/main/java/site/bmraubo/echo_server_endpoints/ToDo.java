@@ -1,8 +1,11 @@
 package site.bmraubo.echo_server_endpoints;
 
 import site.bmraubo.http_server.*;
+import site.bmraubo.todo.Task;
 import site.bmraubo.todo.TaskList;
 import site.bmraubo.todo.TaskMaster;
+
+import java.nio.charset.StandardCharsets;
 
 public class ToDo implements Endpoint {
     TaskList taskList;
@@ -14,11 +17,8 @@ public class ToDo implements Endpoint {
     @Override
     public Response prepareResponse(Request request) {
         if (validateContentType(request) && validateValues(request)) {
-            if (addTask(request.body)) {
-                return successfulResponse(request);
-            } else {
-                return new ServerError("Database Error").prepareResponse();
-            }
+            Task task = addTask(request.body);
+            return successfulResponse(task);
         } else if (validateContentType(request) && !validateValues(request)) {
             return unsuccessfulResponse(400);
         } else {
@@ -26,14 +26,14 @@ public class ToDo implements Endpoint {
         }
     }
 
-    private Response successfulResponse(Request request) {
+    private Response successfulResponse(Task task) {
         ResponseBuilder responseBuilder = new ResponseBuilder();
         Response response = new Response(responseBuilder);
         responseBuilder.setStatusCode(201);
         responseBuilder.setHeader("Content-Type", "application/json;charset=utf-8");
         responseBuilder.setHeader("Access-Control-Allow-Origin", "*");
         responseBuilder.setHeader("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
-        responseBuilder.setResponseBody(request.body);
+        responseBuilder.setResponseBody(task.taskJSON.toString().getBytes(StandardCharsets.UTF_8));
         return response;
     }
 
@@ -52,11 +52,11 @@ public class ToDo implements Endpoint {
         return request.body.contains(":") && request.body.contains("{") && request.body.contains("}");
     }
 
-    private boolean addTask(String taskInfo) {
+    private Task addTask(String taskInfo) {
         TaskMaster taskMaster = new TaskMaster();
         taskMaster.openTaskList(taskList);
-        taskMaster.addTask(taskInfo);
-        return taskMaster.checkActionOutcome();
+        Task task = taskMaster.addTask(taskInfo);
+        return task;
     }
 
 

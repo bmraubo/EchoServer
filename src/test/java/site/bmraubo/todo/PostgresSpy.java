@@ -37,7 +37,7 @@ public class PostgresSpy implements TaskList{
     }
 
     @Override
-    public void addTask(Task task) {
+    public Task addTask(Task task) {
         try {
             PreparedStatement addTaskStatement = conn.prepareStatement("INSERT INTO Tasks(taskinfo, done) VALUES(?, ?) RETURNING taskid");
             addTaskStatement.setString(1, task.taskJSON.getString("task"));
@@ -54,6 +54,7 @@ public class PostgresSpy implements TaskList{
             addedTask = false;
             e.printStackTrace();
         }
+        return task;
     }
 
     @Override
